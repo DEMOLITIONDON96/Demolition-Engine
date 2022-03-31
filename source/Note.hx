@@ -179,9 +179,27 @@ class Note extends FlxSprite
 
 		switch(char.toLowerCase())
 		{
-			case 'character name here':
-				skin = 'Skins/skin asset here';
-				antialias = true; //if ur note texture is pixel set this to false, otherwise delete this line
+			case 'dad':
+				skin = 'Skins/DADNOTE_assets';
+				antialias = true; //same as before
+			case 'gf' | 'gf-opponent' | 'gf-car' | 'gf-christmas':
+				skin = 'Skins/gfNOTE_assets';
+				antialias = true;
+			case 'mom' | 'mom-car':
+				skin = 'Skins/MOMNOTE_assets';
+				antialias = true;
+			case 'parents-christmas':
+				skin = 'Skins/ParentsNOTE_assets';
+				antialias = true;
+			case 'pico' | 'pico-player':
+				skin = 'Skins/picoNOTE_assets';
+				antialias = true;
+			case 'monster' | 'monster-christmas':
+				skin = 'Skins/LemonboiNOTE_assets';
+				antialias = true;
+			case 'spooky':
+				skin = 'Skins/spookyNOTE_assets';
+				antialias = true;
 		}
 		//saving it :)
 		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;

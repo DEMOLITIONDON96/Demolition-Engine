@@ -40,9 +40,27 @@ class StrumNote extends FlxSprite
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
 		switch(char)
 		{
-			case 'character name here':
-				skin = 'Skins/skin asset here';
+			case 'dad':
+				skin = 'Skins/DADNOTE_assets';
 				doAntialiasing = true; //same as before
+			case 'gf' | 'gf-opponent' | 'gf-car' | 'gf-christmas':
+				skin = 'Skins/gfNOTE_assets';
+				doAntialiasing = true;
+			case 'mom' | 'mom-car':
+				skin = 'Skins/MOMNOTE_assets';
+				doAntialiasing = true;
+			case 'parents-christmas':
+				skin = 'Skins/ParentsNOTE_assets';
+				doAntialiasing = true;
+			case 'pico' | 'pico-player':
+				skin = 'Skins/picoNOTE_assets';
+				doAntialiasing = true;
+			case 'monster' | 'monster-christmas':
+				skin = 'Skins/LemonboiNOTE_assets';
+				doAntialiasing = true;
+			case 'spooky':
+				skin = 'Skins/spookyNOTE_assets';
+				doAntialiasing = true;
 			default:
 				if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
 		}
