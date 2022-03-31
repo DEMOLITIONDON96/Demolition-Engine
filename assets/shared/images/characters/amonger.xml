@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="amonger.png"><SubTexture name="down0000" x="1135" y="0" width="313" height="306" frameX="-81" frameY="-38" frameWidth="403" frameHeight="442" />
+<SubTexture name="down0001" x="1135" y="306" width="313" height="293" frameX="-73" frameY="-27" frameWidth="403" frameHeight="442" />
+<SubTexture name="idle0000" x="0" y="0" width="361" height="395" frameX="-5" frameY="0" frameWidth="403" frameHeight="442" />
+<SubTexture name="idle0001" x="361" y="0" width="371" height="389" frameX="-5" frameY="-7" frameWidth="403" frameHeight="442" />
+<SubTexture name="idle0002" x="0" y="395" width="364" height="374" frameX="-11" frameY="-23" frameWidth="403" frameHeight="442" />
+<SubTexture name="idle0003" x="0" y="395" width="364" height="374" frameX="-11" frameY="-23" frameWidth="403" frameHeight="442" />
+<SubTexture name="idle0004" x="361" y="0" width="371" height="389" frameX="-5" frameY="-7" frameWidth="403" frameHeight="442" />
+<SubTexture name="idle0005" x="0" y="0" width="361" height="395" frameX="-5" frameY="0" frameWidth="403" frameHeight="442" />
+<SubTexture name="left0000" x="0" y="769" width="360" height="332" frameX="-37" frameY="-41" frameWidth="403" frameHeight="442" />
+<SubTexture name="left0001" x="360" y="769" width="395" height="332" frameX="-8" frameY="-41" frameWidth="403" frameHeight="442" />
+<SubTexture name="right0000" x="756" y="395" width="260" height="338" frameX="-78" frameY="-39" frameWidth="403" frameHeight="442" />
+<SubTexture name="right0001" x="755" y="769" width="264" height="323" frameX="-76" frameY="-62" frameWidth="403" frameHeight="442" />
+<SubTexture name="up0000" x="732" y="0" width="403" height="380" frameX="0" frameY="-29" frameWidth="403" frameHeight="442" />
+<SubTexture name="up0001" x="364" y="395" width="392" height="369" frameX="-10" frameY="-33" frameWidth="403" frameHeight="442" />
+</TextureAtlas>
