@@ -1,5 +1,6 @@
 package;
 
+import flixel.addons.ui.U;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -36,7 +37,13 @@ class StrumNote extends FlxSprite
 		this.noteData = leData;
 		super(x, y);
 
-		var skin:String = 'NOTE_assets';
+		var skin:String;
+		if(FlxG.save.data.arrowSkin != null) {	
+			skin = FlxG.save.data.arrowSkin;
+		}
+		else {
+			skin = "playerSkins/NOTE_assets";
+		}
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
 		switch(char)
 		{

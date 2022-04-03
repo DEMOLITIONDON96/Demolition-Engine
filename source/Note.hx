@@ -109,6 +109,9 @@ class Note extends FlxSprite
 					hitCausesMiss = true;
 					reloadNote('FLIP');
 					noteSplashTexture = 'FLIPnoteSplashes';
+					if(PlayState.isPixelStage) {
+						noteSplashTexture = 'pixelUI/FLIPnoteSplashes';
+					}
 					colorSwap.hue = 0;
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
@@ -117,6 +120,9 @@ class Note extends FlxSprite
 					hitCausesMiss = true;
 					reloadNote('DARKNESS');
 					noteSplashTexture = 'DARKNESSnoteSplashes';
+					if(PlayState.isPixelStage) {
+						noteSplashTexture = 'pixelUI/DARKNESSnoteSplashes';
+					}
 					colorSwap.hue = 0;
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
@@ -125,6 +131,9 @@ class Note extends FlxSprite
 					hitCausesMiss = true;
 					reloadNote('KILL');
 					noteSplashTexture = 'KILLnoteSplashes';
+					if(PlayState.isPixelStage) {
+						noteSplashTexture = 'pixelUI/KILLnoteSplashes';
+					}
 					colorSwap.hue = 0;
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
@@ -133,6 +142,9 @@ class Note extends FlxSprite
 					hitCausesMiss = true;
 					reloadNote('POISON');
 					noteSplashTexture = 'POISONnoteSplashes';
+					if(PlayState.isPixelStage) {
+						noteSplashTexture = 'pixelUI/POISONnoteSplashes';
+					}
 					colorSwap.hue = 0;
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
@@ -140,6 +152,9 @@ class Note extends FlxSprite
 					ignoreNote = mustPress;
 					reloadNote('HURT');
 					noteSplashTexture = 'HURTnoteSplashes';
+					if(PlayState.isPixelStage) {
+						noteSplashTexture = 'pixelUI/HURTnoteSplashes';
+					}
 					colorSwap.hue = 0;
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
@@ -316,7 +331,10 @@ class Note extends FlxSprite
 		if(texture.length < 1) {
 			skin = PlayState.SONG.arrowSkin;
 			if(skin == null || skin.length < 1) {
-				skin = 'NOTE_assets';
+				skin = FlxG.save.data.arrowSkin;
+			}
+			if(FlxG.save.data.arrowSkin == null) {
+				skin = 'playerSkins/NOTE_assets';
 			}
 		}
 
