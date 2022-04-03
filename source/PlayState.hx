@@ -4010,6 +4010,12 @@ class PlayState extends MusicBeatState
 				note.destroy();
 			}
 		});
+
+		if(daNote.noteType == 'Double Damage')
+			{
+				health -= 0.10;
+			}
+	
 		combo = 0;
 
 		health -= daNote.missHealth * healthLoss;
@@ -4192,8 +4198,6 @@ class PlayState extends MusicBeatState
 					case 'Darkness Note':
 						var shadow:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('lurkingShadow'));
 						//shadow.screenCenter();
-						shadow.scale.x = 1.1;
-						shadow.scale.y = 1.1;
 						shadow.cameras = [camHUD];
 						shadow.alpha = 1;
 						add(shadow);
@@ -4220,9 +4224,8 @@ class PlayState extends MusicBeatState
 						health -= 0;
 
 					case 'Poison Note':
-						healthDrain = 0.20
-						
-						;
+						healthDrain = 0.20;
+
 					case 'Hurt Note': //Hurt note
 						if(boyfriend.animation.getByName('hurt') != null) {
 							boyfriend.playAnim('hurt', true);

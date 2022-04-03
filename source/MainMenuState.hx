@@ -44,6 +44,7 @@ class MainMenuState extends MusicBeatState
 	];
 
 	var ms:FlxSprite;
+	var menuart:FlxSprite;
 	var mp:FlxSprite;
 	var nudes:FlxSprite;
 	var magenta:FlxSprite;
@@ -52,7 +53,7 @@ class MainMenuState extends MusicBeatState
 	var debugKeys:Array<FlxKey>;
 	public static var firstStart:Bool = true;
 	public static var finishedFunnyMove:Bool = false;
-	public var camZooming:Bool = false;
+	//public var camZooming:Bool = false;
 
 	override function create()
 	{
@@ -78,13 +79,13 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-		bg.scrollFactor.set(0, yScroll);
-		bg.setGraphicSize(Std.int(bg.width * 1.175));
-		bg.updateHitbox();
-		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		add(bg);
+		menuart = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		menuart.scrollFactor.set(0, yScroll);
+		menuart.setGraphicSize(Std.int(menuart.width * 1.175));
+		menuart.updateHitbox();
+		menuart.screenCenter();
+		menuart.antialiasing = ClientPrefs.globalAntialiasing;
+		add(menuart);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollowPos = new FlxObject(0, 0, 1, 1);
@@ -276,17 +277,6 @@ class MainMenuState extends MusicBeatState
 	#end
 
 	var selectedSomethin:Bool = false;
-	
-		override function beatHit()
-	{
-		super.beatHit();
-			if(ClientPrefs.camZooms) {
-        FlxG.camera.zoom += 0.015;
-		if(!camZooming) { //Copied from PlayState.hx
-			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5);
-		}
-	}
-	}
 
 	override function update(elapsed:Float)
 	{
@@ -335,7 +325,15 @@ class MainMenuState extends MusicBeatState
 					{
 						if (curSelected != spr.ID)
 						{
-							FlxTween.tween(spr, {alpha: 0}, 0.4, {
+							// Main Menu Select Animations
+							FlxTween.tween(FlxG.camera, {zoom: 1.15}, 2, {ease: FlxEase.quartInOut});
+							FlxTween.tween(menuart, {x: -170}, 2.2, {ease: FlxEase.quartInOut});
+							FlxTween.tween(magenta, {x: -170}, 2.2, {ease: FlxEase.quartInOut});
+							FlxTween.tween(menuart, {y: -120}, 1.9, {ease: FlxEase.quartInOut});
+							FlxTween.tween(magenta, {y: -120}, 1.9, {ease: FlxEase.quartInOut});
+							// FlxTween.tween(bg, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
+							// FlxTween.tween(magenta, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
+							FlxTween.tween(spr, {x: -250, alpha: 0}, 0.4, {
 								ease: FlxEase.quadOut,
 								onComplete: function(twn:FlxTween)
 								{
@@ -413,5 +411,12 @@ class MainMenuState extends MusicBeatState
 				spr.centerOffsets();
 			}
 		});
+	}
+
+override function beatHit()
+	{
+		super.beatHit();
+		if (curBeat % 4 == 0 && ClientPrefs.camZooms)
+			FlxG.camera.zoom = 1.015;
 	}
 }

@@ -27,6 +27,7 @@ class Note extends FlxSprite
 	public var tooLate:Bool = false;
 	public var wasGoodHit:Bool = false;
 	public var ignoreNote:Bool = false;
+	public var noIgnoreNote:Bool = false;
 	public var hitByOpponent:Bool = false;
 	public var noteWasHit:Bool = false;
 	public var prevNote:Note;
@@ -104,6 +105,13 @@ class Note extends FlxSprite
 
 		if(noteData > -1 && noteType != value) {
 			switch(value) {
+				case 'Double Damage': 
+		            noIgnoreNote = mustPress;
+		            reloadNote('DAMAGE');
+		            noteSplashTexture = 'DAMAGEnoteSplashes';
+		            colorSwap.hue = 0;
+		            colorSwap.saturation = 0;
+		            colorSwap.brightness = 0;
 				case 'Flip Note':
 					ignoreNote = mustPress;
 					hitCausesMiss = true;

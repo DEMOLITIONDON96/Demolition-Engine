@@ -60,6 +60,7 @@ class ChartingState extends MusicBeatState
 		'',
 		'Alt Animation',
 		'Hey!',
+		'Double Damage',
 		'Poison Note',
 		'Instakill Note',
 		'Darkness Note',

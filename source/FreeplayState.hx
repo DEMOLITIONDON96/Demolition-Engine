@@ -399,16 +399,13 @@ class FreeplayState extends MusicBeatState
 		super.update(elapsed);
 	}
 	
-			override function beatHit()
-	{
-		super.beatHit();
-			if(ClientPrefs.camZooms) {
-        FlxG.camera.zoom += 0.015;
-		if(!camZooming) { //Copied from PlayState.hx
-			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5);
+	override function beatHit()
+		{
+			super.beatHit();
+
+				if (FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms && curBeat % 4 == 0)
+					FlxG.camera.zoom += 0.015;
 		}
-	}
-	}
 
 	public static function destroyFreeplayVocals() {
 		if(vocals != null) {
