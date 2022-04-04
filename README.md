@@ -58,7 +58,7 @@ This was originally used for a mod titled "Friday Night Funkin: Graveyard Rush",
 - Hell Difficulty (for those wanting to make things harder than hard mode, also, not available in any of the built-in songs)
 - Autopause go bye bye (if you click off the game window, that's your fault lol)
 - Cool Credits in Pause Menu (only in source lol)
-- “nolink” Option for credits you have, but don’t have a link for them.
+- “nolink” Option for credits you have, but don’t have a link for them. (code by Cherif107)
 
 ###### Cam code, judgement counter, underlays and shaders by matt
 
