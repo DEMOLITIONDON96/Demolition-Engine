@@ -221,7 +221,7 @@ class Note extends FlxSprite
 				skin = 'Skins/LemonboiNOTE_assets';
 				antialias = true;
 			case 'spooky':
-				skin = 'Skins/spookyNOTE_assets';
+				skin = 'Skins/SpookyNOTE_assets';
 				antialias = true;
 		}
 		//saving it :)

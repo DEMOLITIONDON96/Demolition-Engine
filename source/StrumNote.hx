@@ -62,7 +62,7 @@ class StrumNote extends FlxSprite
 				skin = 'Skins/LemonboiNOTE_assets';
 				doAntialiasing = true;
 			case 'spooky':
-				skin = 'Skins/spookyNOTE_assets';
+				skin = 'Skins/SpookyNOTE_assets';
 				doAntialiasing = true;
 			default:
 				if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;

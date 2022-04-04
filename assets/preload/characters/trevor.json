@@ -1,77 +1,77 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				0,
-				0
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				-95,
+				260
+			],
 			"anim": "idle",
-			"indices": [],
-			"name": "Mom Idle"
+			"fps": 24,
+			"name": "Trevor idle dance",
+			"indices": []
 		},
 		{
 			"offsets": [
-				250,
-				-23
+				-20,
+				250
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singLEFT",
 			"indices": [],
-			"name": "Mom Left Pose"
+			"name": "Trevor sing note LEFT"
 		},
 		{
 			"offsets": [
-				10,
-				-60
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singRIGHT",
-			"indices": [],
-			"name": "Mom Pose Left"
-		},
-		{
-			"offsets": [
-				20,
-				-160
+				-110,
+				259
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singDOWN",
 			"indices": [],
-			"name": "MOM DOWN POSE"
+			"name": "Trevor Sing Note DOWN"
 		},
 		{
 			"offsets": [
-				14,
-				71
+				-98,
+				263
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Trevor Sing Note right"
+		},
+		{
+			"offsets": [
+				-66,
+				257
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singUP",
 			"indices": [],
-			"name": "Mom Up Pose"
+			"name": "Trevor Sing note UP"
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/Mom_Assets",
+	"image": "characters/Trev_assets",
 	"position": [
 		0,
-		0
+		350
 	],
-	"healthicon": "mom",
+	"healthicon": "trevor",
 	"flip_x": false,
 	"healthbar_colors": [
-		223,
-		81,
-		133
+		0,
+		153,
+		255
 	],
 	"camera_position": [
-		0,
-		0
+		60,
+		-300
 	],
 	"sing_duration": 4,
 	"scale": 1
