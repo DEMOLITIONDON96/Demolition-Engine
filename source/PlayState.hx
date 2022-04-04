@@ -70,16 +70,16 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['ur really bad', 0.2], //From 0% to 19%
-		['Trash', 0.4], //From 20% to 39%
-		['it is not hard, you just suck so bad', 0.5], //From 40% to 49%
-		['...', 0.6], //From 50% to 59%
-		['Ok', 0.69], //From 60% to 68%
+		['Shit...', 0.2], //From 0% to 19%
+		['Terrible', 0.4], //From 20% to 39%
+		['Bad', 0.5], //From 40% to 49%
+		['Meh', 0.6], //From 50% to 59%
+		['Okay', 0.69], //From 60% to 68%
 		['Nice', 0.7], //69%
-		['Thats pretty nice', 0.8], //From 70% to 79%
-		['Cool!', 0.9], //From 80% to 89%
+		['Good.', 0.8], //From 70% to 79%
+		['Great!', 0.9], //from 80% to 89%
 		['Sick!!', 1], //From 90% to 99%
-		['INFINITE BOBUX GENERATOR MODE', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['Perfect!!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 	
 	//Code by lemz1
@@ -390,8 +390,6 @@ class PlayState extends MusicBeatState
 					curStage = 'mall';
 				case 'winter-horrorland':
 					curStage = 'mallEvil';
-				case 'blueshirt':
-					curStage = 'Bridge';
 				case 'senpai' | 'roses':
 					curStage = 'school';
 				case 'thorns':
@@ -624,12 +622,6 @@ class PlayState extends MusicBeatState
 
 				var evilSnow:BGSprite = new BGSprite('christmas/evilSnow', -200, 700);
 				add(evilSnow);
-
-			case 'Bridge': //Trevor Week
-				var map:BGSprite = new BGSprite('trevorStage/Boardwalk', -350, -260, 1, 1);
-				map.scale.x = 1.5;
-				map.scale.y = 1.5;
-				add(map);
 
 			case 'school': //Week 6 - Senpai, Roses
 				GameOverSubstate.deathSoundName = 'fnf_loss_sfx-pixel';
