@@ -109,6 +109,12 @@ class Note extends FlxSprite
 		            noIgnoreNote = mustPress;
 		            reloadNote('DAMAGE');
 		            noteSplashTexture = 'DAMAGEnoteSplashes';
+					if(PlayState.isPixelStage) {
+						noteSplashTexture = 'pixelUI/DAMAGEnoteSplashes';
+					}
+		            colorSwap.hue = 0;
+		            colorSwap.saturation = 0;
+		            colorSwap.brightness = 0;
 		            colorSwap.hue = 0;
 		            colorSwap.saturation = 0;
 		            colorSwap.brightness = 0;
@@ -223,6 +229,9 @@ class Note extends FlxSprite
 			case 'spooky':
 				skin = 'Skins/SpookyNOTE_assets';
 				antialias = true;
+			case 'bf-pixel-opponent':
+				skin = 'Skins/pixelBF-notes';
+				antialias = false;
 		}
 		//saving it :)
 		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;

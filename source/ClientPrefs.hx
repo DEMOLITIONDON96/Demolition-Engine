@@ -242,7 +242,7 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.marvelousWindow != null) {
 			marvelousWindow = FlxG.save.data.marvelousWindow;
-	        }
+		}
 		if(FlxG.save.data.sickWindow != null) {
 			sickWindow = FlxG.save.data.sickWindow;
 		}

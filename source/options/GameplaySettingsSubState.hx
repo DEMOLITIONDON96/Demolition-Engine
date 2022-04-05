@@ -133,7 +133,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.minValue = 15;
 		option.maxValue = 25;
 		addOption(option);
-		
+
 		var option:Option = new Option('Sick! Hit Window',
 			'Changes the amount of time you have\nfor hitting a "Sick!" in milliseconds.',
 			'sickWindow',
