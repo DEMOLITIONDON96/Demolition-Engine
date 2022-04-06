@@ -27,16 +27,6 @@ This was originally used for a mod titled "Friday Night Funkin: Graveyard Rush",
 - More Options in Settings
 - More Modchart Options
 
-## Examples of the Features:
-
-###### Darkness, Poison, Flip & Kill Note Vid Here
-
-###### Pause Menu Example Here
-
-###### Note Skin Code Example
-
-###### Shaders Example Here
-
 ## Changelog:
 
 ### 0.1.0:
