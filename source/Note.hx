@@ -106,18 +106,18 @@ class Note extends FlxSprite
 		if(noteData > -1 && noteType != value) {
 			switch(value) {
 				case 'Double Damage': 
-		            noIgnoreNote = mustPress;
-		            reloadNote('DAMAGE');
-		            noteSplashTexture = 'DAMAGEnoteSplashes';
+		            		noIgnoreNote = mustPress;
+		            		reloadNote('DAMAGE');
+		            		noteSplashTexture = 'DAMAGEnoteSplashes';
 					if(PlayState.isPixelStage) {
 						noteSplashTexture = 'pixelUI/DAMAGEnoteSplashes';
 					}
-		            colorSwap.hue = 0;
-		            colorSwap.saturation = 0;
-		            colorSwap.brightness = 0;
-		            colorSwap.hue = 0;
-		            colorSwap.saturation = 0;
-		            colorSwap.brightness = 0;
+		            		colorSwap.hue = 0;
+		            		colorSwap.saturation = 0;
+		            		colorSwap.brightness = 0;
+		            		colorSwap.hue = 0;
+		            		colorSwap.saturation = 0;
+		            		colorSwap.brightness = 0;
 				case 'Flip Note':
 					ignoreNote = mustPress;
 					hitCausesMiss = true;
@@ -230,11 +230,21 @@ class Note extends FlxSprite
 				skin = 'Skins/SpookyNOTE_assets';
 				antialias = true;
 			case 'bf-pixel-opponent' | 'bf-pixel':
-				skin = 'Skins/pixelBF-notes';
-				antialias = false;
+				if(PlayState.isPixelStage) {
+					skin = 'pixelUI/pixelBF-notes';
+					antialias = false;
+				}else{	
+					skin = 'Skins/pixelBF-notes';
+					antialias = false;
+				}
 			case 'spirit':
-				skin = 'Skins/SpiritNotes';
-				antialias = false;
+				if(PlayState.isPixelStage) {
+					skin = 'pixelUI/SpiritNotes';
+					antialias = false;
+				}else{	
+					skin = 'Skins/SpiritNotes';
+					antialias = false;
+				}
 		}
 		//saving it :)
 		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
@@ -298,8 +308,8 @@ class Note extends FlxSprite
 
 			offsetX -= width / 2;
 
-			/*if (PlayState.isPixelStage)
-				offsetX += 30;*/
+			if (PlayState.isPixelStage)
+				offsetX += 30;
 
 			if (prevNote.isSustainNote)
 			{
@@ -321,18 +331,18 @@ class Note extends FlxSprite
 					prevNote.scale.y *= PlayState.instance.songSpeed;
 				}
 
-				/*if(PlayState.isPixelStage) {
+				if(PlayState.isPixelStage) {
 					prevNote.scale.y *= 1.19;
 					prevNote.scale.y *= (6 / height); //Auto adjust note size
-				}*/
+				}
 				prevNote.updateHitbox();
 				// prevNote.setGraphicSize();
 			}
 
-			/*if(PlayState.isPixelStage) {
+			if(PlayState.isPixelStage) {
 				scale.y *= PlayState.daPixelZoom;
 				updateHitbox();
-			}*/
+			}
 		} else if(!isSustainNote) {
 			earlyHitMult = 1;
 		}
@@ -362,7 +372,7 @@ class Note extends FlxSprite
 
 		var lastScaleY:Float = scale.y;
 		var blahblah:String = arraySkin.join('/');
-		/*if(PlayState.isPixelStage) {
+		if(PlayState.isPixelStage) {
 			if(isSustainNote) {
 				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'));
 				width = width / 4;
@@ -377,19 +387,19 @@ class Note extends FlxSprite
 			}
 			setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 			loadPixelNoteAnims();
-			antialiasing = false;*/
+			antialiasing = false;
 
 			if(isSustainNote) {
 				offsetX += lastNoteOffsetXForPixelAutoAdjusting;
 				lastNoteOffsetXForPixelAutoAdjusting = (width - 7) * (PlayState.daPixelZoom / 2);
 				offsetX -= lastNoteOffsetXForPixelAutoAdjusting;
 				
-				/*if(animName != null && !animName.endsWith('end'))
+				if(animName != null && !animName.endsWith('end'))
 				{
 					lastScaleY /= lastNoteScaleToo;
 					lastNoteScaleToo = (6 / height);
 					lastScaleY *= lastNoteScaleToo; 
-				}*/
+				}
 			}
 		} else {
 			frames = Paths.getSparrowAtlas(blahblah);
@@ -433,7 +443,7 @@ class Note extends FlxSprite
 		updateHitbox();
 	}
 
-	/*function loadPixelNoteAnims() {
+	function loadPixelNoteAnims() {
 		if(isSustainNote) {
 			animation.add('purpleholdend', [PURP_NOTE + 4]);
 			animation.add('greenholdend', [GREEN_NOTE + 4]);
@@ -450,7 +460,7 @@ class Note extends FlxSprite
 			animation.add('blueScroll', [BLUE_NOTE + 4]);
 			animation.add('purpleScroll', [PURP_NOTE + 4]);
 		}
-	}*/
+	}
 
 	override function update(elapsed:Float)
 	{
