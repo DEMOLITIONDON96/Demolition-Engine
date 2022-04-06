@@ -65,11 +65,21 @@ class StrumNote extends FlxSprite
 				skin = 'Skins/SpookyNOTE_assets';
 				doAntialiasing = true;
 			case 'bf-pixel-opponent' | 'bf-pixel':
-				skin = 'Skins/pixelBF-notes';
-				doAntialiasing = false;
+				if(PlayState.isPixelStage) {
+					skin = 'pixelUI/pixelBF-notes';
+					doAntialiasing = false;
+				}else{	
+					skin = 'Skins/pixelBF-notes';
+					doAntialiasing = false;
+				}
 			case 'spirit':
-				skin = 'Skins/SpiritNotes';
-				doAntialiasing = false;
+				if(PlayState.isPixelStage) {
+					skin = 'pixelUI/SpiritNotes';
+					doAntialiasing = false;
+				}else{	
+					skin = 'Skins/SpiritNotes';
+					doAntialiasing = false;
+				}
 			default:
 				if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
 		}
@@ -84,7 +94,7 @@ class StrumNote extends FlxSprite
 		var lastAnim:String = null;
 		if(animation.curAnim != null) lastAnim = animation.curAnim.name;
 
-		/*if(PlayState.isPixelStage)
+		if(PlayState.isPixelStage)
 		{
 			loadGraphic(Paths.image('pixelUI/' + texture));
 			width = width / 4;
@@ -119,7 +129,7 @@ class StrumNote extends FlxSprite
 			}
 		}
 		else
-		{*/
+		{
 			frames = Paths.getSparrowAtlas(texture);
 			animation.addByPrefix('green', 'arrowUP');
 			animation.addByPrefix('blue', 'arrowDOWN');
