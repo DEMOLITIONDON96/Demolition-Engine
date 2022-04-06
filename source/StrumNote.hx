@@ -157,8 +157,8 @@ class StrumNote extends FlxSprite
 					animation.addByPrefix('static', 'arrowRIGHT');
 					animation.addByPrefix('pressed', 'right press', 24, false);
 					animation.addByPrefix('confirm', 'right confirm', 24, false);
-			//}
-		//}
+			}
+		}
 		updateHitbox();
 
 		if(lastAnim != null)
