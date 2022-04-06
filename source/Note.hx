@@ -229,8 +229,11 @@ class Note extends FlxSprite
 			case 'spooky':
 				skin = 'Skins/SpookyNOTE_assets';
 				antialias = true;
-			case 'bf-pixel-opponent':
+			case 'bf-pixel-opponent' | 'bf-pixel':
 				skin = 'Skins/pixelBF-notes';
+				antialias = false;
+			case 'spirit':
+				skin = 'Skins/SpiritNotes';
 				antialias = false;
 		}
 		//saving it :)
