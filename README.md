@@ -55,7 +55,7 @@ This was originally used for a mod titled "Friday Night Funkin: Graveyard Rush",
 - Screen Resolutions & Fullscreen Toggle (by HiroMizuki)
 - Pixel Splashes (also by Hiro)
 - Exclusive Icon Art
-- Exclusive Bonus Song in Freeplay
+- Exclusive Bonus Song in Freeplay *(literally Atrocity, but i charted it for now)*
 - No More Normal & Easy
 - Hell Difficulty (for those wanting to make things harder than hard mode, also, not available in any of the built-in songs)
 - Autopause go bye bye (if you click off the game window, that's your fault lol)
