@@ -295,8 +295,8 @@ class Note extends FlxSprite
 
 			offsetX -= width / 2;
 
-			if (PlayState.isPixelStage)
-				offsetX += 30;
+			/*if (PlayState.isPixelStage)
+				offsetX += 30;*/
 
 			if (prevNote.isSustainNote)
 			{
@@ -318,18 +318,18 @@ class Note extends FlxSprite
 					prevNote.scale.y *= PlayState.instance.songSpeed;
 				}
 
-				if(PlayState.isPixelStage) {
+				/*if(PlayState.isPixelStage) {
 					prevNote.scale.y *= 1.19;
 					prevNote.scale.y *= (6 / height); //Auto adjust note size
-				}
+				}*/
 				prevNote.updateHitbox();
 				// prevNote.setGraphicSize();
 			}
 
-			if(PlayState.isPixelStage) {
+			/*if(PlayState.isPixelStage) {
 				scale.y *= PlayState.daPixelZoom;
 				updateHitbox();
-			}
+			}*/
 		} else if(!isSustainNote) {
 			earlyHitMult = 1;
 		}
@@ -359,7 +359,7 @@ class Note extends FlxSprite
 
 		var lastScaleY:Float = scale.y;
 		var blahblah:String = arraySkin.join('/');
-		if(PlayState.isPixelStage) {
+		/*if(PlayState.isPixelStage) {
 			if(isSustainNote) {
 				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'));
 				width = width / 4;
@@ -374,7 +374,7 @@ class Note extends FlxSprite
 			}
 			setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 			loadPixelNoteAnims();
-			antialiasing = false;
+			antialiasing = false;*/
 
 			if(isSustainNote) {
 				offsetX += lastNoteOffsetXForPixelAutoAdjusting;
@@ -430,7 +430,7 @@ class Note extends FlxSprite
 		updateHitbox();
 	}
 
-	function loadPixelNoteAnims() {
+	/*function loadPixelNoteAnims() {
 		if(isSustainNote) {
 			animation.add('purpleholdend', [PURP_NOTE + 4]);
 			animation.add('greenholdend', [GREEN_NOTE + 4]);
@@ -447,7 +447,7 @@ class Note extends FlxSprite
 			animation.add('blueScroll', [BLUE_NOTE + 4]);
 			animation.add('purpleScroll', [PURP_NOTE + 4]);
 		}
-	}
+	}*/
 
 	override function update(elapsed:Float)
 	{
