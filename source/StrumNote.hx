@@ -64,8 +64,11 @@ class StrumNote extends FlxSprite
 			case 'spooky':
 				skin = 'Skins/SpookyNOTE_assets';
 				doAntialiasing = true;
-			case 'bf-pixel-opponent':
+			case 'bf-pixel-opponent' | 'bf-pixel':
 				skin = 'Skins/pixelBF-notes';
+				doAntialiasing = false;
+			case 'spirit':
+				skin = 'Skins/SpiritNotes';
 				doAntialiasing = false;
 			default:
 				if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
