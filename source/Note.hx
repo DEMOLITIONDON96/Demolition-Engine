@@ -229,7 +229,7 @@ class Note extends FlxSprite
 			case 'spooky':
 				skin = 'Skins/SpookyNOTE_assets';
 				antialias = true;
-			case 'bf-pixel-opponent' | 'bf-pixel':
+			case 'bf-pixel-opponent' /*| 'bf-pixel'*/:
 				/*if(PlayState.isPixelStage) {
 					skin = 'pixelUI/pixelBF-notes';
 					antialias = false;
@@ -237,13 +237,13 @@ class Note extends FlxSprite
 					skin = 'Skins/pixelBF-notes';
 					antialias = false;
 				//}
-			case 'spirit':
-				/*if(PlayState.isPixelStage) {
+			/*case 'spirit':
+				if(PlayState.isPixelStage) {
 					skin = 'pixelUI/SpiritNotes';
 					antialias = false;
-				}else{*/
+				}else{
 					skin = 'Skins/SpiritNotes';
-					antialias = false;
+					antialias = false;*/
 				//}
 				//bitch, this shit doesn't work for shit on pixel stages :(
 		}
