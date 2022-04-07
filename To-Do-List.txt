@@ -13,3 +13,4 @@ Other Shit:
 - Modchart Editor
 - Note Skin Maker
 - Softcoded Menus????
+- add non-malicious os functions
