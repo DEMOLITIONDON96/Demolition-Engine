@@ -267,9 +267,8 @@ class FunkinLua {
 			luaTrace("Script doesn't exist!");
 		});
 
-        Lua_helper.add_callback(lua, "loadCredits", function(?musicos:String = null) {
+        Lua_helper.add_callback(lua, "loadCredits", function(?musicos:String = null, ?freakySex:Bool) {
 
-            var freakySex:Bool
 			LoadingState.loadAndSwitchState(new CreditsState());
 			FlxG.sound.playMusic(Paths.music(musicos));
 			if(musicos == '') {
