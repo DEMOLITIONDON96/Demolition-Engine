@@ -362,7 +362,7 @@ class TitleState extends MusicBeatState
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		credGroup.add(blackScreen);
 
-		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x00ff0000, 0x553D0468, 0xAABF1943], 1, 90, true);
+		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x0000BCFF, 0x55007DFF, 0xAA5BF1FF], 1, 90, true);
 		gradientBar.y = 770;
 		gradientBar.scale.y = 0;
 		gradientBar.updateHitbox();
