@@ -230,21 +230,22 @@ class Note extends FlxSprite
 				skin = 'Skins/SpookyNOTE_assets';
 				antialias = true;
 			case 'bf-pixel-opponent' | 'bf-pixel':
-				if(PlayState.isPixelStage) {
+				/*if(PlayState.isPixelStage) {
 					skin = 'pixelUI/pixelBF-notes';
 					antialias = false;
-				}else{	
+				}else{*/	
 					skin = 'Skins/pixelBF-notes';
 					antialias = false;
-				}
+				//}
 			case 'spirit':
-				if(PlayState.isPixelStage) {
+				/*if(PlayState.isPixelStage) {
 					skin = 'pixelUI/SpiritNotes';
 					antialias = false;
-				}else{	
+				}else{*/
 					skin = 'Skins/SpiritNotes';
 					antialias = false;
-				}
+				//}
+				//bitch, this shit doesn't work for shit on pixel stages :(
 		}
 		//saving it :)
 		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
