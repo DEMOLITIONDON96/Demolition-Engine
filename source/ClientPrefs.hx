@@ -55,7 +55,14 @@ class ClientPrefs {
 		'instakill' => false,
 		'practice' => false,
 		'botplay' => false,
-		'opponentplay' => false
+		//Future Game Modifiers????
+		'opponentplay' => false,
+		'drunknotes' => false,
+		'jacks' => false,
+		'blindness' => false,
+		'mirror' => false,
+		'noholds' => false,
+		'endless' => false //you got to be fucking out of your mind to play this
 	];
 
 	public static var comboOffset:Array<Int> = [0, 0, 0, 0];
