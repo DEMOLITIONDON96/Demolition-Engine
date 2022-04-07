@@ -7,3 +7,9 @@
 - Make Hell Charts (because i'm funi)
 - Replace Rating Sprites [DONE]
 - Fix Damage Note Crashing on Pixel Stages [DONE]
+
+Other Shit:
+- Music Player Menu (for peeps that just wanna listen to music)
+- Modchart Editor
+- Note Skin Maker
+- Softcoded Menus????
