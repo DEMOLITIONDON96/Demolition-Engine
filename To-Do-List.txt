@@ -1,10 +1,10 @@
 0.1.1 Update:
 - Make marvelous Rating Fully Functional [DONE]
-- Experiment with Pixel Notes
-- Update Menu Assets
-- Freeze Note???
+- Experiment with Pixel Notes (fuck this, i give up, greedy fucking game)
+- Update Menu Assets (ig i did this already)
+- Freeze Note??? (push it to later release)
 - Change Engine Name [DONE]
-- Make Hell Charts (because i'm funi)
+- Make Hell Charts (nah, save this for later)
 - Replace Rating Sprites [DONE]
 - Fix Damage Note Crashing on Pixel Stages [DONE]
 
