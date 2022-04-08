@@ -114,7 +114,7 @@ class TitleState extends MusicBeatState
 		#if CHECK_FOR_UPDATES
 		if(!closedState) {
 			trace('checking for update');
-			var http = new haxe.Http("https://raw.githubusercontent.com/DEMOLITIONDON96/Demolition-Engine/main/gitVersion.txt");
+			var http = new haxe.Http("https://raw.githubusercontent.com/SonicProYT/Charles-EngineNEW/main/gitVersion.txt");
 			
 			http.onData = function (data:String)
 			{
@@ -603,14 +603,14 @@ class TitleState extends MusicBeatState
 			{
 				case 1:
 					#if PSYCH_WATERMARKS
-					createCoolText(['Demolition Engine by'], 15);
+					createCoolText(['Charles Engine by'], 15);
 					#else
-					createCoolText(['Demolition96']);
+					createCoolText(['CharlesCatYT']);
 					#end
 				// credTextShit.visible = true;
 				case 3:
 					#if PSYCH_WATERMARKS
-					addMoreText('Demolition96', 15);
+					addMoreText('CharlesCatYT', 15);
 					#else
 					addMoreText('present');
 					#end
@@ -623,9 +623,9 @@ class TitleState extends MusicBeatState
 				// credTextShit.screenCenter();
 				case 5:
 					#if PSYCH_WATERMARKS
-					createCoolText(['A Modified version of', 'Psych engine'], -40);
+					createCoolText(['A Modified version of', 'Psych Engine'], -40);
 					#else
-					createCoolText(['A modified version of', 'Psych engine'], -40);
+					createCoolText(['A Modified version of', 'Psych engine'], -40);
 					#end
 				case 7:
 					addMoreText('newgrounds', -40);
