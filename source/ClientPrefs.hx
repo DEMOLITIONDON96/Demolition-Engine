@@ -13,7 +13,7 @@ class ClientPrefs {
 	public static var laneTransparency:Float = 0.5;
 	public static var debugMode:Bool = false;
 	public static var camMove:Bool = true;
-	public static var marvelouses:Bool = false;
+	public static var marvelouses:Bool = true;
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
 	public static var globalAntialiasing:Bool = true;
