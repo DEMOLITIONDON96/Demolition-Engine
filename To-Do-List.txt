@@ -12,3 +12,6 @@ Shit People Probably Want Most:
 - Softcode Note Skins (both notes and strums)
 - Player Note Skins
 - UI Skin Options?
+- Stage Editor (overrated request, but, eh, we're doing it ig)
+- Character Select Screen? (wait, doesn't this exist for something already? idk)
+- Add More Exclusive Content, maybe?
