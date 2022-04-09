@@ -2968,6 +2968,10 @@ class PlayState extends MusicBeatState
 				if(Math.isNaN(value) || value < 1) value = 1;
 				gfSpeed = value;
 
+				case 'Flash Screen':
+					var value:Int = Std.parseInt(value1);
+					camHUD.flash(FlxColor.value1, 1.5);
+
 			case 'Blammed Lights':
 				var lightId:Int = Std.parseInt(value1);
 				if(Math.isNaN(lightId)) lightId = 0;
