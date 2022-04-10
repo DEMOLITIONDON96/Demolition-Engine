@@ -402,15 +402,17 @@ class PlayState extends MusicBeatState
 		var stageData:StageFile = StageData.getStageFile(curStage);
 		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
 			stageData = {
+				name: "",
 				directory: "",
 				defaultZoom: 0.9,
 				isPixelStage: false,
-			
+
 				boyfriend: [770, 100],
 				girlfriend: [400, 130],
 				opponent: [100, 100],
+				layerArray: [],
 				hide_girlfriend: false,
-			
+
 				camera_boyfriend: [0, 0],
 				camera_opponent: [0, 0],
 				camera_girlfriend: [0, 0],
@@ -717,6 +719,16 @@ class PlayState extends MusicBeatState
 					bg.antialiasing = false;
 					add(bg);
 				}
+
+			default: //custom stages
+				isPixelStage = stageData.isPixelStage;
+				for (layer in stageData.layerArray){
+				var loadedLayer:BGSprite = new BGSprite(layer.directory, layer.xAxis, layer.yAxis, layer.scrollX, layer.scrollY);
+				loadedLayer.setGraphicSize(Std.int(loadedLayer.width * layer.scale));
+				loadedLayer.flipX = layer.flipX;
+				loadedLayer.flipY = layer.flipY;
+				add(loadedLayer);
+			}
 		}
 
 		if(isPixelStage) {
@@ -2968,9 +2980,9 @@ class PlayState extends MusicBeatState
 				if(Math.isNaN(value) || value < 1) value = 1;
 				gfSpeed = value;
 
-				case 'Flash Screen':
+				/*case 'Flash Screen':
 					var value:Int = Std.parseInt(value1);
-					camHUD.flash(FlxColor.value1, 1.5);
+					camHUD.flash(FlxColor.value1, 1.5);*/
 
 			case 'Blammed Lights':
 				var lightId:Int = Std.parseInt(value1);
