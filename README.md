@@ -26,6 +26,7 @@ This was originally used for a mod titled "Friday Night Funkin: Graveyard Rush",
 - Bonus Content????
 - More Options in Settings
 - More Modchart Options
+- Hell chart (In progress tell us feedback on some charts)
 
 ## Changelog:
 
