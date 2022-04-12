@@ -137,4 +137,9 @@ class CoolUtil
 		FlxG.openURL(site);
 		#end
 	}
+
+	public static function camLerpShit(daLerp:Float)
+		{
+		  	return (FlxG.elapsed / 0.016666666666666666) * daLerp;
+		}
 }

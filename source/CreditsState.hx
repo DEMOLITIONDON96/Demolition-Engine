@@ -240,7 +240,6 @@ class CreditsState extends MusicBeatState
   				}
 
 			}
-
 			if (controls.BACK)
 			{
 				if(colorTween != null) {

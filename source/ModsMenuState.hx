@@ -119,6 +119,13 @@ class ModsMenuState extends MusicBeatState
 		}
 		saveTxt();
 
+		// FIND MOD FOLDERS
+		for (folder in Paths.getModDirectories())
+		{
+			addToModsList([folder, true]);
+		}
+		saveTxt();
+
 		selector = new AttachedSprite();
 		selector.xAdd = -205;
 		selector.yAdd = -68;

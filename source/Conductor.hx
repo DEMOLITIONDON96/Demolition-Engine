@@ -61,7 +61,6 @@ class Conductor
 			}
 		}
 		return 'shit';
-		}
 	}
 	public static function mapBPMChanges(song:SwagSong)
 	{
