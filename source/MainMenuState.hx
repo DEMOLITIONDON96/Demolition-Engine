@@ -21,7 +21,26 @@ import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
 
+import haxe.Json;
+#if MODS_ALLOWED
+import sys.FileSystem;
+import sys.io.File;
+#end
+
 using StringTools;
+
+typedef MainMenuData =
+{
+	storymodeP:Array<Int>,
+	freeplayP:Array<Int>,
+	creditsP:Array<Int>,
+	optionsP:Array<Int>,
+	storymodeS:Array<Float>,
+	freeplayS:Array<Float>,
+	creditsS:Array<Float>,
+	optionsS:Array<Float>,
+	centerX:Bool
+}
 
 class MainMenuState extends MusicBeatState
 {
@@ -53,6 +72,7 @@ class MainMenuState extends MusicBeatState
 	var debugKeys:Array<FlxKey>;
 	public static var firstStart:Bool = true;
 	public static var finishedFunnyMove:Bool = false;
+	var mainMenuJSON:MainMenuData;
 	//public var camZooming:Bool = false;
 
 	override function create()
@@ -63,6 +83,24 @@ class MainMenuState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
+
+		#if (desktop && MODS_ALLOWED)
+		var path = "mods/" + Paths.currentModDirectory + "/images/mainmenu/mainMenuLayout.json";
+		//trace(path, FileSystem.exists(path));
+		if (!FileSystem.exists(path)) {
+			path = "mods/images/mainmenu/mainMenuLayout.json";
+			}
+		//trace(path, FileSystem.exists(path));
+		if (!FileSystem.exists(path)) {
+			path = "assets/images/mainmenu/mainMenuLayout.json";
+		}
+		//trace(path, FileSystem.exists(path));
+		mainMenuJSON = Json.parse(File.getContent(path));
+		#else
+		var path = Paths.getPreloadPath("images/mainmenu/mainMenuLayout.json");
+		mainMenuJSON = Json.parse(Assets.getText(path));
+		#end
+
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
 		camGame = new FlxCamera();
@@ -105,21 +143,24 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		var scale:Float = 0.6;
+		//var scale:Float = 0.6;
 		/*if(optionShit.length > 6) {
 			scale = 6 / optionShit.length;
 		}*/
 
 			// Story Mode
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(100, 100);
-			menuItem.scale.x = scale;
-			menuItem.scale.y = scale;
+			var menuItem:FlxSprite = new FlxSprite(mainMenuJSON.storymodeP[0], mainMenuJSON.storymodeP[0]);
+			menuItem.scale.x = mainMenuJSON.storymodeS[0];
+			menuItem.scale.y = mainMenuJSON.storymodeS[0];
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[0]);
 			menuItem.animation.addByPrefix('idle', optionShit[0] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[0] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 0;
+			if(mainMenuJSON.centerX == true) {
+			menuItem.screenCenter(X);
+			}
 			//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
@@ -142,15 +183,18 @@ class MainMenuState extends MusicBeatState
 		
 			// Freeplay
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(100, 250);
-			menuItem.scale.x = scale;
-			menuItem.scale.y = scale;
+			var menuItem:FlxSprite = new FlxSprite(mainMenuJSON.freeplayP[0], mainMenuJSON.freeplayP[1]);
+			menuItem.scale.x = mainMenuJSON.freeplayS[0];
+			menuItem.scale.y = mainMenuJSON.freeplayS[1];
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[1]);
 			menuItem.animation.addByPrefix('idle', optionShit[1] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[1] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 1;
-			//menuItem.screenCenter(X);
+			if(mainMenuJSON.centerX == true) {
+				menuItem.screenCenter(X);
+				}
+				//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 1;
@@ -172,15 +216,18 @@ class MainMenuState extends MusicBeatState
 
 			// Credits
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(100, 400);
-			menuItem.scale.x = scale;
-			menuItem.scale.y = scale;
+			var menuItem:FlxSprite = new FlxSprite(mainMenuJSON.creditsS[0], mainMenuJSON.creditsS[2]);
+			menuItem.scale.x = mainMenuJSON.creditsS[0];
+			menuItem.scale.y = mainMenuJSON.creditsS[2];
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[2]);
 			menuItem.animation.addByPrefix('idle', optionShit[2] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[2] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 2;
-			//menuItem.screenCenter(X);
+			if(mainMenuJSON.centerX == true) {
+				menuItem.screenCenter(X);
+				}
+				//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 2;
@@ -202,15 +249,18 @@ class MainMenuState extends MusicBeatState
 
 			// Options
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(100, 550);
-			menuItem.scale.x = scale;
-			menuItem.scale.y = scale;
+			var menuItem:FlxSprite = new FlxSprite(mainMenuJSON.optionsP[0], mainMenuJSON.optionsP[2]);
+			menuItem.scale.x = mainMenuJSON.optionsS[0];
+			menuItem.scale.y = mainMenuJSON.optionsS[3];
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[3]);
 			menuItem.animation.addByPrefix('idle', optionShit[3] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[3] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 3;
-			//menuItem.screenCenter(X);
+			if(mainMenuJSON.centerX == true) {
+				menuItem.screenCenter(X);
+				}
+				//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 3;
@@ -382,6 +432,9 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
+			if(mainMenuJSON.centerX == true) {
+				spr.screenCenter(X);
+				}
 			//spr.screenCenter(X);
 		});
 	}
