@@ -385,11 +385,11 @@ class TitleState extends MusicBeatState
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
-		creditsGrid = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('creditGrid'));
+		/*creditsGrid = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('creditGrid'));
 		add(creditsGrid);
 		creditsGrid.visible = false;
-		creditsGrid.screencanter(X);
-		creditsGrid.antialiasing = ClientPrefs.globalAntialiasing;
+		creditsGrid.screenCenter(X);
+		creditsGrid.antialiasing = ClientPrefs.globalAntialiasing;*/
 		
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
@@ -612,13 +612,13 @@ class TitleState extends MusicBeatState
 					createCoolText(['Demolition Engine by'], 15);
 				// credTextShit.visible = true;
 				case 3:
-					addMoreText(['These Guys Lol'], 15);
-					creditsGrid = true;
+					addMoreText('These Guys Lol', 15);
+					//creditsGrid = true;
 				// credTextShit.text += '\npresent...';
 				// credTextShit.addText();
 				case 4:
 					deleteCoolText();
-					creditsGrid = false;
+					//creditsGrid = false;
 				// credTextShit.visible = false;
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
