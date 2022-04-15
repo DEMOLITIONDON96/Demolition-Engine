@@ -65,6 +65,7 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
+	var creditsGrid:FlxSprite;
 
 	var curWacky:Array<String> = [];
 
@@ -384,6 +385,12 @@ class TitleState extends MusicBeatState
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
+		/*creditsGrid = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('creditGrid'));
+		add(creditsGrid);
+		creditsGrid.visible = false;
+		creditsGrid.screenCenter(X);
+		creditsGrid.antialiasing = ClientPrefs.globalAntialiasing;*/
+		
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		if (initialized)
@@ -602,34 +609,24 @@ class TitleState extends MusicBeatState
 			switch (sickBeats)
 			{
 				case 1:
-					#if PSYCH_WATERMARKS
 					createCoolText(['Demolition Engine by'], 15);
-					#else
-					createCoolText(['Demolition96']);
-					#end
 				// credTextShit.visible = true;
 				case 3:
-					#if PSYCH_WATERMARKS
-					addMoreText('Demolition96', 15);
-					#else
-					addMoreText('present');
-					#end
+					addMoreText('These Guys Lol', 15);
+					//creditsGrid = true;
 				// credTextShit.text += '\npresent...';
 				// credTextShit.addText();
 				case 4:
 					deleteCoolText();
+					//creditsGrid = false;
 				// credTextShit.visible = false;
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
 				case 5:
-					#if PSYCH_WATERMARKS
-					createCoolText(['A Modified version of', 'Psych engine'], -40);
-					#else
-					createCoolText(['A modified version of', 'Psych engine'], -40);
-					#end
+					createCoolText(['A Modified version of'], -40);
 				case 7:
-					addMoreText('newgrounds', -40);
-					ngSpr.visible = false;
+					addMoreText('Psych Engine', -40);
+					ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
 				case 8:
 					deleteCoolText();
