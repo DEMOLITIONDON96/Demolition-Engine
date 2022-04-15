@@ -72,7 +72,7 @@ class MainMenuState extends MusicBeatState
 	var debugKeys:Array<FlxKey>;
 	public static var firstStart:Bool = true;
 	public static var finishedFunnyMove:Bool = false;
-	var mainMenuJSON:MainMenuData;
+	//var mainMenuJSON:MainMenuData;
 	//public var camZooming:Bool = false;
 
 	override function create()
@@ -445,9 +445,9 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			if(mainMenuJSON.centerX == true) {
+			//if(mainMenuJSON.centerX == true) {
 				spr.screenCenter(X);
-				}
+				//}
 			//spr.screenCenter(X);
 		});
 	}
