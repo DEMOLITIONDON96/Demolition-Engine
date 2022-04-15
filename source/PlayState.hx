@@ -47,6 +47,7 @@ import openfl.filters.BitmapFilter;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.filters.ShaderFilter;
 import editors.ChartingState;
+import editors.OpenSong;
 import editors.CharacterEditorState;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
@@ -2599,6 +2600,22 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		/*
+		delete
+		'		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
+		{
+			openChartEditor();
+		} ' to properly use this
+		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene && SONG.song.toLowerCase() == 'song name') 
+			{ 
+				trace ("function loaded"); lol(); 
+	        } 
+			else if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene) 
+	        { 
+				openChartEditor(); 
+	        }
+			last of the hard code shit
+	    */
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
 		{
 			openChartEditor();
@@ -2901,6 +2918,16 @@ class PlayState extends MusicBeatState
 		DiscordClient.changePresence("Chart Editor", null, null, true);
 		#end
 	}
+
+	/*
+	function lol() 
+		{ persistentUpdate = false;
+			 paused = true;
+			  cancelMusicFadeTween();
+			   MusicBeatState.switchState(new OpenSong()); 
+		}
+		just for hard code support??
+		*/
 
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
