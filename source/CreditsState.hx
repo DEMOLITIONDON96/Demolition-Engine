@@ -96,6 +96,8 @@ class CreditsState extends MusicBeatState
 			//['Phoneguytech75', 'missing-icon', 'Note Skins :D',			'https://github.com/Phoneguytech75',	'FFFFFF'],
 			['HiroMizuki',	'hiro',		'Pixel Splashes & \nScreen Resolution Code',	'https://github.com/HiroMizuki',	'3DED02'],
 			['magnumsrtisswag',		'mag',	'Stage Editor',		'https://github.com/magnumsrtisswag',			'0B03FC'],
+			['AlexDrar',		'missing-icon',	'Hard Code Song Shit',		'https://github.com/mayo78/PSYCHDISCUSSIONS/discussions/85',			'FFFFFF'],
+			['白雪マフィンズ',		'missing-icon',	'Moving Icon Code',		'https://www.youtube.com/watch?v=QZQJ701tAqQ',			'FFFFFF'],
 			[''],
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',							'https://twitter.com/Shadow_Mario_',	'444444'],
