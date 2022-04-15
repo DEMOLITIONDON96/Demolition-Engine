@@ -56,6 +56,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
 
+		var option:Option = new Option('Judgement Skin:', 
+		"What should your judgements look like?", 
+		'uiSkin', 
+		'string', 
+		'Demolition',
+			['Demolition', 'Classic', 'BEAT!', 'BEAT! Gradient', 'Bedrock']);
+		addOption(option);
+
 		var option:Option = new Option('Camera Movement',
 			"If checked, camera moves to the corresponding arrow!",
 			'camMove',
