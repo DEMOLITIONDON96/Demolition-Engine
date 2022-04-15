@@ -162,7 +162,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.play('idle');
 			menuItem.ID = 0;
 			//if(mainMenuJSON.centerX == true) {
-			menuItem.screenCenter(X);
+			//menuItem.screenCenter(X);
 			//}
 			//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
@@ -198,7 +198,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.play('idle');
 			menuItem.ID = 1;
 			//if(mainMenuJSON.centerX == true) {
-				menuItem.screenCenter(X);
+				//menuItem.screenCenter(X);
 				//}
 				//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
@@ -234,7 +234,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.play('idle');
 			menuItem.ID = 2;
 			//if(mainMenuJSON.centerX == true) {
-				menuItem.screenCenter(X);
+				//menuItem.screenCenter(X);
 				//}
 				//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
@@ -270,7 +270,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.play('idle');
 			menuItem.ID = 3;
 			//if(mainMenuJSON.centerX == true) {
-				menuItem.screenCenter(X);
+				//menuItem.screenCenter(X);
 				//}
 				//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
