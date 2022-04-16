@@ -3783,6 +3783,8 @@ class PlayState extends MusicBeatState
 				uiSkin = 'beat-alt';
 			case 'Demolition':
 				uiSkin = 'demolition';
+			case 'Matt :)':
+				uiSkin = 'matt';
 		}
 
 		rating.loadGraphic(Paths.image(getUiSkin(uiSkin, daRating, altPart)));

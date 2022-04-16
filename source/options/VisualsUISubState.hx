@@ -61,7 +61,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		'uiSkin', 
 		'string', 
 		'Demolition',
-			['Demolition', 'Classic', 'BEAT!', 'BEAT! Gradient', 'Bedrock']);
+			['Demolition', 'Classic', 'BEAT!', 'BEAT! Gradient', 'Bedrock', 'Matt :)']);
 		addOption(option);
 
 		var option:Option = new Option('Camera Movement',
