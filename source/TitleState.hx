@@ -736,6 +736,17 @@ class TitleState extends MusicBeatState
 					FlxG.sound.music.fadeOut();
 				}
 				#end
+							}
+			logoBl.angle = -4;
+
+			new FlxTimer().start(0.01, function(tmr:FlxTimer)
+			{
+			   if (logoBl.angle == -4)
+					FlxTween.angle(logoBl, logoBl.angle, 4, 4, {ease: FlxEase.quartInOut});
+			   if (logoBl.angle == 4)
+					FlxTween.angle(logoBl, logoBl.angle, -4, 4, {ease: FlxEase.quartInOut});
+
+	        }, 0);
 			}
 			skippedIntro = true;
 		}
