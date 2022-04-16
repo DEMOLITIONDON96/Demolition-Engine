@@ -108,7 +108,7 @@ class PauseSubState extends MusicBeatSubstate
 			case 'Atrocity':
 			charter = 'Chart by DEMOLITIONDON96';
 			case 'Tutorial' | 'Bopeebo' | 'Fresh' | 'Dad Battle' | 'Spookeez' | 'South' | 'Monster' | 'Pico' | 'Philly Nice' | 'Blammed' | 'Satin Panties' | 'High' | 'Milf' | 'Cocoa' | 'Eggnog' | 'Winter Horrorland' | 'Senpai' | 'Roses' | 'Thorns' | 'Ugh' | 'Guns' | 'Stress':
-			charter = 'Chart by ninjamuffin99';
+			charter = 'Chart by ninjamuffin99' 'Hell Chart by Theoyeah';
 		}
 		charterCredit.text += charter;
 		charterCredit.scrollFactor.set();
