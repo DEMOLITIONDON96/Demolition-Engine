@@ -2078,18 +2078,27 @@ class FunkinLua {
 	{
 		return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
 	}
+
+	switch(ClientPrefs.osSetting){
+		case 'non-malicous':
+			static inline var CLENSE:String = "
+			os.getenv = nil;
+			os.remove = nil;
+			os.rename = nil;
+			os.chdir = nil;
+			os.popen = nil;
+			os.close = nil;
+			os.makedir = nil;
+			os.makedirs = nil;
+			";
+		case 'none':
+			static inline var CLENSE:String = "
+			package.loaded.os.execute = nil;
+			";
+	}
 	static inline var CLENSE:String = "
 	os.execute = nil;
-	package.loaded.os.execute = nil;
 
-	os.getenv = nil;
-	os.remove = nil;
-	os.rename = nil;
-	os.chdir = nil;
-	os.popen = nil;
-	os.close = nil;
-	os.makedir = nil;
-	os.makedirs =nil;
 	require = nil;
 	package.loaded.require = nil;
 	package.preload.require = nil; -- Double remove require, this isn't needed for os since os just references package.loaded.os

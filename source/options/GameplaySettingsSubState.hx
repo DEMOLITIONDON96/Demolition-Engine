@@ -94,6 +94,14 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		addOption(option);
 
+		var option:Option = new Option('Os Options',
+			'Modify how you want OS to run.\nUSE AT YOUR OWN RISK!',
+			'osSetting',
+			'string',
+			'non-malicous',
+			['none', 'non-malicous', 'all']);
+		addOption(option);
+
 		var option:Option = new Option('Debug Mode',
 		'If checked, you can do cool stuff on a song',
 		'debugMode',
