@@ -55,6 +55,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool',
 			false);
 		addOption(option);
+		
+		var option:Option = new Option('Hide Judgement Counter',
+			'If checked, hides Judgement Counter on the screen',
+			'hideJudgement',
+			'bool',
+			false);
+		addOption(option);
 
 		var option:Option = new Option('Ghost Tapping',
 			"If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
