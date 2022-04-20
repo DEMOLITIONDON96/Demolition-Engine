@@ -2565,7 +2565,7 @@ class PlayState extends MusicBeatState
 		if(ratingName == '?') {
 			scoreTxt.text = 'Score: ' + songScore + ' ~ Misses: ' + songMisses;
 		} else {
-                        scoreTxt.text = 'Score: ' + songScore + ' ~ Misses: ' + songMisses + ' (' + ratingFC + ')':
+                        scoreTxt.text = 'Score: ' + songScore + ' ~ Misses: ' + songMisses + ' (' + ratingFC + ')';
 		}
 	        } else {
 
