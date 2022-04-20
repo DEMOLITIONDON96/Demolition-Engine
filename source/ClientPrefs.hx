@@ -118,7 +118,7 @@ class ClientPrefs {
 		FlxG.save.data.camMove = camMove;
 		FlxG.save.data.showFPS = showFPS;
 		FlxG.save.data.flashing = flashing;
-		FlxB.save.data.simplifiedScore = simplifiedScore;
+		FlxG.save.data.simplifiedScore = simplifiedScore;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
 		FlxG.save.data.lowQuality = lowQuality;
