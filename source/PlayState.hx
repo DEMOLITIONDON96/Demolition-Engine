@@ -1135,6 +1135,7 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
+	        if(!ClientPrefs.hideJudgement) {
 			judgementCounter = new FlxText(20, 0, 0, "", 20);
 			judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			judgementCounter.borderSize = 2;
@@ -1148,6 +1149,7 @@ class PlayState extends MusicBeatState
 				judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
 			add(judgementCounter);
 		add(scoreTxt);
+		}
 
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -4898,10 +4900,12 @@ class PlayState extends MusicBeatState
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
-		if (ClientPrefs.marvelouses)
+		if (!ClientPrefs.hideJudgement) {
+			if (ClientPrefs.marvelouses) {
 			judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
-		else
+			} else {
 			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
+	}
 	}
 
 	#if ACHIEVEMENTS_ALLOWED
