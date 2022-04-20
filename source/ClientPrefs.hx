@@ -16,7 +16,7 @@ class ClientPrefs {
 	public static var marvelouses:Bool = true;
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
-	public static var hideJudgement:Bool = true;
+	public static var hideJudgement:Bool = false;
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
