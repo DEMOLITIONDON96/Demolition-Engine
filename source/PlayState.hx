@@ -1098,14 +1098,21 @@ class PlayState extends MusicBeatState
 		reloadHealthBarColors();
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
+	        if (!isPixelStage) {
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		} else {
+                scoreTxt.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
 		peWatermark = new FlxText(5, FlxG.height - 29, 0, "", 16);
+	        if (!isPixelStage) {
 		peWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		} else {
+                peWatermark.setFormat(Paths.font("Retro Gaming.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		}
 		peWatermark.scrollFactor.set();
 		peWatermark.text = "Demolition Engine v" + MainMenuState.DemoEngineVersion + " | " + curSong + " " + storyDifficultyText;
 		peWatermark.visible = ClientPrefs.showWatermarks;
@@ -1125,8 +1132,11 @@ class PlayState extends MusicBeatState
 			case 4:
 				botplayTxt.text = "CHEATING...";
 		}
-
+		if (!isPixelStage) {
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		} else {
+		botplayTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		}
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
@@ -1137,7 +1147,11 @@ class PlayState extends MusicBeatState
 
 	        if(!ClientPrefs.hideJudgement) {
 			judgementCounter = new FlxText(20, 0, 0, "", 20);
+			if (!isPixelStage) {
 			judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			} else {
+			judgementCounter.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			}
 			judgementCounter.borderSize = 2;
 			judgementCounter.borderQuality = 2;
 			judgementCounter.scrollFactor.set();
