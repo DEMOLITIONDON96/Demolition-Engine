@@ -4916,11 +4916,10 @@ class PlayState extends MusicBeatState
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
 		if (!ClientPrefs.hideJudgement) {
-			if (ClientPrefs.marvelouses) {
+			if (ClientPrefs.marvelouses)
 			judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
-			} else {
+		        else
 			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
-	}
 	}
 
 	#if ACHIEVEMENTS_ALLOWED
