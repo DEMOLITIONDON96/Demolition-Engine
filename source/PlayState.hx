@@ -1163,8 +1163,8 @@ class PlayState extends MusicBeatState
 			else
 				judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
 			add(judgementCounter);
-		add(scoreTxt);
 		}
+		add(scoreTxt);
 
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -4920,6 +4920,7 @@ class PlayState extends MusicBeatState
 			judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
 		        else
 			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
+		}
 	}
 
 	#if ACHIEVEMENTS_ALLOWED
