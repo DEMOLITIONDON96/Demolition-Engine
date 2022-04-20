@@ -98,8 +98,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'Modify how you want OS to run.\nUSE AT YOUR OWN RISK!',
 			'osSetting',
 			'string',
-			'non-malicous',
-			['none', 'non-malicous', 'all']);
+			'non-malicious',
+			['none', 'non-malicious', 'all']);
 		addOption(option);
 
 		var option:Option = new Option('Debug Mode',

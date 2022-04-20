@@ -2080,7 +2080,7 @@ class FunkinLua {
 	}
 
 	switch(ClientPrefs.osSetting){
-		case 'non-malicous':
+		case 'non-malicious':
 			static inline var CLENSE:String = "
 			os.getenv = nil;
 			os.remove = nil;
