@@ -63,6 +63,13 @@ class VisualsUISubState extends BaseOptionsMenu
 		'Demolition',
 			['Demolition', 'Classic', 'BEAT!', 'BEAT! Gradient', 'Bedrock', 'Matt :)']);
 		addOption(option);
+		
+		var option:Option = new Option('Simplify Score Text',
+			"If checked, Score Text under the Health Bar \ndisplays less text",
+			'simplifiedScore',
+			'bool',
+		        false);
+		addOption(option);
 
 		var option:Option = new Option('Camera Movement',
 			"If checked, camera moves to the corresponding arrow!",
