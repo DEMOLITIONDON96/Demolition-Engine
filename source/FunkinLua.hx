@@ -1746,21 +1746,73 @@ class FunkinLua {
 			FlxG.sound.music.fadeOut(duration, toValue);
 			luaTrace('musicFadeOut is deprecated! Use soundFadeOut instead.', false, true);
 		});
-		Lua_helper.add_callback(lua, "addEffect1", function(camera:String, chromeOffset:Float = 0.005)
-		{
+		Lua_helper.add_callback(lua, "addEffect1", function(camera:String, chromeOffset:Float = 0.005) {
+			
 			PlayState.instance.addShaderToCamera(camera, new ChromaticAberrationEffect(chromeOffset));
+			
 		});
-		Lua_helper.add_callback(lua, "addEffect2", function(camera:String, waveSpeed:Float = 0.1, waveFrq:Float = 0.1, waveAmp:Float = 0.1)
-		{
-			PlayState.instance.addShaderToCamera(camera, new GlitchEffect(waveSpeed, waveFrq, waveAmp));
-		});
-		Lua_helper.add_callback(lua, "addEffect3", function(camera:String,lockAlpha:Bool=false)
-		{
+		Lua_helper.add_callback(lua, "addEffect2", function(camera:String, lockAlpha:Bool=false) {
+			
 			PlayState.instance.addShaderToCamera(camera, new ScanlineEffect(lockAlpha));
+			
 		});
-		Lua_helper.add_callback(lua, "addEffect4", function(camera:String,glitchFactor:Float = 0.0,distortion:Bool=true,perspectiveOn:Bool=true,vignetteMoving:Bool=true)
-		{
-			PlayState.instance.addShaderToCamera(camera, new VCRDistortionEffect(glitchFactor,distortion,perspectiveOn,vignetteMoving));
+		Lua_helper.add_callback(lua, "addEffect3", function(camera:String, grainSize:Float, lumAmount:Float, lockAlpha:Bool=false) {
+			
+			PlayState.instance.addShaderToCamera(camera, new GrainEffect(grainSize, lumAmount, lockAlpha));
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect4", function(camera:String, blurAmount:Float, center:Float) {
+			
+			PlayState.instance.addShaderToCamera(camera, new TiltshiftEffect(blurAmount, center));
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect5", function(camera:String,glitchFactor:Float = 0.0, distortion:Bool=true, perspectiveOn:Bool=true, vignetteMoving:Bool=true) {
+			
+			PlayState.instance.addShaderToCamera(camera, new VCRDistortionEffect(glitchFactor, distortion, perspectiveOn, vignetteMoving));
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect6", function(camera:String,waveSpeed:Float = 0.1, waveFrq:Float = 0.1, waveAmp:Float = 0.1) {
+			
+			PlayState.instance.addShaderToCamera(camera, new GlitchEffect(waveSpeed, waveFrq, waveAmp));
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect7", function(camera:String, waveSpeed:Float = 0.1, waveFrq:Float = 0.1, waveAmp:Float = 0.1) {
+			
+			PlayState.instance.addShaderToCamera(camera, new PulseEffect(waveSpeed, waveFrq, waveAmp));
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect8", function(camera:String, waveSpeed:Float = 0.1, waveFrq:Float = 0.1, waveAmp:Float = 0.1) {
+			
+			PlayState.instance.addShaderToCamera(camera, new DistortBGEffect(waveSpeed, waveFrq, waveAmp));
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect9", function(camera:String, lockAlpha:Bool=false) {
+			
+			PlayState.instance.addShaderToCamera(camera, new InvertColorsEffect(lockAlpha));
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect10", function(camera:String) { //for dem funkies
+			
+			PlayState.instance.addShaderToCamera(camera, new GreyscaleEffect());
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect11", function(camera:String) { //for dem funkies
+			
+			PlayState.instance.addShaderToCamera(camera, new GreyscaleEffect());
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect12", function(camera:String, xrotation:Float=0, yrotation:Float=0, zrotation:Float=0, depth:Float=0) { //for dem funkies
+			
+			PlayState.instance.addShaderToCamera(camera, new ThreeDEffect(xrotation, yrotation, zrotation, depth));
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect13", function(camera:String, intensity:Float = 0.35, blurSize:Float=1.0) {
+			
+			PlayState.instance.addShaderToCamera(camera, new BloomEffect(blurSize/512.0, intensity));
+			
+		});
+		Lua_helper.add_callback(lua, "die", function(camera:String) {
+			PlayState.instance.clearShaderFromCamera(camera);
 		});
 		
 		
