@@ -70,6 +70,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('Enable Anti Mash',
+		"If Checked, Anti Mash Is Enabled IDK WHAT THIS DOES\nITS BEEN 10 FUCKING YEARS PLZ\nDEMO LET ME OUT :(",
+		'antiMash',
+		'bool',
+		true);
+		addOption(option);
+
 		var option:Option = new Option('Disable Reset Button',
 			"If checked, pressing Reset won't do anything.",
 			'noReset',

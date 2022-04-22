@@ -9,6 +9,7 @@ import Controls;
 class ClientPrefs {
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
+	public static var antiMash:Bool = true;
 	public static var laneunderlay:Bool = false;
 	public static var laneTransparency:Float = 0.5;
 	public static var debugMode:Bool = false;
@@ -124,6 +125,7 @@ class ClientPrefs {
 		FlxG.save.data.noteSplashes = noteSplashes;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
+		FlxG.save.data.antiMash = antiMash;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
 		FlxG.save.data.camZooms = camZooms;
@@ -174,6 +176,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.marvelouses != null) {
 			marvelouses = FlxG.save.data.marvelouses;
+		}
+		if(FlxG.save.data.antiMash != null) {
+			antiMash = FlxG.save.data.antiMash;
 		}
 		if(FlxG.save.data.middleScroll != null) {
 			middleScroll = FlxG.save.data.middleScroll;
