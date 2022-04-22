@@ -99,6 +99,7 @@ class CreditsState extends MusicBeatState
 			['AlexDrar',		'missing-icon',	'Hard Code Song Shit',		'https://github.com/mayo78/PSYCHDISCUSSIONS/discussions/85',			'FFFFFF'],
 			['白雪マフィンズ',		'missing-icon',	'Moving Main Menu Code',		'https://www.youtube.com/watch?v=QZQJ701tAqQ',			'FFFFFF'],
 			['TimothyFnf',		'missing-icon',	'Some Credit For Code',		'https://gamebanana.com/mods/370936',			'FFFFFF'],
+			['KutikiPlayz',	'missing-icon',		'Scroll Type Event',		'https://github.com/KutikiPlayz',		'FFFFFF'],
 			[''],
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',							'https://twitter.com/Shadow_Mario_',	'444444'],
