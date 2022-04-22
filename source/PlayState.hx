@@ -154,6 +154,7 @@ class PlayState extends MusicBeatState
 
 	public var laneunderlay:FlxSprite;
 	public var laneunderlayOpponent:FlxSprite;
+	public var blackScreen:FlxSprite;
 
 	//Handles the new epic mega sexy cam code that i've done
 	private var camFollow:FlxPoint;
@@ -928,6 +929,13 @@ class PlayState extends MusicBeatState
 		laneunderlay.alpha = ClientPrefs.laneTransparency;
 		laneunderlay.color = FlxColor.BLACK;
 		laneunderlay.scrollFactor.set();
+	
+	        var blackScreen:FlxSprite;
+                blackScreen = new FlxSprite().makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+		blackScreen.alpha = 0;
+		blackScreen.screenCenter(X);
+		blackScreen.screenCenter(Y);
+                add(blackScreen);
 
 		if (ClientPrefs.laneunderlay)
 		{
@@ -1181,6 +1189,7 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+	        blackScreen.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -3345,7 +3354,51 @@ class PlayState extends MusicBeatState
 						}
 				}
 				reloadHealthBarColors();
-			
+			case 'Screen Fade':
+				var charType:Int = Std.parseInt(value1);
+				if(Math.isNaN(charType)) charType = 0;
+	
+				switch(charType) {
+					case 0:
+						blackScreen.alpha = 0;
+					case 1:
+						blackScreen.alpha += 0.05;
+					case 2:
+						blackScreen.alpha -= 0.05;
+					case 3:
+						blackScreen.alpha += 1;
+					//Sorry that you have to fucking spam these events to do the thing
+				}
+			case 'White Flash':
+				var charType:Int = Std.parseInt(value1);
+				if(Math.isNaN(charType)) charType = 0;
+		
+				switch(charType) {
+					case 0:
+						FlxG.camera.flash(FlxColor.WHITE, 3);
+					case 1:
+						FlxG.camera.flash(FlxColor.WHITE, 3);
+						camHUD.visible = false;
+				}
+			case 'Fade Character':
+				var charType:Int = Std.parseInt(value1);
+				if(Math.isNaN(charType)) charType = 0;
+						
+				switch(charType) {
+					case 0:
+						dad.alpha -= 0.05;
+						iconP2.alpha -= 0.05;
+					case 1:
+						boyfriend.alpha -= 0.05;
+						iconP1.alpha -= 0.05;
+					case 2:
+						dad.alpha += 0.05;
+						iconP2.alpha += 0.05;
+					case 3:
+						boyfriend.alpha += 0.05;
+						iconP1.alpha += 0.05;
+					//Sorry that you have to fucking spam these events to do the thing
+				}
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
 
