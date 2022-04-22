@@ -94,6 +94,7 @@ class ChartingState extends MusicBeatState
 		['Screen Fade', "Funi Screen Fade\n0 = Invisible\n1 = add 0.05 to Visibility\n2 = remove 0.05 to Visibility\n3 = Visible\n(i'm sorry you have to spam 1 & 2)"],
 		//['Hide HUD', "Value 1: 1 = Hide HUD, 2 = Show HUD\n Value 2: No Use"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
+		['Scroll Type', "Changes Scroll Type, Mid-Song\nDefault = Normal Scrolltype\nFlip = Flips Current Scroll Type\nDown = Lock Downscroll\nUp = Locks Upscroll\nLeft = Sidescroll from Left\nRight = Sidescroll from Right\nUndyne = Centerscroll"],
 		['White Flash', "Flashes da hud, yup, thats it\n0 = Normal Flash\n1 = Hide HUD with Flash"]
 	];
 
