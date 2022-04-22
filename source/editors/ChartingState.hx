@@ -90,9 +90,11 @@ class ChartingState extends MusicBeatState
 		['Alt Idle Animation', "Sets a specified suffix after the idle animation name.\nYou can use this to trigger 'idle-alt' if you set\nValue 2 to -alt\n\nValue 1: Character to set (Dad, BF or GF)\nValue 2: New suffix (Leave it blank to disable)"],
 		['Screen Shake', "Value 1: Camera shake\nValue 2: HUD shake\n\nEvery value works as the following example: \"1, 0.05\".\nThe first number (1) is the duration.\nThe second number (0.05) is the intensity."],
 		['Change Character', "Value 1: Character to change (Dad, BF, GF)\nValue 2: New character's name"],
+		['Fade Character', "0 = -0.05 Dad Alpha Value\n1 = -0.05 BF Alpha Value\n2 = +0.05 Dad Alpha Value\n3 = +0.05 BF Alpha Value\n(i'm so sorry for the spam shit)"],
+		['Screen Fade', "Funi Screen Fade\n0 = Invisible\n1 = add 0.05 to Visibility\n2 = remove 0.05 to Visibility\n3 = Visible\n(i'm sorry you have to spam 1 & 2)"],
 		//['Hide HUD', "Value 1: 1 = Hide HUD, 2 = Show HUD\n Value 2: No Use"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
-		['Flash Screen', "Flashes da hud, yup, thats it"]
+		['White Flash', "Flashes da hud, yup, thats it\n0 = Normal Flash\n1 = Hide HUD with Flash"]
 	];
 
 	var _file:FileReference;
