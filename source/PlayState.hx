@@ -154,7 +154,7 @@ class PlayState extends MusicBeatState
 
 	public var laneunderlay:FlxSprite;
 	public var laneunderlayOpponent:FlxSprite;
-	public var blackScreen:FlxSprite;
+	public var blackFadeThing:FlxSprite;
 
 	//Handles the new epic mega sexy cam code that i've done
 	private var camFollow:FlxPoint;
@@ -930,12 +930,11 @@ class PlayState extends MusicBeatState
 		laneunderlay.color = FlxColor.BLACK;
 		laneunderlay.scrollFactor.set();
 	
-	        var blackScreen:FlxSprite;
-                blackScreen = new FlxSprite().makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
-		blackScreen.alpha = 0;
-		blackScreen.screenCenter(X);
-		blackScreen.screenCenter(Y);
-                add(blackScreen);
+        blackFadeThing = new FlxSprite().makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+		blackFadeThing.alpha = 0;
+		blackFadeThing.screenCenter(X);
+		blackFadeThing.screenCenter(Y);
+        add(blackFadeThing);
 
 		if (ClientPrefs.laneunderlay)
 		{
@@ -950,7 +949,11 @@ class PlayState extends MusicBeatState
 
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
+		 if (!isPixelStage) {
 		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		} else {
+                timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		}
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
 		timeTxt.borderSize = 2;
@@ -1188,9 +1191,9 @@ class PlayState extends MusicBeatState
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
+		blackFadeThing.cameras = [camHUD];
 		doof.cameras = [camHUD];
-	        blackScreen.cameras = [camHUD];
-
+		
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -3360,24 +3363,45 @@ class PlayState extends MusicBeatState
 	
 				switch(charType) {
 					case 0:
-						blackScreen.alpha = 0;
+						blackFadeThing.alpha = 0;
 					case 1:
-						blackScreen.alpha += 0.05;
+						blackFadeThing.alpha += 0.05;
 					case 2:
-						blackScreen.alpha -= 0.05;
+						blackFadeThing.alpha -= 0.05;
 					case 3:
-						blackScreen.alpha += 1;
+						blackFadeThing.alpha += 1;
 					//Sorry that you have to fucking spam these events to do the thing
 				}
-			case 'White Flash':
-				var charType:Int = Std.parseInt(value1);
-				if(Math.isNaN(charType)) charType = 0;
+			case 'Flash Screen':
+				var colorFlash:Int = Std.parseInt(value1);
+				if(Math.isNaN(colorFlash)) colorFlash = 0;
 		
-				switch(charType) {
+				switch(colorFlash) {
 					case 0:
 						FlxG.camera.flash(FlxColor.WHITE, 3);
 					case 1:
-						FlxG.camera.flash(FlxColor.WHITE, 3);
+						FlxG.camera.flash(FlxColor.RED, 3);
+					case 2:
+					case 3:
+						FlxG.camera.flash(FlxColor.BLACK, 3);
+					case 4:
+						FlxG.camera.flash(FlxColor.CYAN, 3);
+					case 5:
+						FlxG.camera.flash(FlxColor.MAGENTA, 3);
+					case 6:
+						FlxG.camera.flash(FlxColor.PINK, 3);
+					case 7:
+						FlxG.camera.flash(FlxColor.ORANGE, 3);
+					case 8:
+						FlxG.camera.flash(FlxColor.PURPLE, 3);
+					case 9:
+						FlxG.camera.flash(FlxColor.LIME, 3);
+				}
+
+				switch(value2) {
+					case 'false' | 'False':
+						camHUD.visible = true;
+					case 'true' | 'True':
 						camHUD.visible = false;
 				}
 			case 'Fade Character':
@@ -3388,19 +3412,35 @@ class PlayState extends MusicBeatState
 					case 0:
 						dad.alpha -= 0.05;
 						iconP2.alpha -= 0.05;
+						opponentStrums.members[0].alpha -= 0.05;
+						opponentStrums.members[1].alpha -= 0.05;
+						opponentStrums.members[2].alpha -= 0.05;
+						opponentStrums.members[3].alpha -= 0.05;
 					case 1:
 						boyfriend.alpha -= 0.05;
 						iconP1.alpha -= 0.05;
+						playerStrums.members[0].alpha -= 0.05;
+						playerStrums.members[1].alpha -= 0.05;
+						playerStrums.members[2].alpha -= 0.05;
+						playerStrums.members[3].alpha -= 0.05;
 					case 2:
 						dad.alpha += 0.05;
 						iconP2.alpha += 0.05;
+						opponentStrums.members[0].alpha += 0.05;
+						opponentStrums.members[1].alpha += 0.05;
+						opponentStrums.members[2].alpha += 0.05;
+						opponentStrums.members[3].alpha += 0.05;
 					case 3:
 						boyfriend.alpha += 0.05;
 						iconP1.alpha += 0.05;
+						playerStrums.members[0].alpha += 0.05;
+						playerStrums.members[1].alpha += 0.05;
+						playerStrums.members[2].alpha += 0.05;
+						playerStrums.members[3].alpha += 0.05;
 					//Sorry that you have to fucking spam these events to do the thing
 				}
-			//thx KutikiPlayz for letting me use this
-			 case 'Scroll Type':
+				//thx KutikiPlayz for letting me use this
+			case 'Scroll Type':
 				var playerLeft:Bool = false;
 				var playerDown:Bool = false;
 				var playerUp:Bool = false;
@@ -3477,7 +3517,7 @@ class PlayState extends MusicBeatState
 							FlxTween.tween(playerStrums.members[2], {y: 368}, 0.2, {ease: FlxEase.linear});
 							FlxTween.tween(playerStrums.members[3], {y: 480}, 0.2, {ease: FlxEase.linear});
 							playerStrums.members[i].downScroll = false;
-	
+
 							FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
 						} else if(playerDown) {
 							FlxTween.tween(playerStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0}, 0.2, {ease: FlxEase.linear});
@@ -3486,7 +3526,7 @@ class PlayState extends MusicBeatState
 							FlxTween.tween(playerStrums.members[2], {x: 956}, 0.2, {ease: FlxEase.linear});
 							FlxTween.tween(playerStrums.members[3], {x: 1068}, 0.2, {ease: FlxEase.linear});
 							playerStrums.members[i].downScroll = true;
-	
+
 							FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
 						} else if(playerUp) {
 							FlxTween.tween(playerStrums.members[i], {direction: 90, y: 50, angle: 0}, 0.2, {ease: FlxEase.linear});
@@ -3495,7 +3535,7 @@ class PlayState extends MusicBeatState
 							FlxTween.tween(playerStrums.members[2], {x: 956}, 0.2, {ease: FlxEase.linear});
 							FlxTween.tween(playerStrums.members[3], {x: 1068}, 0.2, {ease: FlxEase.linear});
 							playerStrums.members[i].downScroll = false;
-	
+
 							FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
 						} else if(playerRight) {
 							FlxTween.tween(playerStrums.members[i], {direction: 0, x: 50, angle: 270}, 0.2, {ease: FlxEase.linear});
@@ -3504,7 +3544,7 @@ class PlayState extends MusicBeatState
 							FlxTween.tween(playerStrums.members[2], {y: 256}, 0.2, {ease: FlxEase.linear});
 							FlxTween.tween(playerStrums.members[3], {y: 144}, 0.2, {ease: FlxEase.linear});
 							playerStrums.members[i].downScroll = false;
-	
+
 							FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
 						} else if(playerDefault) {
 							if(ClientPrefs.downScroll) {
@@ -3521,11 +3561,11 @@ class PlayState extends MusicBeatState
 								FlxTween.tween(playerStrums.members[2], {x: 956}, 0.2, {ease: FlxEase.linear});
 								FlxTween.tween(playerStrums.members[3], {x: 1068}, 0.2, {ease: FlxEase.linear});
 								playerStrums.members[i].downScroll = false;
-							}
-	
+								}
+
 							FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
-						} else if(playerFlip) {
-							if(ClientPrefs.downScroll) {
+							} else if(playerFlip) {
+								if(ClientPrefs.downScroll) {
 								FlxTween.tween(playerStrums.members[i], {direction: 90, y: 50, angle: 0}, 0.2, {ease: FlxEase.linear});
 								FlxTween.tween(playerStrums.members[0], {x: 732}, 0.2, {ease: FlxEase.linear});
 								FlxTween.tween(playerStrums.members[1], {x: 844}, 0.2, {ease: FlxEase.linear});
@@ -3539,10 +3579,10 @@ class PlayState extends MusicBeatState
 								FlxTween.tween(playerStrums.members[2], {x: 956}, 0.2, {ease: FlxEase.linear});
 								FlxTween.tween(playerStrums.members[3], {x: 1068}, 0.2, {ease: FlxEase.linear});
 								playerStrums.members[i].downScroll = true;
-							}
-	
-							FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
-						} else if(undyne) {
+								}
+
+								FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
+							} else if(undyne) {
 							FlxTween.tween(playerStrums.members[0], {direction: 180, x: 585 - 75, y: 305, angle: 0}, 0.2, {ease: FlxEase.linear});
 							playerStrums.members[0].downScroll = false;
 							FlxTween.tween(playerStrums.members[1], {direction: 90, x: 586, y: 305 + 75, angle: 0}, 0.2, {ease: FlxEase.linear});
@@ -3551,11 +3591,11 @@ class PlayState extends MusicBeatState
 							playerStrums.members[2].downScroll = true;
 							FlxTween.tween(playerStrums.members[3], {direction: 0, x: 585 + 75, y: 305, angle: 0}, 0.2, {ease: FlxEase.linear});
 							playerStrums.members[3].downScroll = false;
-	
+
 							FlxTween.tween(opponentStrums.members[j], {alpha: 0}, 0.2, {ease: FlxEase.linear});
+							}
 						}
 					}
-				}
 
 				var opponentLeft:Bool = false;
 				var opponentDown:Bool = false;
@@ -3564,125 +3604,125 @@ class PlayState extends MusicBeatState
 				var opponentDefault:Bool = false;
 				var opponentFlip:Bool = false;
 
-				switch(value2) {
-					case 'left' | 'Left':
-						undyne = false;
-						opponentDefault = false;
-						opponentLeft = true;
-						opponentDown = false;
-						opponentUp = false;
-						opponentRight = false;
-						opponentFlip = false;
-					case 'down' | 'Down':
-						undyne = false;
-						opponentDefault = false;
-						opponentLeft = false;
-						opponentDown = true;
-						opponentUp = false;
-						opponentRight = false;
-						opponentFlip = false;
-					case 'up' | 'Up':
-						undyne = false;
-						opponentDefault = false;
-						opponentLeft = false;
-						opponentDown = false;
-						opponentUp = true;
-						opponentRight = false;
-						opponentFlip = false;
-					case 'right' | 'Right':
-						undyne = false;
-						opponentDefault = false;
-						opponentLeft = false;
-						opponentDown = false;
-						opponentUp = false;
-						opponentRight = true;
-						opponentFlip = false;
-					case 'default' | 'Default':
-						undyne = false;
-						opponentDefault = true;
-						opponentLeft = false;
-						opponentDown = false;
-						opponentUp = false;
-						opponentRight = false;
-						opponentFlip = false;
-					case 'flip' | 'Flip':
-						undyne = false;
-						opponentDefault = false;
-						opponentLeft = false;
-						opponentDown = false;
-						opponentUp = false;
-						opponentRight = false;
-						opponentFlip = true;
-				}
+					switch(value2) {
+						case 'left' | 'Left':
+							undyne = false;
+							opponentDefault = false;
+							opponentLeft = true;
+							opponentDown = false;
+							opponentUp = false;
+							opponentRight = false;
+							opponentFlip = false;
+						case 'down' | 'Down':
+							undyne = false;
+							opponentDefault = false;
+							opponentLeft = false;
+							opponentDown = true;
+							opponentUp = false;
+							opponentRight = false;
+							opponentFlip = false;
+						case 'up' | 'Up':
+							undyne = false;
+							opponentDefault = false;
+							opponentLeft = false;
+							opponentDown = false;
+							opponentUp = true;
+							opponentRight = false;
+							opponentFlip = false;
+						case 'right' | 'Right':
+							undyne = false;
+							opponentDefault = false;
+							opponentLeft = false;
+							opponentDown = false;
+							opponentUp = false;
+							opponentRight = true;
+							opponentFlip = false;
+						case 'default' | 'Default':
+							undyne = false;
+							opponentDefault = true;
+							opponentLeft = false;
+							opponentDown = false;
+							opponentUp = false;
+							opponentRight = false;
+							opponentFlip = false;
+						case 'flip' | 'Flip':
+							undyne = false;
+							opponentDefault = false;
+							opponentLeft = false;
+							opponentDown = false;
+							opponentUp = false;
+							opponentRight = false;
+							opponentFlip = true;
+							}
 
-				for (i in 0...opponentStrums.length) {
-					if(opponentLeft) {
-						FlxTween.tween(opponentStrums.members[i], {direction: 180, x: FlxG.width - 150, angle: 90, alpha: 1}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[0], {y: 144}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[1], {y: 256}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[2], {y: 368}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[3], {y: 480}, 0.2, {ease: FlxEase.linear});
-						opponentStrums.members[i].downScroll = false;
-						//allowOpponentNoteSplash = true;
-					} else if(opponentDown) {
-						FlxTween.tween(opponentStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
-						opponentStrums.members[i].downScroll = true;
-						//allowOpponentNoteSplash = true;
-					} else if(opponentUp) {
-						FlxTween.tween(opponentStrums.members[i], {direction: 90, y: 50, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
-						opponentStrums.members[i].downScroll = false;
-						//allowOpponentNoteSplash = true;
-					} else if(opponentRight) {
-						FlxTween.tween(opponentStrums.members[i], {direction: 0, x: 50, angle: 270, alpha: 1}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[0], {y: 480}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[1], {y: 368}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[2], {y: 256}, 0.2, {ease: FlxEase.linear});
-						FlxTween.tween(opponentStrums.members[3], {y: 144}, 0.2, {ease: FlxEase.linear});
-						opponentStrums.members[i].downScroll = false;
-						//allowOpponentNoteSplash = true;
-					} else if(opponentDefault) {
-						if(ClientPrefs.downScroll) {
-							FlxTween.tween(opponentStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
-							opponentStrums.members[i].downScroll = true;
-						} else {
-							FlxTween.tween(opponentStrums.members[i], {direction: 90, y: 50, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
-							opponentStrums.members[i].downScroll = false;
+						for (i in 0...opponentStrums.length) {
+							if(opponentLeft) {
+								FlxTween.tween(opponentStrums.members[i], {direction: 180, x: FlxG.width - 150, angle: 90, alpha: 1}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[0], {y: 144}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[1], {y: 256}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[2], {y: 368}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[3], {y: 480}, 0.2, {ease: FlxEase.linear});
+								opponentStrums.members[i].downScroll = false;
+								//allowOpponentNoteSplash = true;
+							} else if(opponentDown) {
+								FlxTween.tween(opponentStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+								opponentStrums.members[i].downScroll = true;
+								//allowOpponentNoteSplash = true;
+							} else if(opponentUp) {
+								FlxTween.tween(opponentStrums.members[i], {direction: 90, y: 50, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+								opponentStrums.members[i].downScroll = false;
+								//allowOpponentNoteSplash = true;
+							} else if(opponentRight) {
+								FlxTween.tween(opponentStrums.members[i], {direction: 0, x: 50, angle: 270, alpha: 1}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[0], {y: 480}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[1], {y: 368}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[2], {y: 256}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[3], {y: 144}, 0.2, {ease: FlxEase.linear});
+								opponentStrums.members[i].downScroll = false;
+								//allowOpponentNoteSplash = true;
+							} else if(opponentDefault) {
+								if(ClientPrefs.downScroll) {
+									FlxTween.tween(opponentStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+									opponentStrums.members[i].downScroll = true;
+								} else {
+									FlxTween.tween(opponentStrums.members[i], {direction: 90, y: 50, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+									opponentStrums.members[i].downScroll = false;
+									}
+								//allowOpponentNoteSplash = true;
+							} else if(opponentFlip) {
+								if(ClientPrefs.downScroll) {
+									FlxTween.tween(opponentStrums.members[i], {direction: 90, y: 50, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+									opponentStrums.members[i].downScroll = false;
+								} else {
+									FlxTween.tween(opponentStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+									opponentStrums.members[i].downScroll = true;
+									}
+							//allowOpponentNoteSplash = true;
 						}
-						//allowOpponentNoteSplash = true;
-					} else if(opponentFlip) {
-						if(ClientPrefs.downScroll) {
-							FlxTween.tween(opponentStrums.members[i], {direction: 90, y: 50, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
-							opponentStrums.members[i].downScroll = false;
-						} else {
-							FlxTween.tween(opponentStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
-							FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
-							opponentStrums.members[i].downScroll = true;
-						}
-						//allowOpponentNoteSplash = true;
-					}
 				}
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();

@@ -13,6 +13,7 @@ import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
@@ -46,6 +47,7 @@ class StoryMenuState extends MusicBeatState
 	var sprDifficulty:FlxSprite;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
+	var transitionThing:FlxSprite;
 
 	var loadedWeeks:Array<WeekData> = [];
 
@@ -184,6 +186,11 @@ class StoryMenuState extends MusicBeatState
 
 		changeWeek();
 		changeDifficulty();
+
+		transitionThing = new FlxSprite(-1700, 0).loadGraphic(Paths.image('storyMenuTransition'));
+		add(transitionThing);
+
+		FlxTween.tween(transitionThing, {x: 1600}, 2.1, {ease: FlxEase.quadInOut});
 
 		super.create();
 	}

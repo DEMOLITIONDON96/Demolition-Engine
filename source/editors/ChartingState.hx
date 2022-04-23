@@ -94,8 +94,8 @@ class ChartingState extends MusicBeatState
 		['Screen Fade', "Funi Screen Fade\n0 = Invisible\n1 = add 0.05 to Visibility\n2 = remove 0.05 to Visibility\n3 = Visible\n(i'm sorry you have to spam 1 & 2)"],
 		//['Hide HUD', "Value 1: 1 = Hide HUD, 2 = Show HUD\n Value 2: No Use"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
-		['Scroll Type', "Changes Scroll Type, Mid-Song\nValue 1 = BF Notes\n Value 2 = Dad Notes\nDefault = Normal Scroll Type\nFlip = Flips Current Scroll Type\nDown = Locks Downscroll\nUp = Locks Upscroll\nLeft = Sidescroll from Left\nRight = Sidescroll from Right\nUndyne = Centerscroll"],
-		['White Flash', "Flashes da hud, yup, thats it\n0 = Normal Flash\n1 = Hide HUD with Flash"]
+		['Scroll Type', "Changes Scroll Type, Mid-Song\n \nValue 1 = BF Notes\nValue 2 = Dad Notes\n \nDefault = Normal Scroll Type\nFlip = Flips Current Scroll Type\nDown = Locks Downscroll\nUp = Locks Upscroll\nLeft = Sidescroll from Left\nRight = Sidescroll from Right\nUndyne = Centerscroll"],
+		['Flash Screen', "Flashes da hud, yup, thats it\nValue 1 = Color you should Flash\nValue 2 = Option to Hide HUD\n \n Colors: 0 = White\n1 = Red\n2 = Blue\n3 = Black\n4 = Cyan\n5 = Magenta\n6 = Pink\n7 = Orange\n8 = Purple\n9 = Lime\n \nTrue: HUD is hidden\n False: HUD is visible"]
 	];
 
 	var _file:FileReference;
