@@ -3382,6 +3382,7 @@ class PlayState extends MusicBeatState
 					case 1:
 						FlxG.camera.flash(FlxColor.RED, 3);
 					case 2:
+						FlxG.camera.flash(FlxColor.BLUE, 3);
 					case 3:
 						FlxG.camera.flash(FlxColor.BLACK, 3);
 					case 4:
