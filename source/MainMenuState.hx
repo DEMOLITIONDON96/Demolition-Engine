@@ -54,11 +54,10 @@ class MainMenuState extends MusicBeatState
 	var nudes:FlxSprite;
 	var magenta:FlxSprite;
 		var theCode:Array<Dynamic> = [
-		[FlxKey.G, FlxKey.NUMPADFOUR], 
-		[FlxKey.A, FlxKey.NUMPADTWO], 
-		[FlxKey.C, FlxKey.NUMPADTWO], 
-		[FlxKey.H, FlxKey.NUMPADFOUR], 
-		[FlxKey.A, FlxKey.NUMPADTWO]];
+		[FlxKey.O, FlxKey.NUMPADSIX], 
+		[FlxKey.M, FlxKey.NUMPADSIX], 
+		[FlxKey.N, FlxKey.NUMPADSIX], 
+		[FlxKey.I, FlxKey.NUMPADFOUR]];
 		var theCodeOrder:Int = 0;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
