@@ -120,7 +120,13 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[0] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 0;
+			if (ClientPrefs.center)
+			{
+			menuItem.screenCenter(X);
+			}
+			else {
 			//menuItem.screenCenter(X);
+			}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -150,7 +156,13 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[1] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 1;
+			if (ClientPrefs.center)
+			{
+			menuItem.screenCenter(X);
+			}
+			else {
 			//menuItem.screenCenter(X);
+			}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 1;
@@ -180,7 +192,13 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[2] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 2;
+			if (ClientPrefs.center)
+			{
+			menuItem.screenCenter(X);
+			}
+			else {
 			//menuItem.screenCenter(X);
+			}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 2;
@@ -210,7 +228,13 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[3] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 3;
+			if (ClientPrefs.center)
+			{
+			menuItem.screenCenter(X);
+			}
+			else {
 			//menuItem.screenCenter(X);
+			}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 3;
@@ -382,7 +406,13 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			//spr.screenCenter(X);
+			if (ClientPrefs.center)
+			{
+			spr.screenCenter(X);
+			}
+			else {
+				//spr.screenCenter(X);
+			}
 		});
 	}
 

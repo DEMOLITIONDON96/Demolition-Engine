@@ -10,6 +10,7 @@ class ClientPrefs {
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
 	public static var antiMash:Bool = true;
+	public static var center:Bool = true;
 	public static var laneunderlay:Bool = false;
 	public static var laneTransparency:Float = 0.5;
 	public static var debugMode:Bool = false;
@@ -143,6 +144,7 @@ class ClientPrefs {
 		FlxG.save.data.comboOffset = comboOffset;
 		FlxG.save.data.achievementsMap = Achievements.achievementsMap;
 		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
+		FlxG.save.data.center = center;
 
 		FlxG.save.data.ratingOffset = ratingOffset;
 		FlxG.save.data.marvelousWindow = marvelousWindow;
@@ -170,6 +172,9 @@ class ClientPrefs {
 	public static function loadPrefs() {
 		if(FlxG.save.data.debugMode != null) {
 			debugMode = FlxG.save.data.debugMode;
+		}
+		if (FlxG.save.data.center != null) {
+			center = FlxG.save.data.center;
 		}
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
