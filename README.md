@@ -45,26 +45,4 @@ haxelib install flixel-addons
 haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit
 haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
 haxelib install hscript 
-
-shit aint required
-haxelib install hxcpp
-haxelib install tjson
-haxelib install hxjsonast
-haxelib install hscript 
-haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
-haxelib install hxcpp-debug-server
 ```
-
-# PRISM HERE!
-I'm killing myself.
-
-# MATT TO PRISM ^^
-you do realize
-```
-haxelib install hxcpp
-haxelib install tjson
-haxelib install hxjsonast
-haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
-haxelib install hxcpp-debug-server
-```
-this isnt needed right?
