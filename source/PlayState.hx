@@ -3031,6 +3031,8 @@ class PlayState extends MusicBeatState
 		return pressed;
 	}
 
+	var lyrics:FlxText;
+	
 	public function triggerEventNote(eventName:String, value1:String, value2:String) {
 		switch(eventName) {
 			case 'Hey!':
@@ -3371,6 +3373,20 @@ class PlayState extends MusicBeatState
 					case 3:
 						blackFadeThing.alpha += 1;
 					//Sorry that you have to fucking spam these events to do the thing
+				}
+			case 'Lyrics':
+				if(lyrics!=null){
+					remove(lyrics);
+					lyrics.destroy();
+				}
+				if(value2.trim()=='')value2='#FFFFFF';
+				if(value1.trim()!=''){
+			 		lyrics = new FlxText(0, 570, 0, value1, 32);
+					lyrics.cameras = [camOther];
+					lyrics.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.fromString(value2), CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					lyrics.screenCenter(X);
+					lyrics.updateHitbox();
+					add(lyrics);
 				}
 			case 'Flash Screen':
 				var colorFlash:Int = Std.parseInt(value1);
