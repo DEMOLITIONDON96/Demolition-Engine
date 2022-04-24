@@ -325,9 +325,9 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
+		
 						var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
-			if (FlxG.keys.justPressed.ANY) {
+									if (FlxG.keys.justPressed.ANY) {
 
 				var hitCorrectKey:Bool = false;
 				for (i in 0...theCode[theCodeOrder].length) {
@@ -354,6 +354,8 @@ class MainMenuState extends MusicBeatState
 					FlxG.sound.muteKeys = null;
 				else
 					FlxG.sound.muteKeys = [FlxKey.ZERO, FlxKey.NUMPADZERO];
+		}
+				
 					
 			if (controls.UI_UP_P)
 			{
@@ -483,29 +485,4 @@ class MainMenuState extends MusicBeatState
 			}
 		});
 	}
-
-	function changeItem(huh:Int = 0)
-		{
-			if (finishedFunnyMove)
-			{
-				curSelected += huh;
-
-				if (curSelected >= menuItems.length)
-					curSelected = 0;
-				if (curSelected < 0)
-					curSelected = menuItems.length - 1;
-			}
-			menuItems.forEach(function(spr:FlxSprite)
-			{
-				spr.animation.play('idle');
-
-				if (spr.ID == curSelected && finishedFunnyMove)
-				{
-					spr.animation.play('selected');
-					camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
-				}
-
-				spr.updateHitbox();
-			});
-		}
 }
