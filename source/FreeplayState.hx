@@ -41,6 +41,7 @@ class FreeplayState extends MusicBeatState
 	var lerpRating:Float = 0;
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
+	var transitionThing:FlxSprite;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -114,7 +115,13 @@ class FreeplayState extends MusicBeatState
 		for (i in 0...songs.length)
 		{
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
+			if (ClientPrefs.center)
+			{
 			songText.isMenuItemCenter = true;
+			}
+			else {
+				songText.isMenuItemCenter = false;
+			}
 			songText.targetY = i;
 			grpSongs.add(songText);
 
@@ -130,6 +137,11 @@ class FreeplayState extends MusicBeatState
 				//songText.updateHitbox();
 				//trace(songs[i].songName + ' new scale: ' + textScale);
 			}
+			
+		transitionThing = new FlxSprite(-1700, 0).loadGraphic(Paths.image('freeplay'));
+		add(transitionThing);
+
+		FlxTween.tween(transitionThing, {x: 1600}, 2.1, {ease: FlxEase.circOut});
 
 			Paths.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);

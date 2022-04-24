@@ -1,5 +1,10 @@
 package;
 
+//baldi
+import flixel.input.keyboard.FlxKeyboard;
+import flixel.input.keyboard.FlxKey;
+import flixel.input.gamepad.FlxGamepad;
+
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -48,6 +53,13 @@ class MainMenuState extends MusicBeatState
 	var mp:FlxSprite;
 	var nudes:FlxSprite;
 	var magenta:FlxSprite;
+		var theCode:Array<Dynamic> = [
+		[FlxKey.G, FlxKey.NUMPADFOUR], 
+		[FlxKey.A, FlxKey.NUMPADTWO], 
+		[FlxKey.C, FlxKey.NUMPADTWO], 
+		[FlxKey.H, FlxKey.NUMPADFOUR], 
+		[FlxKey.A, FlxKey.NUMPADTWO]];
+		var theCodeOrder:Int = 0;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
@@ -120,7 +132,13 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[0] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 0;
+			if (ClientPrefs.center)
+			{
+			menuItem.screenCenter(X);
+			}
+			else {
 			//menuItem.screenCenter(X);
+			}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -150,7 +168,13 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[1] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 1;
+			if (ClientPrefs.center)
+			{
+			menuItem.screenCenter(X);
+			}
+			else {
 			//menuItem.screenCenter(X);
+			}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 1;
@@ -180,7 +204,13 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[2] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 2;
+			if (ClientPrefs.center)
+			{
+			menuItem.screenCenter(X);
+			}
+			else {
 			//menuItem.screenCenter(X);
+			}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 2;
@@ -210,7 +240,13 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[3] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 3;
+			if (ClientPrefs.center)
+			{
+			menuItem.screenCenter(X);
+			}
+			else {
 			//menuItem.screenCenter(X);
+			}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 3;
@@ -290,6 +326,36 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
+						var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
+
+			if (FlxG.keys.justPressed.ANY) {
+
+				var hitCorrectKey:Bool = false;
+				for (i in 0...theCode[theCodeOrder].length) {
+					if (FlxG.keys.checkStatus(theCode[theCodeOrder][i], JUST_PRESSED))
+						hitCorrectKey = true;
+				}
+				if (hitCorrectKey) {
+					if (theCodeOrder == (theCode.length - 1)) {
+						PlayState.SONG = Song.loadFromJson('omnipresent-hard', 'omnipresent'); //DONT USE THIS YET IM LIKE NOT FUCKING DONE
+						LoadingState.loadAndSwitchState(new PlayState());
+					} else {
+						theCodeOrder++;
+
+					}
+				} else {
+					theCodeOrder = 0;
+					for (i in 0...theCode[0].length) {
+						if (FlxG.keys.checkStatus(theCode[0][i], JUST_PRESSED))
+							theCodeOrder = 1;
+					}
+				}
+
+				if (theCodeOrder == 4)
+					FlxG.sound.muteKeys = null;
+				else
+					FlxG.sound.muteKeys = [FlxKey.ZERO, FlxKey.NUMPADZERO];
+					
 			if (controls.UI_UP_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
@@ -382,7 +448,13 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			//spr.screenCenter(X);
+			if (ClientPrefs.center)
+			{
+			spr.screenCenter(X);
+			}
+			else {
+				//spr.screenCenter(X);
+			}
 		});
 	}
 
@@ -413,10 +485,28 @@ class MainMenuState extends MusicBeatState
 		});
 	}
 
-override function beatHit()
-	{
-		super.beatHit();
-		if (curBeat % 4 == 0 && ClientPrefs.camZooms)
-			FlxG.camera.zoom = 1.015;
-	}
+	function changeItem(huh:Int = 0)
+		{
+			if (finishedFunnyMove)
+			{
+				curSelected += huh;
+
+				if (curSelected >= menuItems.length)
+					curSelected = 0;
+				if (curSelected < 0)
+					curSelected = menuItems.length - 1;
+			}
+			menuItems.forEach(function(spr:FlxSprite)
+			{
+				spr.animation.play('idle');
+
+				if (spr.ID == curSelected && finishedFunnyMove)
+				{
+					spr.animation.play('selected');
+					camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
+				}
+
+				spr.updateHitbox();
+			});
+		}
 }

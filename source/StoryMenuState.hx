@@ -190,7 +190,7 @@ class StoryMenuState extends MusicBeatState
 		transitionThing = new FlxSprite(-1700, 0).loadGraphic(Paths.image('storyMenuTransition'));
 		add(transitionThing);
 
-		FlxTween.tween(transitionThing, {x: 1600}, 2.1, {ease: FlxEase.quadInOut});
+		FlxTween.tween(transitionThing, {x: 1600}, 2.1, {ease: FlxEase.circOut});
 
 		super.create();
 	}
