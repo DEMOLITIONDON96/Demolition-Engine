@@ -53,12 +53,14 @@ class MainMenuState extends MusicBeatState
 	var mp:FlxSprite;
 	var nudes:FlxSprite;
 	var magenta:FlxSprite;
+	/*
 		var theCode:Array<Dynamic> = [
 		[FlxKey.O, FlxKey.NUMPADSIX], 
 		[FlxKey.M, FlxKey.NUMPADSIX], 
 		[FlxKey.N, FlxKey.NUMPADSIX], 
 		[FlxKey.I, FlxKey.NUMPADFOUR]];
 		var theCodeOrder:Int = 0;
+		*/
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
@@ -325,7 +327,7 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
-		
+		/*
 						var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 									if (FlxG.keys.justPressed.ANY) {
 
@@ -355,6 +357,7 @@ class MainMenuState extends MusicBeatState
 				else
 					FlxG.sound.muteKeys = [FlxKey.ZERO, FlxKey.NUMPADZERO];
 		}
+		*/
 				
 					
 			if (controls.UI_UP_P)
@@ -459,6 +462,7 @@ class MainMenuState extends MusicBeatState
 		});
 	}
 
+	/*
 	function changeItem(huh:Int = 0)
 	{
 		curSelected += huh;
@@ -485,4 +489,5 @@ class MainMenuState extends MusicBeatState
 			}
 		});
 	}
+	*/
 }
