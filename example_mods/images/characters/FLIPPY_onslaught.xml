@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="FLIPPY_onslaught.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="FLIPPY Idle0000" x="0" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0001" x="0" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0002" x="546" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0003" x="546" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0004" x="1092" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0005" x="1092" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0006" x="1638" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0007" x="1638" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0008" x="2184" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0009" x="2184" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0010" x="2184" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0011" x="2184" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0012" x="2184" y="0" width="546" height="591"/>
+	<SubTexture name="FLIPPY Idle0013" x="2184" y="0" width="546" height="591"/>
+	<SubTexture name="FLP M DOWN0000" x="2730" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0001" x="2730" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0002" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0003" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0004" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0005" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0006" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0007" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0008" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0009" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0010" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0011" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0012" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M DOWN0013" x="3307" y="0" width="577" height="445"/>
+	<SubTexture name="FLP M LEFT0000" x="0" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0001" x="0" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0002" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0003" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0004" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0005" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0006" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0007" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0008" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0009" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0010" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0011" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0012" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M LEFT0013" x="582" y="591" width="582" height="683"/>
+	<SubTexture name="FLP M RIGHT0000" x="1164" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0001" x="1815" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0002" x="2466" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0003" x="3117" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0004" x="2466" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0005" x="3117" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0006" x="2466" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0007" x="3117" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0008" x="2466" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0009" x="3117" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0010" x="2466" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0011" x="3117" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0012" x="2466" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M RIGHT0013" x="3117" y="591" width="651" height="610"/>
+	<SubTexture name="FLP M UP0000" x="0" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0001" x="0" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0002" x="629" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0003" x="629" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0004" x="629" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0005" x="629" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0006" x="629" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0007" x="629" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0008" x="629" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0009" x="629" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0010" x="629" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0011" x="629" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0012" x="629" y="1274" width="629" height="670"/>
+	<SubTexture name="FLP M UP0013" x="629" y="1274" width="629" height="670"/>
+</TextureAtlas>
