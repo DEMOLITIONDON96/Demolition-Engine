@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.util.FlxSave;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
+import gamejolt.GameJoltAPI;
 import Controls;
 
 class ClientPrefs {
@@ -205,6 +206,27 @@ class ClientPrefs {
 		if(FlxG.save.data.simplifiedScore != null) {
 			simplifiedScore = FlxG.save.data.simplifiedScore;
 		}
+		 //GameJolt Things
+        	if(FlxG.save.data.gjUser != null)
+       		{
+            	FlxG.save.data.gjUser = FlxG.save.data.gjUser;
+        	}
+
+        	if (FlxG.save.data.gjToken != null)
+        	{
+            	FlxG.save.data.gjToken = FlxG.save.data.gjToken;
+        	}
+
+        	if (FlxG.save.data.lbToggle == null)
+        	{
+           	FlxG.save.data.lbToggle = false;
+            	FlxG.save.flush();
+        	}
+
+        if (FlxG.save.data.lbToggle != null)
+        {
+            GameJoltAPI.leaderboardToggle = FlxG.save.data.lbToggle;
+        }
 		if(FlxG.save.data.showFPS != null) {
 			showFPS = FlxG.save.data.showFPS;
 			if(Main.fpsVar != null) {
