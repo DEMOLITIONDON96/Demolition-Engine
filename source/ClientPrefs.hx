@@ -27,6 +27,7 @@ class ClientPrefs {
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
 	public static var hideHud:Bool = false;
+	public static var funiShaders:Bool = true;
 	public static var noteOffset:Int = 0;
 	public static var simplifiedScore:Bool = false;
 	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
@@ -129,6 +130,7 @@ class ClientPrefs {
 		FlxG.save.data.antiMash = antiMash;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
+		FlxG.save.data.funiShaders = funiShaders;
 		FlxG.save.data.camZooms = camZooms;
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
@@ -175,6 +177,9 @@ class ClientPrefs {
 		}
 		if (FlxG.save.data.center != null) {
 			center = FlxG.save.data.center;
+		}
+		if (FlxG.save.data.funiShaders != null) {
+			funiShaders = FlxG.save.data.funiShaders;
 		}
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
