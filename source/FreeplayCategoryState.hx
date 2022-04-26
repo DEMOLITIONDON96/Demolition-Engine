@@ -71,7 +71,7 @@ class FreeplayCategoryState extends MusicBeatState
                 selectorBox.antialiasing = ClientPrefs.globalAntialiasing;
                 add(selectorBox);
           
-                super.(create);
+                super.create();
         }
 }
 //We workin' on this, clearly not finished lmao
