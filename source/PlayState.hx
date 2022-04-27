@@ -1442,7 +1442,7 @@ class PlayState extends MusicBeatState
 		}
 		#end
 	}
-	
+	if(ClientPrefs.funiShaders) {
 		public function addShaderToCamera(cam:String, effect:ShaderEffect)
 	{ // STOLE FROM ANDROMEDA
 
@@ -1538,6 +1538,7 @@ class PlayState extends MusicBeatState
 				camGame.setFilters(newCamEffects);
 		}
 	}
+}
 	
 	function startCharacterPos(char:Character, ?gfCheck:Bool = false) {
 		if(gfCheck && char.curCharacter.startsWith('gf')) { //IF DAD IS GIRLFRIEND, HE GOES TO HER POSITION
@@ -4742,6 +4743,7 @@ class PlayState extends MusicBeatState
 
 					case 'Poison Note':
 						healthDrain = 0.20;
+						health -= 0;
 
 					case 'Hurt Note': //Hurt note
 						if(boyfriend.animation.getByName('hurt') != null) {
