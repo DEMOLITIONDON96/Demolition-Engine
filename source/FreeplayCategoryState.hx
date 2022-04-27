@@ -49,15 +49,11 @@ class FreeplayCategoryState extends MusicBeatState
 		            DiscordClient.changePresence("In Freeplay Category", null);
 		            #end
                   
-                bg = new FlxSprite().loadGraphic(Paths.image('menuFreeplay'));
-		            bg.antialiasing = ClientPrefs.globalAntialiasing;
+                bg = new FlxSprite().loadGraphic(Paths.image('menuFreeplayCate'));
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
                 bg.color = 0xFF424d54;
-		            add(bg);
-		            bg.screenCenter();
-          
-                vanillaGame = new FlxSprite().loadGraphic(Paths.image('mainGameBanner'));
-                vanillaGame.antialiasing = ClientPrefs.globalAntialiasing;
-                add(vanillaGame);
+		add(bg);
+		bg.screenCenter();
           
                 exclusiveShit = new FlxSprite().loadGraphic(Paths.image('bonusBanner'));
                 exclusiveShit.antialiasing = ClientPrefs.globalAntialiasing;
@@ -66,7 +62,11 @@ class FreeplayCategoryState extends MusicBeatState
                 modsMusic = new FlxSprite().loadGraphic(Paths.image('modsMenuBanner'));
                 modsMusic.antialiasing = ClientPrefs.globalAntialiasing;
                 add(modsMusic);
-          
+          	
+		vanillaGame = new FlxSprite().loadGraphic(Paths.image('mainGameBanner'));
+                vanillaGame.antialiasing = ClientPrefs.globalAntialiasing;
+                add(vanillaGame);
+		
                 selectorBox = new FlxSprite().loadGraphic(Paths.image('daSelecta'));
                 selectorBox.antialiasing = ClientPrefs.globalAntialiasing;
                 add(selectorBox);
