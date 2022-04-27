@@ -1442,10 +1442,9 @@ class PlayState extends MusicBeatState
 		}
 		#end
 	}
-	if(ClientPrefs.funiShaders) {
 		public function addShaderToCamera(cam:String, effect:ShaderEffect)
 	{ // STOLE FROM ANDROMEDA
-
+		if(ClientPrefs.funiShaders) {
 		switch (cam.toLowerCase())
 		{
 			case 'camhud' | 'hud':
@@ -1488,9 +1487,11 @@ class PlayState extends MusicBeatState
 				}
 		}
 	}
+}
 	
 		public function removeShaderFromCamera(cam:String, effect:ShaderEffect)
 	{
+		if(ClientPrefs.funiShaders) {
 		switch (cam.toLowerCase())
 		{
 			case 'camhud' | 'hud':
@@ -1519,9 +1520,11 @@ class PlayState extends MusicBeatState
 				camGame.setFilters(newCamEffects);
 		}
 	}
+}
 	
 		public function clearShaderFromCamera(cam:String)
 	{
+		if(ClientPrefs.funiShaders) {
 		switch (cam.toLowerCase())
 		{
 			case 'camhud' | 'hud':
