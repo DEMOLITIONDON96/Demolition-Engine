@@ -33,38 +33,18 @@ This was originally used for a mod titled "Friday Night Funkin: Graveyard Rush",
 ## Copy this shit into cmd/powershell
 
 ```
-main shit
 haxelib install lime
 haxelib install openfl
 haxelib install flixel
 haxelib run lime setup flixel
 haxelib run lime setup
+```
+(do the steps that `haxelib run lime setup` tells you)
+```
 haxelib install flixel-tools
 haxelib install flixel-ui
 haxelib install flixel-addons
 haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit
 haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
 haxelib install hscript
-
-shit aint required
-haxelib install hxcpp
-haxelib install tjson
-haxelib install hxjsonast
-haxelib install hscript 
-haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
-haxelib install hxcpp-debug-server
 ```
-
-# PRISM HERE!
-I'm killing myself.
-
-# MATT TO PRISM ^^
-you do realize
-```
-haxelib install hxcpp
-haxelib install tjson
-haxelib install hxjsonast
-haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
-haxelib install hxcpp-debug-server
-```
-this isnt needed right?
