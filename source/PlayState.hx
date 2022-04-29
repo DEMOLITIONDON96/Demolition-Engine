@@ -255,6 +255,7 @@ class PlayState extends MusicBeatState
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
+	public var totalMisses:Int = 0;
 	public var scoreTxt:FlxText;
 	var peWatermark:FlxText;
 	var timeTxt:FlxText;
@@ -2613,6 +2614,11 @@ class PlayState extends MusicBeatState
 		}
 	        }
 			
+					// Info Bar
+		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
+		var ratingNameTwo:String = ratingName;
+		var divider:String = ' ' + '-' + ' ';
+			
 		if (ClientPrefs.ratingSystem == "None")
 			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
 
@@ -4135,9 +4141,42 @@ class PlayState extends MusicBeatState
 
 		// tryna do MS based judgment due to popular demand
 		var daRating:String = Conductor.judgeNote(note, noteDiff);
-
+		
+		if (!ClientPrefs.keAccuracy)
+		{
 		switch (daRating)
 		{
+				case 'shit':
+					score = -300;
+					combo = 0;
+					songMisses++;
+					totalMisses++;
+					health -= 0.1;
+					shits++;
+				case 'bad':
+					daRating = 'bad';
+					score = 0;
+					health -= 0.06;
+					bads++;
+				case 'good':
+					daRating = 'good';
+					score = 200;
+					goods++;
+				case 'sick':
+					if (health < 2)
+						health += 0.04;
+					sicks++;
+			case "marvelous": // marvelous
+				totalNotesHit += 1;
+					if (health < 2)
+						health += 0.08;
+				marvelouses++;
+		}
+		}
+		else
+		{
+			switch (daRating)
+			{
 			case "shit": // shit
 				totalNotesHit += 0;
 				shits++;
@@ -4155,12 +4194,20 @@ class PlayState extends MusicBeatState
 				sicks++;
 			case "marvelous": // marvelous
 				totalNotesHit += 1;
+					if (health < 2)
+						health += 0.08;
 				marvelouses++;
+			}
 		}
 
 		if (ClientPrefs.marvelouses == true)
 		{
 			if (daRating == 'marvelous' && !note.noteSplashDisabled)
+			{
+				spawnNoteSplashOnNote(note);
+			}
+			
+			if (daRating == 'sick' && !note.noteSplashDisabled)
 			{
 				spawnNoteSplashOnNote(note);
 			}
@@ -4204,6 +4251,8 @@ class PlayState extends MusicBeatState
 		else if (combo > 4)
 			daRating = 'bad';
 	 */
+			
+	 totalMisses++;
 
 		var uiSkin:String = '';
 		var altPart:String = isPixelStage ? '-pixel' : '';

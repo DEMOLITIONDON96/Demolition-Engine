@@ -11,6 +11,7 @@ class ClientPrefs {
 	public static var middleScroll:Bool = false;
 	public static var antiMash:Bool = true;
 	public static var center:Bool = true;
+	public static var keAccuracy:Bool = false;
 	public static var ratingSystem:String = "Bedrock";
 	public static var laneunderlay:Bool = false;
 	public static var laneTransparency:Float = 0.5;
@@ -131,6 +132,7 @@ class ClientPrefs {
 		FlxG.save.data.antiMash = antiMash;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
+		FlxG.save.data.keAccuracy = keAccuracy;
 		FlxG.save.data.funiShaders = funiShaders;
 		FlxG.save.data.camZooms = camZooms;
 		FlxG.save.data.noteOffset = noteOffset;
@@ -200,6 +202,10 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.laneunderlay != null) {
 			laneunderlay = FlxG.save.data.laneunderlay;
+		}
+		if (FlxG.save.data.keAccuracy != null)
+		{
+			keAccuracy = FlxG.save.data.keAccuracy;
 		}
 		if(FlxG.save.data.laneTransparency != null) {
 			laneTransparency = FlxG.save.data.laneTransparency;

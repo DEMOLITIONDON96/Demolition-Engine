@@ -65,6 +65,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			['Bedrock', 'Psych', 'Forever', 'Andromeda', "Etterna", 'Mania', "None"]);
 		addOption(option);
 		
+			var option:Option = new Option('Kade Engine Input System',
+			'If checked, KE input system will be on, this will not effect the rating system',
+			'keAccuracy',
+			'bool',
+			false);
+		addOption(option);
+		
 		var option:Option = new Option('Hide Judgement Counter',
 			'If checked, hides Judgement Counter on the screen',
 			'hideJudgement',

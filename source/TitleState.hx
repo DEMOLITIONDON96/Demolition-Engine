@@ -16,7 +16,6 @@ import flixel.addons.transition.TransitionData;
 import haxe.Json;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
-import kha.System;
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
@@ -257,9 +256,6 @@ class TitleState extends MusicBeatState
 				FlxG.sound.music.fadeIn(4, 0, 0.7);
 			}
 		}
-
-		if (Controls.BACK)
-			System.requestShutdown();
 			
 		Conductor.changeBPM(110);
 		persistentUpdate = true;
