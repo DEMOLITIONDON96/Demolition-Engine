@@ -462,7 +462,7 @@ class MainMenuState extends MusicBeatState
 		});
 	}
 
-	/*
+	
 	function changeItem(huh:Int = 0)
 	{
 		curSelected += huh;
@@ -489,5 +489,5 @@ class MainMenuState extends MusicBeatState
 			}
 		});
 	}
-	*/
+	
 }

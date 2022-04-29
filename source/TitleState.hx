@@ -16,6 +16,7 @@ import flixel.addons.transition.TransitionData;
 import haxe.Json;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
+import kha.System;
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
@@ -257,6 +258,9 @@ class TitleState extends MusicBeatState
 			}
 		}
 
+		if (Controls.BACK)
+			System.requestShutdown();
+			
 		Conductor.changeBPM(110);
 		persistentUpdate = true;
 
