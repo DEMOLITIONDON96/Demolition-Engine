@@ -56,6 +56,15 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 		
+		//bedrock can kiss my ass XD
+		var option:Option = new Option('Rating System:',
+		    "What should your Rating System be?", 
+			'ratingSystem', 
+			'string', 
+			'Bedrock',
+			['Bedrock', 'Psych', 'Forever', 'Andromeda', "Etterna", 'Mania', "None"]);
+		addOption(option);
+		
 		var option:Option = new Option('Hide Judgement Counter',
 			'If checked, hides Judgement Counter on the screen',
 			'hideJudgement',

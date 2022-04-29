@@ -58,7 +58,11 @@ import Achievements;
 import DialogueBoxPsych;
 import StageData;
 import FunkinLua;
+
+//slay
 import Shaders;
+import data.Etterna;
+import data.Ratings;
 #if sys
 import sys.FileSystem;
 #end
@@ -2604,6 +2608,9 @@ class PlayState extends MusicBeatState
 			scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' ~ Score: ' + songScore + ' ~ Misses: ' + songMisses + ' ~ Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
 	        }
+			
+		if (ClientPrefs.ratingSystem == "None")
+			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -4118,6 +4125,9 @@ class PlayState extends MusicBeatState
 
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
+		
+		if (ClientPrefs.keAccuracy)
+			totalNotesHit += Etterna.wife3(-noteDiff, Conductor.safeZoneOffset / 166);
 
 		// tryna do MS based judgment due to popular demand
 		var daRating:String = Conductor.judgeNote(note, noteDiff);
@@ -5287,6 +5297,23 @@ class PlayState extends MusicBeatState
 				// Rating Percent
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
 				//trace((totalNotesHit / totalPlayed) + ', Total: ' + totalPlayed + ', notes hit: ' + totalNotesHit);
+				
+			var ratings:Array<Dynamic> = Ratings.bedrockRatings;
+			switch (ClientPrefs.ratingSystem)
+			{
+				case "Psych":
+					ratings = Ratings.psychRatings;
+				// GO CHECK FOREVER ENGINE OUT!! https://github.com/Yoshubs/Forever-Engine-Legacy
+				case "Forever":
+					ratings = Ratings.foreverRatings;
+				// ALSO TRY ANDROMEDA!! https://github.com/nebulazorua/andromeda-engine
+				case "Andromeda":
+					ratings = Ratings.andromedaRatings;
+				case "Etterna":
+					ratings = Ratings.accurateRatings;
+				case 'Mania':
+					ratings = Ratings.maniaRatings;
+			}
 
 				// Rating Name
 				if(ratingPercent >= 1)
