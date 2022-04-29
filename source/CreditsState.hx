@@ -103,6 +103,7 @@ class CreditsState extends MusicBeatState
 			['Ash237',	'missing-icon',		'Funni Code',		'https://github.com/alexlolxp/baldi-source/commit/8bc86a45de3fba962539cab1258ebd48daf324a0',		'FFFFFF'],
 			['Chimmie-mpeg',	'missing-icon',		'Chromatics for omni lol',		'https://github.com/Chimmie-mpeg/FNF-FANMADE-CHROMATIC-SCALES/tree/main/Chromatics%202.0',		'FFFFFF'],
 			['NoahWantsDie',	'missing-icon',		'MIDI for omni (same i wanna die /j)',		'https://www.youtube.com/watch?v=2s5mDJrkFoc',		'FFFFFF'],
+			['SaadTheDrip',	'missing-icon',		'open browser shit',		'https://github.com/mayo78/PSYCHDISCUSSIONS/discussions/611',		'FFFFFF'],
 			[''],
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',							'https://twitter.com/Shadow_Mario_',	'444444'],
