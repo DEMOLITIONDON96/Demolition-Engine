@@ -4194,8 +4194,6 @@ class PlayState extends MusicBeatState
 				sicks++;
 			case "marvelous": // marvelous
 				totalNotesHit += 1;
-					if (health < 2)
-						health += 0.08;
 				marvelouses++;
 			}
 		}
