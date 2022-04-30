@@ -261,6 +261,7 @@ class PauseSubState extends MusicBeatSubstate
 			switch (daSelected)
 			{
 				case "Resume":
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + PlayState.SONG.song + ' [' + CoolUtil.difficultyString() + ']';
 					close();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
@@ -302,8 +303,10 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
 					if(PlayState.isStoryMode) {
+						Application.current.window.title = "Friday Night Funkin': Demolition Engine";
 						MusicBeatState.switchState(new StoryMenuState());
 					} else {
+						Application.current.window.title = "Friday Night Funkin': Demolition Engine";
 						MusicBeatState.switchState(new FreeplayState());
 					}
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
