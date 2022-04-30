@@ -12,6 +12,7 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxGame;
 import flixel.FlxObject;
+import lime.app.Application;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxSubState;
@@ -1081,6 +1082,8 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		moveCameraSection(0);
 
+		Application.current.window.title = "Friday Night Funkin: Demolition Engine - Playing " + PlayState.SONG.song + ' [' + CoolUtil.difficultyString() + ']';
+	
 		healthBarBG = new AttachedSprite('healthBar');
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
@@ -3014,6 +3017,7 @@ class PlayState extends MusicBeatState
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
 				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				Application.current.window.title = "Friday Night Funkin': Demolition Engine - Game Over";
 				#end
 				isDead = true;
 				return true;
