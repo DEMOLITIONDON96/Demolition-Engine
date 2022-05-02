@@ -1085,13 +1085,13 @@ class PlayState extends MusicBeatState
 		switch(PlayState.SONG.song)
 				{
 					case 'Atrocity':
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.diffcultyString() + "] - Composed by: Saster";
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Saster";
 					case 'Tutorial' | 'Bopeebo' | 'Fresh' | 'Dad Battle' | 'Spookeez' | 'South' | 'Pico' | 'Philly Nice' | 'Blammed' | 'Satin Panties' | 'High' | 'Milf' | 'Cocoa' | 'Eggnog' | 'Senpai' | 'Roses' | 'Thorns' | 'Ugh' | 'Guns' | 'Stress':
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.diffcultyString() + "] - Composed by: Kawai Sprite";
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Kawai Sprite";
 					case 'Monster' | 'Winter Horrorland':
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.diffcultyString() + "] - Composed by: Kawai Sprite & Bassetfilms";
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Kawai Sprite & Bassetfilms";
 					default:
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.diffcultyString() + "]";
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "]";
 				}
 
 		healthBarBG = new AttachedSprite('healthBar');
