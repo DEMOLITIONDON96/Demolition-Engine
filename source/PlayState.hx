@@ -5357,9 +5357,11 @@ class PlayState extends MusicBeatState
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
 				//trace((totalNotesHit / totalPlayed) + ', Total: ' + totalPlayed + ', notes hit: ' + totalNotesHit);
 
-				var ratings:Array<Dynamic> = Ratings.bedrockRatings;
+				var ratings:Array<Dynamic> = ClientPrefs.ratingSystem;
 			switch (ClientPrefs.ratingSystem)
 			{
+				case "Bedrock":
+					ratings = Ratings.psychRatings;
 				case "Psych":
 					ratings = Ratings.psychRatings;
 				// GO CHECK FOREVER ENGINE OUT!! https://github.com/Yoshubs/Forever-Engine-Legacy
