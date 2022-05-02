@@ -11,8 +11,8 @@ import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxGame;
-import flixel.FlxObject;
 import lime.app.Application;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxSubState;
@@ -60,7 +60,6 @@ import DialogueBoxPsych;
 import StageData;
 import FunkinLua;
 
-//slay
 import Shaders;
 import data.Etterna;
 import data.Ratings;
@@ -2626,7 +2625,7 @@ class PlayState extends MusicBeatState
 			scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' ~ Score: ' + songScore + ' ~ Misses: ' + songMisses + ' ~ Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
 	        }
-			
+
 					// Info Bar
 		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
 		var ratingNameTwo:String = ratingName;
@@ -2851,12 +2850,12 @@ class PlayState extends MusicBeatState
 
 				if (strumScroll) //Downscroll
 				{
-					//daNote.y = (strumY + 0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed);
+					daNote.y = (strumY + 0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed);
 					daNote.distance = (0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed);
 				}
 				else //Upscroll
 				{
-					//daNote.y = (strumY - 0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed);
+					daNote.y = (strumY - 0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed);
 					daNote.distance = (-0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed);
 				}
 
@@ -4156,8 +4155,8 @@ class PlayState extends MusicBeatState
 
 		// tryna do MS based judgment due to popular demand
 		var daRating:String = Conductor.judgeNote(note, noteDiff);
-		
-		if (!ClientPrefs.keAccuracy)
+
+			if (ClientPrefs.keAccuracy)
 		{
 		switch (daRating)
 		{
@@ -4190,8 +4189,8 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			switch (daRating)
-			{
+		switch (daRating)
+		{
 			case "shit": // shit
 				totalNotesHit += 0;
 				shits++;
@@ -4210,7 +4209,7 @@ class PlayState extends MusicBeatState
 			case "marvelous": // marvelous
 				totalNotesHit += 1;
 				marvelouses++;
-			}
+		}
 		}
 
 		if (ClientPrefs.marvelouses == true)
@@ -4219,7 +4218,6 @@ class PlayState extends MusicBeatState
 			{
 				spawnNoteSplashOnNote(note);
 			}
-			
 		}
 		else
 		{
@@ -4260,8 +4258,6 @@ class PlayState extends MusicBeatState
 		else if (combo > 4)
 			daRating = 'bad';
 	 */
-			
-	 totalMisses++;
 
 		var uiSkin:String = '';
 		var altPart:String = isPixelStage ? '-pixel' : '';
@@ -5360,8 +5356,8 @@ class PlayState extends MusicBeatState
 				// Rating Percent
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
 				//trace((totalNotesHit / totalPlayed) + ', Total: ' + totalPlayed + ', notes hit: ' + totalNotesHit);
-				
-			var ratings:Array<Dynamic> = Ratings.bedrockRatings;
+
+				var ratings:Array<Dynamic> = Ratings.bedrockRatings;
 			switch (ClientPrefs.ratingSystem)
 			{
 				case "Psych":
@@ -5381,15 +5377,15 @@ class PlayState extends MusicBeatState
 				// Rating Name
 				if(ratingPercent >= 1)
 				{
-					ratingName = ratingStuff[ratingStuff.length-1][0]; //Uses last string
+					ratingName = ratings[ratings.length-1][0]; //Uses last string
 				}
 				else
 				{
-					for (i in 0...ratingStuff.length-1)
+					for (i in 0...ratings.length-1)
 					{
-						if(ratingPercent < ratingStuff[i][1])
+						if(ratingPercent < ratings[i][1])
 						{
-							ratingName = ratingStuff[i][0];
+							ratingName = ratings[i][0];
 							break;
 						}
 					}
