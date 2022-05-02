@@ -4,6 +4,7 @@ package;
 import Discord.DiscordClient;
 #end
 import editors.ChartingState;
+import PlayState;
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -16,6 +17,7 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
+import lime.app.Application;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
 import WeekData;
@@ -41,7 +43,6 @@ class FreeplayState extends MusicBeatState
 	var lerpRating:Float = 0;
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
-	var transitionThing:FlxSprite;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -116,13 +117,6 @@ class FreeplayState extends MusicBeatState
 		{
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
 			songText.isMenuItemCenter = true;
-			/*if (ClientPrefs.center)
-			{
-			songText.isMenuItemCenter = true;
-			}
-			else {
-				songText.isMenuItemCenter = false;
-			}*/
 			songText.targetY = i;
 			grpSongs.add(songText);
 
@@ -138,11 +132,6 @@ class FreeplayState extends MusicBeatState
 				//songText.updateHitbox();
 				//trace(songs[i].songName + ' new scale: ' + textScale);
 			}
-			
-		transitionThing = new FlxSprite(-1700, 0).loadGraphic(Paths.image('freeplay'));
-		add(transitionThing);
-
-		FlxTween.tween(transitionThing, {x: 1600}, 2.1, {ease: FlxEase.circOut});
 
 			Paths.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
@@ -363,6 +352,17 @@ class FreeplayState extends MusicBeatState
 				vocals.looped = true;
 				vocals.volume = 0.7;
 				instPlaying = curSelected;
+				switch(PlayState.SONG.song)
+				{
+					case 'Atrocity':
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Saster";
+					case 'Tutorial' | 'Bopeebo' | 'Fresh' | 'Dad Battle' | 'Spookeez' | 'South' | 'Pico' | 'Philly Nice' | 'Blammed' | 'Satin Panties' | 'High' | 'Milf' | 'Cocoa' | 'Eggnog' | 'Senpai' | 'Roses' | 'Thorns' | 'Ugh' | 'Guns' | 'Stress':
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Kawai Sprite";
+					case 'Monster' | 'Winter Horrorland':
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Kawai Sprite & Bassetfilms";
+					default:
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song;
+				}
 				#end
 			}
 		}

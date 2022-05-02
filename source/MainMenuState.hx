@@ -1,6 +1,8 @@
 package;
 
-//baldi
+#if desktop
+import Discord.DiscordClient;
+#end
 import flixel.input.keyboard.FlxKeyboard;
 import flixel.input.keyboard.FlxKey;
 import flixel.input.gamepad.FlxGamepad;
@@ -53,14 +55,6 @@ class MainMenuState extends MusicBeatState
 	var mp:FlxSprite;
 	var nudes:FlxSprite;
 	var magenta:FlxSprite;
-	/*
-		var theCode:Array<Dynamic> = [
-		[FlxKey.O, FlxKey.NUMPADSIX], 
-		[FlxKey.M, FlxKey.NUMPADSIX], 
-		[FlxKey.N, FlxKey.NUMPADSIX], 
-		[FlxKey.I, FlxKey.NUMPADFOUR]];
-		var theCodeOrder:Int = 0;
-		*/
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
@@ -72,6 +66,8 @@ class MainMenuState extends MusicBeatState
 	{
 		WeekData.loadTheFirstEnabledMod();
 
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine";
+		
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -133,13 +129,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[0] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 0;
-			//if (ClientPrefs.center)
-			//{
 			//menuItem.screenCenter(X);
-			//}
-			//else {
-			//menuItem.screenCenter(X);
-			//}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -169,13 +159,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[1] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 1;
-			//if (ClientPrefs.center)
-			//{
 			//menuItem.screenCenter(X);
-			//}
-			//else {
-			//menuItem.screenCenter(X);
-			//}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 1;
@@ -205,13 +189,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[2] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 2;
-			//if (ClientPrefs.center)
-			//{
 			//menuItem.screenCenter(X);
-			//}
-			//else {
-			//menuItem.screenCenter(X);
-			//}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 2;
@@ -241,13 +219,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[3] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = 3;
-			//if (ClientPrefs.center)
-			//{
 			//menuItem.screenCenter(X);
-			//}
-			//else {
-			//menuItem.screenCenter(X);
-			//}
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 2) * 0.135;
 			if(optionShit.length < 6) scr = 3;
@@ -327,39 +299,6 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
-		/*
-						var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-									if (FlxG.keys.justPressed.ANY) {
-
-				var hitCorrectKey:Bool = false;
-				for (i in 0...theCode[theCodeOrder].length) {
-					if (FlxG.keys.checkStatus(theCode[theCodeOrder][i], JUST_PRESSED))
-						hitCorrectKey = true;
-				}
-				if (hitCorrectKey) {
-					if (theCodeOrder == (theCode.length - 1)) {
-						PlayState.SONG = Song.loadFromJson('omnipresent-hard', 'omnipresent'); //DONT USE THIS YET IM LIKE NOT FUCKING DONE
-						LoadingState.loadAndSwitchState(new PlayState());
-					} else {
-						theCodeOrder++;
-
-					}
-				} else {
-					theCodeOrder = 0;
-					for (i in 0...theCode[0].length) {
-						if (FlxG.keys.checkStatus(theCode[0][i], JUST_PRESSED))
-							theCodeOrder = 1;
-					}
-				}
-
-				if (theCodeOrder == 4)
-					FlxG.sound.muteKeys = null;
-				else
-					FlxG.sound.muteKeys = [FlxKey.ZERO, FlxKey.NUMPADZERO];
-		}
-		*/
-				
-					
 			if (controls.UI_UP_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
@@ -452,13 +391,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			if (ClientPrefs.center)
-			{
-			spr.screenCenter(X);
-			}
-			else {
 				//spr.screenCenter(X);
-			}
 		});
 	}
 
@@ -489,5 +422,11 @@ class MainMenuState extends MusicBeatState
 			}
 		});
 	}
-	
+
+override function beatHit()
+	{
+		super.beatHit();
+		if (curBeat % 4 == 0 && ClientPrefs.camZooms)
+			FlxG.camera.zoom = 1.015;
+	}
 }

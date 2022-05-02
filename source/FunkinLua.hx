@@ -2134,6 +2134,7 @@ class FunkinLua {
 		return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
 	}
 	static inline var CLENSE:String = "
+	os.execute = nil;
 	package.loaded.os.execute = nil;
 
 	os.getenv = nil;
