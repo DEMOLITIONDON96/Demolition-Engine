@@ -1,8 +1,5 @@
 package;
 
-#if desktop
-import Discord.DiscordClient;
-#end
 import flixel.input.keyboard.FlxKeyboard;
 import flixel.input.keyboard.FlxKey;
 import flixel.input.gamepad.FlxGamepad;
