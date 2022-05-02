@@ -5361,7 +5361,7 @@ class PlayState extends MusicBeatState
 			switch (ClientPrefs.ratingSystem)
 			{
 				case "Bedrock":
-					ratings = Ratings.psychRatings;
+					ratings = Ratings.bedrockRatings;
 				case "Psych":
 					ratings = Ratings.psychRatings;
 				// GO CHECK FOREVER ENGINE OUT!! https://github.com/Yoshubs/Forever-Engine-Legacy
