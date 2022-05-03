@@ -5357,24 +5357,24 @@ class PlayState extends MusicBeatState
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
 				//trace((totalNotesHit / totalPlayed) + ', Total: ' + totalPlayed + ', notes hit: ' + totalNotesHit);
 
-				var ratings:Array<Dynamic> = ClientPrefs.ratingSystem;
-			switch (ClientPrefs.ratingSystem)
-			{
-				case "Bedrock":
-					ratings = Ratings.bedrockRatings;
-				case "Psych":
-					ratings = Ratings.psychRatings;
-				// GO CHECK FOREVER ENGINE OUT!! https://github.com/Yoshubs/Forever-Engine-Legacy
-				case "Forever":
-					ratings = Ratings.foreverRatings;
-				// ALSO TRY ANDROMEDA!! https://github.com/nebulazorua/andromeda-engine
-				case "Andromeda":
-					ratings = Ratings.andromedaRatings;
-				case "Etterna":
-					ratings = Ratings.accurateRatings;
-				case 'Mania':
-					ratings = Ratings.maniaRatings;
-			}
+				var ratings:Array<Dynamic> = [ClientPrefs.ratingSystem];
+				switch (ClientPrefs.ratingSystem)
+				{
+					case "Bedrock":
+						ratings = Ratings.bedrockRatings;
+					case "Psych":
+						ratings = Ratings.psychRatings;
+						// GO CHECK FOREVER ENGINE OUT!! https://github.com/Yoshubs/Forever-Engine-Legacy
+					case "Forever":
+						ratings = Ratings.foreverRatings;
+						// ALSO TRY ANDROMEDA!! https://github.com/nebulazorua/andromeda-engine
+					case "Andromeda":
+						ratings = Ratings.andromedaRatings;
+					case "Etterna":
+						ratings = Ratings.accurateRatings;
+					case 'Mania':
+						ratings = Ratings.maniaRatings;
+				}
 
 				// Rating Name
 				if(ratingPercent >= 1)
