@@ -13,6 +13,8 @@ hi, welcome to yet, another modified version of Psych Engine, where we add lots 
 - Ask for help, but don’t beg for it, it gets annoying.
 - Joke posts are okay, but please don’t do what I just said not to do under the 2nd bullet…
 
+## If you wish to make a PR to this repo, you are more than welcome to do so, we're willing to accept all ideas if they work and aren't stupid (looking at you, Dave & Bambi porters)
+
 ## Origins of Engine:
 
 This was originally used for a mod titled "Friday Night Funkin: Graveyard Rush", you can go download and play it on GameJolt Here:
