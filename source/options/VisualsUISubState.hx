@@ -62,6 +62,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
+		
+		var option:Option = new Option('Icon Bounce:',
+			'How should you icons bounce?',
+			'iconBounce',
+			'string',
+			'Default',
+			['Default', 'Golden Apple', 'None']);
+		addOption(option);
 
 		var option:Option = new Option('Judgement Skin:', 
 		"What should your judgements look like?", 
