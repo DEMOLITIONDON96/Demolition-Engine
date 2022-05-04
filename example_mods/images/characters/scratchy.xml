@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="scratchy.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="scratchy down instance 10000" x="0" y="0" width="194" height="187" frameX="0" frameY="-12" frameWidth="194" frameHeight="200"/>
+	<SubTexture name="scratchy down instance 10001" x="194" y="0" width="183" height="200" frameX="0" frameY="0" frameWidth="194" frameHeight="200"/>
+	<SubTexture name="scratchy idle instance 10000" x="377" y="0" width="172" height="226" frameX="-10" frameY="-5" frameWidth="182" frameHeight="231"/>
+	<SubTexture name="scratchy idle instance 10001" x="549" y="0" width="181" height="218" frameX="0" frameY="-13" frameWidth="182" frameHeight="231"/>
+	<SubTexture name="scratchy idle instance 10002" x="730" y="0" width="172" height="226" frameX="-10" frameY="-4" frameWidth="182" frameHeight="231"/>
+	<SubTexture name="scratchy idle instance 10003" x="0" y="226" width="167" height="227" frameX="-10" frameY="-3" frameWidth="182" frameHeight="231"/>
+	<SubTexture name="scratchy idle instance 10004" x="167" y="226" width="165" height="230" frameX="-15" frameY="0" frameWidth="182" frameHeight="231"/>
+	<SubTexture name="scratchy left instance 10000" x="332" y="226" width="197" height="228" frameX="0" frameY="-2" frameWidth="198" frameHeight="231"/>
+	<SubTexture name="scratchy left instance 10001" x="529" y="226" width="195" height="231" frameX="-3" frameY="0" frameWidth="198" frameHeight="231"/>
+	<SubTexture name="scratchy right instance 10000" x="724" y="226" width="180" height="231" frameX="-9" frameY="0" frameWidth="189" frameHeight="231"/>
+	<SubTexture name="scratchy right instance 10001" x="0" y="457" width="171" height="228" frameX="0" frameY="0" frameWidth="189" frameHeight="231"/>
+	<SubTexture name="scratchy up instance 10000" x="171" y="457" width="162" height="237" frameX="0" frameY="0" frameWidth="168" frameHeight="244"/>
+	<SubTexture name="scratchy up instance 10001" x="333" y="457" width="163" height="227" frameX="-5" frameY="-17" frameWidth="168" frameHeight="244"/>
+</TextureAtlas>
