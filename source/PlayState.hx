@@ -12,6 +12,7 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxGame;
 import lime.app.Application;
+import flash.system.System;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -4851,6 +4852,15 @@ class PlayState extends MusicBeatState
 							boyfriend.specialAnim = true;
 						}
 						health -= 500;
+						
+					/*case 'Error Note':
+						FlxG.sound.play(Paths.sound('wiiCrashSoundLol'), 1);
+						FlxTween.tween(SONG, {speed: SONG.speed = 0}, 0);
+						PlayState.instance.practiceMode = true;
+						new FlxTimer().start(1, function(tmr:FlxTimer)
+						{
+							System.exit(0);
+						});*/
 
 					case 'Flip Note':
 						new FlxTimer().start(0.01, function(tmr:FlxTimer)
