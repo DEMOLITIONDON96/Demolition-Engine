@@ -1093,7 +1093,12 @@ class PlayState extends MusicBeatState
 					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "]";
 				}
 
-		healthBarBG = new AttachedSprite('healthBar');
+		if(ClientPrefs.longBar)
+		{
+			healthBarBG = new AttachedSprite('healthBar-Long');
+		}else{
+			healthBarBG = new AttachedSprite('healthBar');
+		}
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
