@@ -162,6 +162,14 @@ class Note extends FlxSprite
 					colorSwap.hue = 0;
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
+				case 'Error Note':
+					ignoreNote = mustPress;
+					hitCausesMiss = true;
+					reloadNote('ERROR');
+					noteSplashTexture = 'HURTnoteSplashes';
+					if(PlayState.isPixelStage) {
+						noteSplashTexture = 'pixelUI/HURTnoteSplashes';
+					}
 				case 'Hurt Note':
 					ignoreNote = mustPress;
 					reloadNote('HURT');
