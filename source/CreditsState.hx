@@ -92,7 +92,7 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Extra Code'],
 			['mayo78',   'missing-icon',     'Epic CPU Skin Code',        'https://github.com/mayo78',                'FFFFFF'],
-			['Wither362',  '.mp3 & .wav file support\n(and for allowing me to add in some cool shit they made)',   'https://www.youtube.com/channel/UCsVr-qBLxT0uSWH037BmlHw',   '009BF4'],
+			['Wither362',  'wither362',	'.mp3 & .wav file support\n(and for allowing me to add in some cool shit they made)',   'https://www.youtube.com/channel/UCsVr-qBLxT0uSWH037BmlHw',   '009BF4'],
 			['lemz1',     'lemz1',            'Modchart Code for Game Window',        'https://github.com/lemz1',         '383838'],
 			//['Phoneguytech75', 'missing-icon', 'Note Skins :D',			'https://github.com/Phoneguytech75',	'FFFFFF'],
 			['HiroMizuki',	'hiro',		'Pixel Splashes & \nScreen Resolution Code',	'https://github.com/HiroMizuki',	'3DED02'],
