@@ -62,6 +62,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
+		
+		var option:Option = new Option('Icon Bounce:',
+			'How should you icons bounce?',
+			'iconBounce',
+			'string',
+			'Default',
+			['Default', 'Golden Apple', 'None']);
+		addOption(option);
 
 		var option:Option = new Option('Judgement Skin:', 
 		"What should your judgements look like?", 
@@ -116,6 +124,13 @@ class VisualsUISubState extends BaseOptionsMenu
 		var option:Option = new Option('Score Text Zoom on Hit',
 			"If unchecked, disables the Score text zooming\neverytime you hit a note.",
 			'scoreZoom',
+			'bool',
+			true);
+		addOption(option);
+		
+		var option:Option = new Option('Long Health Bar',
+			"If unchecked, the health bar will be short.",
+			'longBar',
 			'bool',
 			true);
 		addOption(option);
