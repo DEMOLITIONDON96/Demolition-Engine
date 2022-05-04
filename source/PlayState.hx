@@ -2714,24 +2714,41 @@ class PlayState extends MusicBeatState
 		health -= 0.001;
 		healthDrain -= 0.0001;
 	}
-		if (health > 2)
-			health = 2;
-		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1;
-		else if (healthBar.percent > 20 && healthBar.percent < 80)
-			iconP1.animation.curAnim.curFrame = 0;
-		else if (healthBar.percent > 80)
-			iconP1.animation.curAnim.curFrame = 2;
-	
-		switch(SONG.player2)
+		if(ClientPrefs.winningIcon)
 		{
-			default:
-				if (healthBar.percent < 20)
-					iconP2.animation.curAnim.curFrame = 2;
-				else if (healthBar.percent > 20 && healthBar.percent < 80)
-					iconP2.animation.curAnim.curFrame = 0;
-				else if (healthBar.percent > 80)
-					iconP2.animation.curAnim.curFrame = 1;
+		
+			if (health > 2)	
+				health = 2;
+			if (healthBar.percent < 20)
+				iconP1.animation.curAnim.curFrame = 1;
+			else if (healthBar.percent > 20 && healthBar.percent < 80)	
+				iconP1.animation.curAnim.curFrame = 0;
+			else if (healthBar.percent > 80)
+				iconP1.animation.curAnim.curFrame = 2;
+			
+			switch(SONG.player2)
+			{	
+				default:
+					if (healthBar.percent < 20)
+						iconP2.animation.curAnim.curFrame = 2;
+					else if (healthBar.percent > 20 && healthBar.percent < 80)
+						iconP2.animation.curAnim.curFrame = 0;		
+					else if (healthBar.percent > 80)
+						iconP2.animation.curAnim.curFrame = 1;
+			}
+		} else {
+			if (health > 2)
+				health = 2;
+
+			if (healthBar.percent < 20)
+				iconP1.animation.curAnim.curFrame = 1;
+			else		
+				iconP1.animation.curAnim.curFrame = 0;
+	
+			if (healthBar.percent > 80)
+				iconP2.animation.curAnim.curFrame = 1;
+			else
+				iconP2.animation.curAnim.curFrame = 0;
 		}
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
