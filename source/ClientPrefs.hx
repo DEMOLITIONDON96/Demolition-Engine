@@ -44,6 +44,7 @@ class ClientPrefs {
 	public static var screenRes:String = '1280x720';
 	public static var fullscreen:Bool = false;
 	public static var showWatermarks:Bool = true;
+	public static var winningIcon:Bool = true;
 	public static var hitsoundVolume:Float = 0;
 	public static var pauseMusic:String = 'Tea Time';
 	public static var gameplaySettings:Map<String, Dynamic> = [
@@ -124,6 +125,7 @@ class ClientPrefs {
 		FlxG.save.data.camMove = camMove;
 		FlxG.save.data.showFPS = showFPS;
 		FlxG.save.data.flashing = flashing;
+		FlxG.save.data.winningIcon = winningIcon;
 		FlxG.save.data.simplifiedScore = simplifiedScore;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
@@ -184,6 +186,9 @@ class ClientPrefs {
 		}
 		if (FlxG.save.data.funiShaders != null) {
 			funiShaders = FlxG.save.data.funiShaders;
+		}
+		if(FlxG.save.data.winningIcon != null) {
+			winningIcon = FlxG.save.data.winningIcon;
 		}
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;

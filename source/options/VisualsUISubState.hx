@@ -40,6 +40,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
+		
+		var option:Option = new Option('Winning Icons',
+			'If checked, enables extra icon frames',
+			'winningIcon',
+			'bool',
+			true);
+		addOption(option);
 
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
