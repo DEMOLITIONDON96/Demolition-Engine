@@ -22,6 +22,7 @@ class ClientPrefs {
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
 	public static var hideJudgement:Bool = false;
+	public static var longBar:Bool = true;
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
@@ -131,6 +132,7 @@ class ClientPrefs {
 		FlxG.save.data.simplifiedScore = simplifiedScore;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
+		FlxG.save.data.longBar = longBar;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
 		FlxG.save.data.antiMash = antiMash;
@@ -219,6 +221,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.laneTransparency != null) {
 			laneTransparency = FlxG.save.data.laneTransparency;
+		}
+		if(FlxG.save.data.longBar != null) {
+			longBar = FlxG.save.data.longBar;
 		}
 		if(FlxG.save.data.simplifiedScore != null) {
 			simplifiedScore = FlxG.save.data.simplifiedScore;
