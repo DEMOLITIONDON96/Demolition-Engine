@@ -16,6 +16,7 @@ class ClientPrefs {
 	public static var laneunderlay:Bool = false;
 	public static var laneTransparency:Float = 0.5;
 	public static var debugMode:Bool = false;
+	public static var iconBounce:String = 'Default';
 	public static var camMove:Bool = true;
 	public static var marvelouses:Bool = true;
 	public static var showFPS:Bool = true;
@@ -126,6 +127,7 @@ class ClientPrefs {
 		FlxG.save.data.showFPS = showFPS;
 		FlxG.save.data.flashing = flashing;
 		FlxG.save.data.winningIcon = winningIcon;
+		FlxG.save.data.iconBounce = iconBounce;
 		FlxG.save.data.simplifiedScore = simplifiedScore;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
@@ -198,6 +200,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.antiMash != null) {
 			antiMash = FlxG.save.data.antiMash;
+		}
+		if(FlxG.save.data.iconBounce != null) {
+			iconBounce = FlxG.save.data.iconBounce;
 		}
 		if(FlxG.save.data.middleScroll != null) {
 			middleScroll = FlxG.save.data.middleScroll;
