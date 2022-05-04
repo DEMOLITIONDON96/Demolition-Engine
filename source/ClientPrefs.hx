@@ -44,7 +44,7 @@ class ClientPrefs {
 	public static var screenRes:String = '1280x720';
 	public static var fullscreen:Bool = false;
 	public static var showWatermarks:Bool = true;
-	public static var winningIcon = true;
+	public static var winningIcon:Bool = true;
 	public static var hitsoundVolume:Float = 0;
 	public static var pauseMusic:String = 'Tea Time';
 	public static var gameplaySettings:Map<String, Dynamic> = [
