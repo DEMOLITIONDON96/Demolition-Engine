@@ -379,7 +379,7 @@ class MainMenuState extends MusicBeatState
 			{
 				if (optionShit[curSelected] == 'donate')
 				{
-					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
+					CoolUtil.browserLoad('https://sonicproyt.github.io/scratchcraftanddashpage/');
 				}
 				else
 				{
