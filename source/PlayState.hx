@@ -4766,25 +4766,25 @@ class PlayState extends MusicBeatState
 								animToPlay = 'singLEFT';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.x -= 30;
+											camFollow.x -= 20;
 										}
 							case 1:
 								animToPlay = 'singDOWN';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.y += 30;
+											camFollow.y += 20;
 										}
 							case 2:
 								animToPlay = 'singUP';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.y -= 30;
+											camFollow.y -= 20;
 										}
 							case 3:
 								animToPlay = 'singRIGHT';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.x += 30;
+											camFollow.x += 20;
 										}
 						}
 			if(note.gfNote) {
@@ -4914,25 +4914,25 @@ class PlayState extends MusicBeatState
 						animToPlay = 'singLEFT';
 						if(ClientPrefs.camMove)
 					{
-						camFollow.x -= 30;
+						camFollow.x -= 20;
 					}
 					case 1:
 						animToPlay = 'singDOWN';
 						if(ClientPrefs.camMove)
 							{
-								camFollow.y += 30;
+								camFollow.y += 20;
 							}
 					case 2:
 						animToPlay = 'singUP';
 						if(ClientPrefs.camMove)
 							{
-								camFollow.y -= 30;
+								camFollow.y -= 20;
 							}
 					case 3:
 						animToPlay = 'singRIGHT';
 						if(ClientPrefs.camMove)
 							{
-								camFollow.x += 30;
+								camFollow.x += 20;
 							}
 				}
 
