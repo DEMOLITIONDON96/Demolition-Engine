@@ -1,11 +1,11 @@
 {
-    "storymodeP": [0, 0],
-    "freeplayP": [0, 0],
-    "creditsP": [0, 0],
-    "optionsP": [0, 0],
-    "storymodeS": [0, 0],
-    "freeplayS": [0, 0],
-    "creditsS": [0, 0],
-    "optionsS": [0, 0],
+    "storymodeP": [5, 0],
+    "freeplayP": [4, 0],
+    "creditsP": [3, 0],
+    "optionsP": [2, 0],
+    "storymodeS": [6, 0],
+    "freeplayS": [7, 0],
+    "creditsS": [8, 0],
+    "optionsS": [9, 0],
     "centerX": true
 }
