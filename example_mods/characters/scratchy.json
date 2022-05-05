@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				-18
+			],
+			"indices": [],
+			"fps": 10,
+			"anim": "idle",
+			"loop": false,
+			"name": "scratchy idle"
+		},
+		{
+			"offsets": [
+				190,
+				-20
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "scratchy left"
+		},
+		{
+			"offsets": [
+				-20,
+				-110
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "scratchy down"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "scratchy up"
+		},
+		{
+			"offsets": [
+				-130,
+				-30
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "scratchy right"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/scratchy",
+	"position": [
+		0,
+		310
+	],
+	"healthicon": "face",
+	"flip_x": false,
+	"healthbar_colors": [
+		195,
+		195,
+		195
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 2.4
+}
