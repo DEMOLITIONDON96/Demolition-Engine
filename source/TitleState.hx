@@ -66,6 +66,7 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
+	var psychEngine:FlxSprite;
 	var creditsGrid:FlxSprite;
 	var randomWindowText:Int = FlxG.random.int(0, 20);
 
@@ -386,6 +387,14 @@ class TitleState extends MusicBeatState
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		
+		psychEngine = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('psychLogo'));
+		add(psychEngine);
+		psychEngine.visible = false;
+		psychEngine.setGraphicSize(Std.int(ngSpr.width * 0.8));
+		psychEngine.updateHitbox();
+		psychEngine.screenCenter(X);
+		psychEngine.antialiasing = ClientPrefs.globalAntialiasing;
 
 		creditsGrid = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('creditGrid'));
 		add(creditsGrid);
@@ -677,11 +686,11 @@ class TitleState extends MusicBeatState
 					createCoolText(['A Modified version of'], -40);
 				case 7:
 					addMoreText('Psych Engine', -40);
-					ngSpr.visible = true;
+					psychEngine.visible = true;
 				// credTextShit.text += '\nNewgrounds';
 				case 8:
 					deleteCoolText();
-					ngSpr.visible = false;
+					psychEngine.visible = false;
 				// credTextShit.visible = false;
 
 				// credTextShit.text = 'Shoutouts Tom Fulp';
