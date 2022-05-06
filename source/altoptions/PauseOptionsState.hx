@@ -78,6 +78,11 @@ class PauseOptionsState extends MusicBeatState
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
 			grpOptions.add(optionText);
 		}
+		
+		if(ClientPrefs.pauseMusic == 'None')
+			FlxG.sound.music.volume = 0;
+		else
+			FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)));
 
 		selectorLeft = new Alphabet(0, 0, '>', true, false);
 		add(selectorLeft);
@@ -86,11 +91,6 @@ class PauseOptionsState extends MusicBeatState
 
 		changeSelection();
 		ClientPrefs.saveSettings();
-
-		if(ClientPrefs.pauseMusic == 'None')
-			FlxG.sound.music.volume = 0;
-		else
-			FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)));
 
 		super.create();
 	}
