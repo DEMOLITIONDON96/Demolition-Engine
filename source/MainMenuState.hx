@@ -112,9 +112,9 @@ class MainMenuState extends MusicBeatState
 		add(menuItems);
 
 		var scale:Float = 0.6;
-		/*if(optionShit.length > 6) {
-			scale = 6 / optionShit.length;
-		}*/
+		if(optionShit.length > 6) {
+			scale = 0.6 / optionShit.length;
+		}
 
 			// Story Mode
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
