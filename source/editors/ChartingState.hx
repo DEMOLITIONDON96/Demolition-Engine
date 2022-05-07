@@ -67,6 +67,7 @@ class ChartingState extends MusicBeatState
 		'Darkness Note',
 		'Hurt Note',
 		'Flip Note',
+		'Error Note',
 		'GF Sing',
 		'No Animation'
 	];
