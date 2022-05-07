@@ -40,10 +40,10 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
+		//#if MODS_ALLOWED 'mods', #end
 		//#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
-		#if !switch 'donate', #end
+		//#if !switch 'donate', #end
 		'options'
 	];
 
@@ -237,7 +237,7 @@ class MainMenuState extends MusicBeatState
 				menuItem.y = 108 + (0 * 90);
 		
 			// Donate
-			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
+			/*var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var menuItem:FlxSprite = new FlxSprite(100, 700);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
@@ -294,7 +294,7 @@ class MainMenuState extends MusicBeatState
 					}
 				});
 			else
-				menuItem.y = 108 + (0 * 90);
+				menuItem.y = 108 + (0 * 90);*/
 
 		firstStart = false;
 
@@ -419,10 +419,10 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayState());
-									#if MODS_ALLOWED
-									case 'mods':
-										MusicBeatState.switchState(new ModsMenuState());
-									#end
+									//#if MODS_ALLOWED
+									//case 'mods':
+										//MusicBeatState.switchState(new ModsMenuState());
+									//#end
 									//case 'awards':
 										//MusicBeatState.switchState(new AchievementsMenuState());
 									case 'credits':
