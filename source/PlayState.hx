@@ -4856,14 +4856,11 @@ class PlayState extends MusicBeatState
 						}
 						health -= 500;
 						
-					/*case 'Error Note':
-						FlxG.sound.play(Paths.sound('wiiCrashSoundLol'), 1);
-						FlxTween.tween(SONG, {speed: SONG.speed = 0}, 0);
-						PlayState.instance.practiceMode = true;
-						new FlxTimer().start(1, function(tmr:FlxTimer)
-						{
-							System.exit(0);
-						});*/
+					case 'Error Note':
+						endSong();
+						FlxG.sound.play(Paths.sound('wiiCrash'), 1);
+						Application.current.window.alert('lime.app.Application: function goodNoteHit: note.noteType = "Error Note": closing game...');
+						System.exit(0);
 
 					case 'Flip Note':
 						new FlxTimer().start(0.01, function(tmr:FlxTimer)
