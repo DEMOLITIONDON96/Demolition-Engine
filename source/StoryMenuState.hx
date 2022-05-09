@@ -9,6 +9,7 @@ import flixel.FlxSubState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import lime.app.Application;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -94,6 +95,8 @@ class StoryMenuState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In Story Mode", null);
 		#end
+			
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine";
 
 		var num:Int = 0;
 		for (i in 0...WeekData.weeksList.length)
