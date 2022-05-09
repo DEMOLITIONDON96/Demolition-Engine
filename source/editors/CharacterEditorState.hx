@@ -11,6 +11,7 @@ import flixel.FlxState;
 import flixel.FlxCamera;
 import flixel.input.keyboard.FlxKey;
 import flixel.addons.display.FlxGridOverlay;
+import lime.app.Application;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.graphics.FlxGraphic;
 import flixel.text.FlxText;
@@ -111,7 +112,9 @@ class CharacterEditorState extends MusicBeatState
 			reloadBGs();
 		});
 		changeBGbutton.cameras = [camMenu];
-
+		
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Character Editor - Editing: " + Character.curCharacter;
+		
 		loadChar(!daAnim.startsWith('bf'), false);
 
 		healthBarBG = new FlxSprite(30, FlxG.height - 75).loadGraphic(Paths.image('healthBar'));
