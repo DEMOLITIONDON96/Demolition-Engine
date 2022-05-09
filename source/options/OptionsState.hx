@@ -15,6 +15,7 @@ import lime.utils.Assets;
 import flixel.FlxSubState;
 import flash.text.TextField;
 import flixel.FlxG;
+import lime.app.Application;
 import flixel.FlxSprite;
 import flixel.util.FlxSave;
 import haxe.Json;
@@ -61,6 +62,8 @@ class OptionsState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
 		#end
+			
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Settings";
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
