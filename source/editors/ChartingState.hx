@@ -242,7 +242,7 @@ class ChartingState extends MusicBeatState
 		DiscordClient.changePresence("Chart Editor", StringTools.replace(_song.song, '-', ' '));
 		#end
 			
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Chart Editor - Editing:" + StringTools.replace(_song.song, '-', ' '));
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Chart Editor - Editing: " + StringTools.replace(_song.song, '-', ' ');
 
 		vortex = FlxG.save.data.chart_vortex;
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
