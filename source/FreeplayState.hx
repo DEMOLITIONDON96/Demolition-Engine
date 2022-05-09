@@ -67,6 +67,8 @@ class FreeplayState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In Freeplay", null);
 		#end
+			
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine";
 
 		for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
