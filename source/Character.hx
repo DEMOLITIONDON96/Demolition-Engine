@@ -50,7 +50,7 @@ class Character extends FlxSprite
 	public var debugMode:Bool = false;
 
 	public var isPlayer:Bool = false;
-	public var curCharacter:String = DEFAULT_CHARACTER;
+	public static var curCharacter:String = DEFAULT_CHARACTER;
 
 	public var colorTween:FlxTween;
 	public var holdTimer:Float = 0;
