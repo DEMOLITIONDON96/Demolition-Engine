@@ -473,6 +473,21 @@ class FunkinLua {
 				luaTrace('Couldnt find object: ' + vars);
 			}
 		});
+
+        Lua_helper.add_callback(lua, "doTweenScale", function(tag:String, vars:String, x:Dynamic = 1, y:Dynamic = 1, duration:Float, ease:String) {
+			var penisExam:Dynamic = tweenShit(tag, vars);
+			if(penisExam != null) {
+				PlayState.instance.modchartTweens.set(tag, FlxTween.tween(penisExam, {"scale.x": x, "scale.y": y}, duration, {ease: getFlxEaseByString(ease),
+					onComplete: function(twn:FlxTween) {
+						PlayState.instance.callOnLuas('onTweenCompleted', [tag]);
+						PlayState.instance.modchartTweens.remove(tag);
+					}
+				}));
+			} else {
+				luaTrace('Couldnt find object: ' + vars);
+			}
+		});
+
 		Lua_helper.add_callback(lua, "doTweenAngle", function(tag:String, vars:String, value:Dynamic, duration:Float, ease:String) {
 			var penisExam:Dynamic = tweenShit(tag, vars);
 			if(penisExam != null) {
@@ -546,6 +561,22 @@ class FunkinLua {
 				}));
 			}
 		});
+
+        Lua_helper.add_callback(lua, "noteTweenScale", function(tag:String, note:Int, x:Dynamic, y:Dynamic, duration:Float, ease:String) {
+			cancelTween(tag);
+			if(note < 0) note = 0;
+			var testicle:StrumNote = PlayState.instance.strumLineNotes.members[note % PlayState.instance.strumLineNotes.length];
+
+			if(testicle != null) {
+				PlayState.instance.modchartTweens.set(tag, FlxTween.tween(testicle, {"scale.x": x, "scale.y": y}, duration, {ease: getFlxEaseByString(ease),
+					onComplete: function(twn:FlxTween) {
+						PlayState.instance.callOnLuas('onTweenCompleted', [tag]);
+						PlayState.instance.modchartTweens.remove(tag);
+					}
+				}));
+			}
+		});
+
 		Lua_helper.add_callback(lua, "noteTweenY", function(tag:String, note:Int, value:Dynamic, duration:Float, ease:String) {
 			cancelTween(tag);
 			if(note < 0) note = 0;
