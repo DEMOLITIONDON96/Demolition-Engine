@@ -113,7 +113,7 @@ class CharacterEditorState extends MusicBeatState
 		});
 		changeBGbutton.cameras = [camMenu];
 		
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Character Editor - Editing: " + Character.curCharacter;
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Character Editor - Editing: " + daAnim;
 		
 		loadChar(!daAnim.startsWith('bf'), false);
 
