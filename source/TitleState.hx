@@ -86,7 +86,7 @@ class TitleState extends MusicBeatState
 		"How's life, buddy?",
 		"mmmm, B E A N S ."
 	];
-	var randomWindowText:Int = FlxG.random.int(0, randomWindowTitle.length);
+	var randomWindowText:Int;
 
 	var curWacky:Array<String> = [];
 
@@ -574,6 +574,8 @@ class TitleState extends MusicBeatState
 			if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
 		}
 
+		randomWindowText = FlxG.random.int(0, randomWindowTitle.length);
+		
 		if(randomWindowText != 13) {
 			Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + randomWindowTitle[randomWindowText];
 		} else {
