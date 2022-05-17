@@ -86,7 +86,7 @@ class TitleState extends MusicBeatState
 		"How's life, buddy?",
 		"mmmm, B E A N S ."
 	];
-	var randomWindowText:Int = FlxG.random.int(0, randomWindowTitle.lenght);
+	var randomWindowText:Int = FlxG.random.int(0, randomWindowTitle.length);
 
 	var curWacky:Array<String> = [];
 
