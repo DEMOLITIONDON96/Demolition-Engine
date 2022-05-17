@@ -68,7 +68,25 @@ class TitleState extends MusicBeatState
 	var ngSpr:FlxSprite;
 	var psychEngine:FlxSprite;
 	var creditsGrid:FlxSprite;
-	var randomWindowText:Int = FlxG.random.int(0, 20);
+	var randomWindowTitle:Array<String> = [
+		"Also try Your Mom Simulator",
+		"Imagine making yet another modded Psych Engine?",
+		"omfg, stop beggin' for new releases, just wait >:(",
+		"Sample Text",
+		"We don't talk about SNS",
+		"Stfu, I'm playing Minecraft",
+		"Stfu, I'm playing Fortnite",
+		"Erect Difficulty is fun, ngl.",
+		"Why can't BF & GF do shit about the bs the parents are putting them in?",
+		"Pico funi.",
+		"stfu about Dave & Bambi, I don't wanna hear about it.",
+		"ur adopted *epic roast 2022*",
+		"MOUSE RAP. MOUSE RAP",
+		"I'm shutting down your game now, fuck you",
+		"How's life, buddy?",
+		"mmmm, B E A N S ."
+	];
+	var randomWindowText:Int = FlxG.random.int(0, randomWindowTitle.lenght);
 
 	var curWacky:Array<String> = [];
 
@@ -556,53 +574,14 @@ class TitleState extends MusicBeatState
 			if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
 		}
 
-		switch randomWindowText {
-		case 0:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Also try Your Mom Simulator";
-		case 1:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Imagine making yet another modded Psych Engine?";
-		case 2:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Comically Large Spoon";
-		case 3:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - snas uddertail";
-		case 4:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - K i l l .";
-		case 5:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - GYR Demo when?";
-		case 6:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Fun Fact: This fact is literally useless and serves no purpose.";
-		case 7:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - omfg, stop beggin' for new releases, just wait >:(";
-		case 8:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Sample Text";
-		case 9:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - We don't talk about SNS";
-		case 10:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Stfu, I'm playing Minecraft";
-		case 11:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Stfu, I'm playing Fortnite";
-		case 12:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Erect Difficulty is fun, ngl.";
-		case 13:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Why can't BF & GF do shit about the bs the parents are putting them in?";
-		case 14:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Pico funi.";
-		case 15:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - stfu about Dave & Bambi, I don't wanna hear about it.";
-		case 16:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - ur adopted *epic roast 2022*";
-		case 17:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - MOUSE RAP. MOUSE RAP";
-		case 18:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - I'm shutting down your game now, fuck you";
-		new FlxTimer().start(1.5, function(tmr:FlxTimer){
-			System.exit(0);
-		});
-		case 19:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - How's life, buddy?";
-		case 20:
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - mmmm, B E A N S .";
-	}
+		if(randomWindowText != 13) {
+			Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + randomWindowTitle[randomWindowText];
+		} else {
+			Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + randomWindowTitle[13];
+			new FlxTimer().start(1.5, function(tmr:FlxTimer){
+				System.exit(0);
+			});
+		}
 		super.update(elapsed);
 	}
 
