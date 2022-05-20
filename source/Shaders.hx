@@ -97,14 +97,14 @@ class ChromaticAberrationEffect extends Effect
 // got this from https://github.com/McJonnycat/haxeflixel-shaders/blob/main/ZackGamerz%20Shaders/VcrShader.hx
 class BetterVHSEffect extends Effect
 {
-    public var shader:BetterVHSShader = new BetterVHSShader();
+    public var shader;
     public var noise(default, set):Float = 0.0;
     public var intensity(default,set):Float = 0.2;
 
 	public function new()
 	{
 		//super();
-        shader = new VhsShader();
+        shader = new BetterVHSShader();
     	shader.iTime.value = [0.0];
 	    shader.noisePercent.value = [0.0];
         shader.intensity.value = [0.2];
