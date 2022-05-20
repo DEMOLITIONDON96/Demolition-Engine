@@ -1845,6 +1845,26 @@ class FunkinLua {
 			PlayState.instance.addShaderToCamera(camera, new BloomEffect(blurSize/512.0, intensity));
 			
 		});
+		Lua_helper.add_callback(lua, "addEffect14", function(camera:String) { //for dem funkies
+			
+			PlayState.instance.addShaderToCamera(camera, new BetterVHSEffect());
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect15", function(camera:String) { //for dem funkies
+			
+			PlayState.instance.addShaderToCamera(camera, new TVDistortEffect());
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect16", function(camera:String) { //for dem funkies
+			
+			PlayState.instance.addShaderToCamera(camera, new TapeOverlayEffect());
+			
+		});
+		Lua_helper.add_callback(lua, "addEffect17", function(camera:String) { //for dem funkies
+			
+			PlayState.instance.addShaderToCamera(camera, new FilmScratchEffect());
+			
+		});
 		Lua_helper.add_callback(lua, "die", function(camera:String) {
 			PlayState.instance.clearShaderFromCamera(camera);
 		});
