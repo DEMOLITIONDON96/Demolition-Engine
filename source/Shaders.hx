@@ -97,9 +97,9 @@ class ChromaticAberrationEffect extends Effect
 // got this from https://github.com/McJonnycat/haxeflixel-shaders/blob/main/ZackGamerz%20Shaders/VcrShader.hx
 class BetterVHSEffect extends Effect
 {
-    public var shader;
+    public var shader:BetterVHSShader;
     public var noise(default, set):Float = 0.0;
-    public var intensity(default,set):Float = 0.2;
+    public var intensityVHS(default,set):Float = 0.2;
 
 	public function new()
 	{
@@ -115,15 +115,15 @@ class BetterVHSEffect extends Effect
     	shader.iTime.value[0] += elapsed;
 	}
 
-	function set_noise(value:Float):Float {
-	    shader.noisePercent.value = [value];
-        noise = value;
-        return value;
+	function set_noise(noise:Float):Void {
+	    shader.noisePercent.value = [noise];
+        noise = noise;
+        return noise;
 	}
-	function set_intensity(value:Float):Float {
-    	shader.intensity.value = [value];
-        intensity = value;
-        return value;
+	function set_intensity(intensityVHS:Float):Void {
+    	shader.intensity.value = [intensityVHS];
+        intensityVHS = intensityVHS;
+        return intensityVHS;
 	}
 }
 
@@ -235,10 +235,10 @@ class GameboyEffect extends Effect
         shader.threshold.value = [value];
         return value;
 	}*/
-    function set_BRIGHTNESS(value:Float):Float {
-		BRIGHTNESS = value;
-        shader.BRIGHTNESS.value = [value];
-        return value;
+    function set_BRIGHTNESS(brightness:Float):Void {
+		BRIGHTNESS = brightness;
+        shader.BRIGHTNESS.value = [brightness];
+        return brightness;
 	}
 }
 
