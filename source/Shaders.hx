@@ -127,7 +127,7 @@ class BetterVHSEffect extends Effect
 	}
 }
 
-class BetterVHSShader extends BetterVHSShader {
+class BetterVHSShader extends FlxShader {
     @:glFragmentSource('
     #pragma header
     
