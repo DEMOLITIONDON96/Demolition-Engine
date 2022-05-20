@@ -94,88 +94,214 @@ class ChromaticAberrationEffect extends Effect
 	}
 
 }
-
-class BetterVHSShader extends FlxShader
+// got this from https://github.com/McJonnycat/haxeflixel-shaders/blob/main/ZackGamerz%20Shaders/VcrShader.hx
+class BetterVHSEffect extends Effect
 {
-	@:glFragmentSource('
-		#pragma header
-			float noise(vec2 p)
-		{
-			float s = texture(iChannel1,vec2(1.,2.*cos(iTime))*iTime*8. + p*1.).x;
-			s *= s;
-			return s;
-		}
+    public var shader:BetterVHSShader = new BetterVHSShader();
+    public var noise(default, set):Float = 0.0;
+    public var intensity(default,set):Float = 0.2;
 
-		float onOff(float a, float b, float c)
-		{
-			return step(c, sin(iTime + a*cos(iTime*b)));
-		}
-
-		float ramp(float y, float start, float end)
-		{
-			float inside = step(start,y) - step(end,y);
-			float fact = (y-start)/(end-start)*inside;
-			return (1.-fact) * inside;
-
-		}
-
-		float stripes(vec2 uv)
-		{
-
-			float noi = noise(uv*vec2(0.5,1.) + vec2(1.,3.));
-			return ramp(mod(uv.y*4. + iTime/2.+sin(iTime + sin(iTime*0.63)),1.),0.5,0.6)*noi;
-		}
-
-		vec3 getVideo(vec2 uv)
-		{
-			vec2 look = uv;
-			float window = 1./(1.+20.*(look.y-mod(iTime/4.,1.))*(look.y-mod(iTime/4.,1.)));
-			look.x = look.x + sin(look.y*10. + iTime)/50.*onOff(4.,4.,.3)*(1.+cos(iTime*80.))*window;
-			float vShift = 0.4*onOff(2.,3.,.9)*(sin(iTime)*sin(iTime*20.) + 
-												 (0.5 + 0.1*sin(iTime*200.)*cos(iTime)));
-			look.y = mod(look.y + vShift, 1.);
-			vec3 video = vec3(texture(iChannel0,look));
-			return video;
-		}
-
-		vec2 screenDistort(vec2 uv)
-		{
-			uv -= vec2(.5,.5);
-			uv = uv*1.2*(1./1.2+2.*uv.x*uv.x*uv.y*uv.y);
-			uv += vec2(.5,.5);
-			return uv;
-		}
-
-		void mainImage( out vec4 fragColor, in vec2 fragCoord )
-		{
-			vec2 uv = fragCoord.xy / iResolution.xy;
-			uv = screenDistort(uv);
-			vec3 video = getVideo(uv);
-			float vigAmt = 3.+.3*sin(iTime + 5.*cos(iTime*5.));
-			float vignette = (1.-vigAmt*(uv.y-.5)*(uv.y-.5))*(1.-vigAmt*(uv.x-.5)*(uv.x-.5));
-
-			video += stripes(uv);
-			video += noise(uv*2.)/2.;
-			video *= vignette;
-			video *= (12.+mod(uv.y*30.+iTime,1.))/13.;
-
-			fragColor = vec4(video,1.0);
-		}')
-		public function new()
+	public function new()
 	{
-		super();
+		//super();
+        shader = new VhsShader();
+    	shader.iTime.value = [0.0];
+	    shader.noisePercent.value = [0.0];
+        shader.intensity.value = [0.2];
+	}
+
+	public function update(elapsed:Float)
+	{
+    	shader.iTime.value[0] += elapsed;
+	}
+
+	function set_noise(value:Float):Float {
+	    shader.noisePercent.value = [value];
+        noise = value;
+        return value;
+	}
+	function set_intensity(value:Float):Float {
+    	shader.intensity.value = [value];
+        intensity = value;
+        return value;
 	}
 }
 
-class BetterVHSEffect extends Effect{
+class BetterVHSShader extends BetterVHSShader {
+    @:glFragmentSource('
+    #pragma header
+    
+    uniform float iTime;
+    uniform sampler2D noiseTexture;
+    uniform float noisePercent;
+    uniform float intensity;
+    
+    float rand(vec2 co)
+    {
+        //no highp, crashes bullshit.
+        float a = 12.9898;
+        float b = 78.233;
+        float c = 43758.5453;
+        float dt= dot(co.xy ,vec2(a,b));
+        float sn= mod(dt,3.14);
+        return fract(sin(sn) * c);
+    }
+        
+    float noise(vec2 p)
+    {
+        return rand(p) * noisePercent;
+    }
+    
+    float onOff(float a, float b, float c)
+    {
+        return step(c, sin(iTime + a*cos(iTime*b)));
+    }
 
-	public var shader:BetterVHSShader = new BetterVHSShader();
+    float ramp(float y, float start, float end)
+    {
+        float inside = step(start,y) - step(end,y);
+        float fact = (y-start)/(end-start)*inside;
+        return (1.-fact) * inside;
+    }
 
-	public function new(){
+    float stripes(vec2 uv)
+    {
+        float noi = noise(uv*vec2(0.5,1.) + vec2(1.,3.));
+        return ramp(mod(uv.y*4. + iTime/2.+sin(iTime + sin(iTime*0.63)),1.),0.5,0.6)*noi;
+    }
 
+    vec4 getVideo(vec2 uv)
+    {
+        vec2 look = uv;
+        float window = 1./(1.+20.*(look.y-mod(iTime/4.,1.))*(look.y-mod(iTime/4.,1.)));
+        look.x = look.x + sin(look.y*10. + iTime)/50.*onOff(4.,4.,.3)*(1.+cos(iTime*80.))*window;
+        float vShift = 0.4*onOff(2.,3.,.9) * (sin(iTime)*sin(iTime*20.) + (0.5 + 0.1*sin(iTime*200.)*cos(iTime)));
+        look.y = mod(look.y + vShift, 1.);
+        vec4 video = vec4(flixel_texture2D(bitmap,mix(uv,look,intensity)));
+        return video;
+    }
+
+    vec2 screenDistort(vec2 uv)
+    {
+        uv -= vec2(.5,.5);
+        uv = uv*1.2*(1./1.2+2.*uv.x*uv.x*uv.y*uv.y);
+        uv += vec2(.5,.5);
+        return uv;
+    }
+
+    void main()
+    {
+        vec2 uv = openfl_TextureCoordv.xy;
+        uv = screenDistort(uv);
+        vec4 video = getVideo(uv);
+        float daAlp = video.a; // we dont want a black camera with the efx on it.
+        float vigAmt = 3.+.3*sin(iTime + 5.*cos(iTime*5.));
+        float vignette = (1.-vigAmt*(uv.y-.5)*(uv.y-.5))*(1.-vigAmt*(uv.x-.5)*(uv.x-.5));
+        
+        video += stripes(uv);
+        video += noise(uv*2.)/2.;
+        video *= vignette;
+        video *= (12.+mod(uv.y*30.+iTime,1.))/13.;
+        
+        gl_FragColor = vec4(video.rgb,daAlp);
+    }
+    ')
+    public function new() {
+        super();
+    }
+}
+// https://github.com/McJonnycat/haxeflixel-shaders/blob/main/ZackGamerz%20Shaders/GameboyDesaturator.hx
+// original shader in question: https://www.shadertoy.com/view/MdfXDH
+
+class GameboyEffect extends Effect
+{
+    //public var size(default, set):Float = 128.0;
+    //public var threshold(default, set):Float = 0.006;
+    public var BRIGHTNESS(default, set):Float = 1.0;
+    public var shader:GameboyShader = null;
+    public function new() {
+        shader = new GameboyShader();
+        shader.BRIGHTNESS.value = [1.0];
+        //shader.threshold.value = [0.006];
+    }
+
+	/*function set_size(value:Float):Float {
+		size = value;
+        shader.size.value = [value];
+        return value;
+	}
+    function set_threshold(value:Float):Float {
+		threshold = value;
+        shader.threshold.value = [value];
+        return value;
+	}*/
+    function set_BRIGHTNESS(value:Float):Float {
+		BRIGHTNESS = value;
+        shader.BRIGHTNESS.value = [value];
+        return value;
 	}
 }
-class TVDistortShader extends FlxShader
+
+class GameboyShader extends FlxShader {
+    @:glFragmentSource('
+    #pragma header
+    //#define GAMEBOY
+    //#define GAMEBOY
+    uniform float BRIGHTNESS;
+
+    vec3 iscloser (in vec3 color, in vec3 current, inout float dmin) 
+    {
+        vec3 closest = current;
+        float dcur = distance (color, current);
+        if (dcur < dmin) 
+        {
+            dmin = dcur;
+            closest = color;	
+        }
+        return closest;
+    }
+    
+    vec3 find_closest (vec3 ref) {	
+        vec3 old = vec3 (100.0*255.0);		
+        #define TRY_COLOR(new) old = mix (new, old, step (length (old-ref), length (new-ref)));	
+        
+        //#ifdef GAMEBOY
+        TRY_COLOR (vec3 (156.0, 189.0, 15.0));
+        TRY_COLOR (vec3 (140.0, 173.0, 15.0));
+        TRY_COLOR (vec3 (48.0, 98.0, 48.0));
+        TRY_COLOR (vec3 (15.0, 56.0, 15.0));
+        //#endif
+        
+        return old;
+    }
+    
+    
+    float dither_matrix (float x, float y) {
+        return mix(mix(mix(mix(mix(mix(0.0,32.0,step(1.0,y)),mix(8.0,40.0,step(3.0,y)),step(2.0,y)),mix(mix(2.0,34.0,step(5.0,y)),mix(10.0,42.0,step(7.0,y)),step(6.0,y)),step(4.0,y)),mix(mix(mix(48.0,16.0,step(1.0,y)),mix(56.0,24.0,step(3.0,y)),step(2.0,y)),mix(mix(50.0,18.0,step(5.0,y)),mix(58.0,26.0,step(7.0,y)),step(6.0,y)),step(4.0,y)),step(1.0,x)),mix(mix(mix(mix(12.0,44.0,step(1.0,y)),mix(4.0,36.0,step(3.0,y)),step(2.0,y)),mix(mix(14.0,46.0,step(5.0,y)),mix(6.0,38.0,step(7.0,y)),step(6.0,y)),step(4.0,y)),mix(mix(mix(60.0,28.0,step(1.0,y)),mix(52.0,20.0,step(3.0,y)),step(2.0,y)),mix(mix(62.0,30.0,step(5.0,y)),mix(54.0,22.0,step(7.0,y)),step(6.0,y)),step(4.0,y)),step(3.0,x)),step(2.0,x)),mix(mix(mix(mix(mix(3.0,35.0,step(1.0,y)),mix(11.0,43.0,step(3.0,y)),step(2.0,y)),mix(mix(1.0,33.0,step(5.0,y)),mix(9.0,41.0,step(7.0,y)),step(6.0,y)),step(4.0,y)),mix(mix(mix(51.0,19.0,step(1.0,y)),mix(59.0,27.0,step(3.0,y)),step(2.0,y)),mix(mix(49.0,17.0,step(5.0,y)),mix(57.0,25.0,step(7.0,y)),step(6.0,y)),step(4.0,y)),step(5.0,x)),mix(mix(mix(mix(15.0,47.0,step(1.0,y)),mix(7.0,39.0,step(3.0,y)),step(2.0,y)),mix(mix(13.0,45.0,step(5.0,y)),mix(5.0,37.0,step(7.0,y)),step(6.0,y)),step(4.0,y)),mix(mix(mix(63.0,31.0,step(1.0,y)),mix(55.0,23.0,step(3.0,y)),step(2.0,y)),mix(mix(61.0,29.0,step(5.0,y)),mix(53.0,21.0,step(7.0,y)),step(6.0,y)),step(4.0,y)),step(7.0,x)),step(6.0,x)),step(4.0,x));
+    }
+    
+    vec3 dither (vec3 color, vec2 uv) {	
+        color *= 255.0 * BRIGHTNESS;	
+        color += dither_matrix (mod (uv.x, 8.0), mod (uv.y, 8.0));
+        color = find_closest (clamp (color, 0.0, 255.0));
+        return color / 255.0;
+    }
+    
+    
+    void main()
+    {
+        vec2 uv = openfl_TextureCoordv.xy;
+        vec4 tc = flixel_texture2D(bitmap, uv);
+        float daAlp = tc.a;
+        gl_FragColor =  vec4 (dither (tc.xyz, uv),daAlp);		
+    }')
+
+    public function new() {
+        super();
+    }
+}
+
+/*class TVDistortShader extends FlxShader
 {
 	@:glFragmentSource('
 		#pragma header
@@ -491,7 +617,7 @@ class FilmScratchEffect extends Effect{
 	public function new(){
 
 	}
-}
+}*/
 
 class ScanlineEffect extends Effect
 {
