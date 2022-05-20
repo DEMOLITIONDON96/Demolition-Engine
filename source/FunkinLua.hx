@@ -1845,17 +1845,17 @@ class FunkinLua {
 			PlayState.instance.addShaderToCamera(camera, new BloomEffect(blurSize/512.0, intensity));
 			
 		});
-		Lua_helper.add_callback(lua, "addEffect14", function(camera:String) { //for dem funkies
+		Lua_helper.add_callback(lua, "addEffect14", function(camera:String, noise:Float = 0.0, inetnsityVHS:Float = 0.2) { //for dem funkies
 			
-			PlayState.instance.addShaderToCamera(camera, new BetterVHSEffect());
-			
-		});
-		Lua_helper.add_callback(lua, "addEffect15", function(camera:String) { //for dem funkies
-			
-			PlayState.instance.addShaderToCamera(camera, new TVDistortEffect());
+			PlayState.instance.addShaderToCamera(camera, new BetterVHSEffect(noise, intensityVHS));
 			
 		});
-		Lua_helper.add_callback(lua, "addEffect16", function(camera:String) { //for dem funkies
+		Lua_helper.add_callback(lua, "addEffect15", function(camera:String, brightness:Float = 1.0) { //for dem funkies
+			
+			PlayState.instance.addShaderToCamera(camera, new GameboyEffect(brightness));
+			
+		});
+		/*Lua_helper.add_callback(lua, "addEffect16", function(camera:String) { //for dem funkies
 			
 			PlayState.instance.addShaderToCamera(camera, new TapeOverlayEffect());
 			
@@ -1864,7 +1864,7 @@ class FunkinLua {
 			
 			PlayState.instance.addShaderToCamera(camera, new FilmScratchEffect());
 			
-		});
+		});*/
 		Lua_helper.add_callback(lua, "die", function(camera:String) {
 			PlayState.instance.clearShaderFromCamera(camera);
 		});
