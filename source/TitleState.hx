@@ -396,7 +396,7 @@ class TitleState extends MusicBeatState
 		psychEngine.screenCenter(X);
 		psychEngine.antialiasing = ClientPrefs.globalAntialiasing;
 
-		creditsGrid = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('creditGrid'));
+		creditsGrid = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('creditsGrid'));
 		add(creditsGrid);
 		creditsGrid.visible = false;
 		creditsGrid.screenCenter(X);
