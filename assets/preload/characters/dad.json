@@ -129,9 +129,9 @@
 	"healthicon": "dad",
 	"flip_x": false,
 	"healthbar_colors": [
-		188,
-		95,
-		254
+		175,
+		102,
+		206
 	],
 	"camera_position": [
 		0,

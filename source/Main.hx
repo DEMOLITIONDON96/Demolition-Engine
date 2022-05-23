@@ -89,6 +89,6 @@ class Main extends Sprite
 		#end
 
 		FlxG.autoPause = false;
-		FlxG.mouse.visible = true;
+		FlxG.mouse.visible = false;
 	}
 }

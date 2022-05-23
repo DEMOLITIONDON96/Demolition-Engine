@@ -56,7 +56,6 @@ class OptionsState extends MusicBeatState
 
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
-	var bg:FlxSprite;
 
 	override function create() {
 		#if desktop
@@ -65,8 +64,10 @@ class OptionsState extends MusicBeatState
 			
 		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Settings";
 
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
+		bg.updateHitbox();
+
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);

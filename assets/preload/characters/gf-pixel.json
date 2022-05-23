@@ -1,13 +1,14 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "danceLeft",
+			"fps": 24,
+			"name": "GF IDLE",
 			"indices": [
 				30,
 				0,
@@ -25,17 +26,17 @@
 				12,
 				13,
 				14
-			],
-			"name": "GF IDLE"
+			]
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "danceRight",
+			"fps": 24,
+			"name": "GF IDLE",
 			"indices": [
 				15,
 				16,
@@ -52,19 +53,18 @@
 				27,
 				28,
 				29
-			],
-			"name": "GF IDLE"
+			]
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "GF IDLE"
+			"fps": 24,
+			"name": "GF IDLE",
+			"indices": []
 		}
 	],
 	"no_antialiasing": true,
@@ -76,9 +76,9 @@
 	"healthicon": "gf",
 	"flip_x": false,
 	"healthbar_colors": [
-		201,
-		41,
-		124
+		165,
+		0,
+		77
 	],
 	"camera_position": [
 		-20,

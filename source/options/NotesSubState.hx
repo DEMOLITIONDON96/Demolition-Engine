@@ -39,14 +39,13 @@ class NotesSubState extends MusicBeatSubstate
 	var nextAccept:Int = 5;
 
 	var blackBG:FlxSprite;
-	var bg:FlxSprite;
 	var hsbText:Alphabet;
 
 	var posX = 230;
 	public function new() {
 		super();
 		
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;

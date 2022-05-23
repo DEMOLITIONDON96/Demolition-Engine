@@ -1,25 +1,24 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				2,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "GF Dancing Beat Hair blowing CAR"
+			"fps": 24,
+			"name": "GF Dancing Beat Hair blowing CAR",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"loop": false,
-			"anim": "danceRight",
 			"fps": 24,
-			"name": "GF Dancing Beat Hair blowing CAR",
+			"anim": "danceRight",
 			"indices": [
 				15,
 				16,
@@ -36,17 +35,17 @@
 				27,
 				28,
 				29
-			]
+			],
+			"name": "GF Dancing Beat Hair blowing CAR"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"loop": false,
-			"anim": "danceLeft",
 			"fps": 24,
-			"name": "GF Dancing Beat Hair blowing CAR",
+			"anim": "danceLeft",
 			"indices": [
 				30,
 				0,
@@ -64,7 +63,8 @@
 				12,
 				13,
 				14
-			]
+			],
+			"name": "GF Dancing Beat Hair blowing CAR"
 		}
 	],
 	"no_antialiasing": false,
@@ -76,9 +76,9 @@
 	"healthicon": "gf",
 	"flip_x": false,
 	"healthbar_colors": [
-		201,
-		41,
-		124
+		165,
+		0,
+		77
 	],
 	"camera_position": [
 		0,
