@@ -2164,7 +2164,7 @@ class FunkinLua {
 		#end
 	}
 
-	inline function getInstance()
+	public static inline function getInstance()
 	{
 		return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
 	}
