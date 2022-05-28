@@ -26,8 +26,7 @@ class MasterEditorMenu extends MusicBeatState
 		'Dialogue Editor',
 		'Dialogue Portrait Editor',
 		'Character Editor',
-		'Chart Editor',
-		'Stage Editor'
+		'Chart Editor'
 	];
 	private var grpTexts:FlxTypedGroup<Alphabet>;
 	private var directories:Array<String> = [null];
@@ -76,8 +75,7 @@ class MasterEditorMenu extends MusicBeatState
 		}
 
 		var found:Int = directories.indexOf(Paths.currentModDirectory);
-		if (found > -1)
-			curDirectory = found;
+		if(found > -1) curDirectory = found;
 		changeDirectory();
 		#end
 		changeSelection();
@@ -97,11 +95,11 @@ class MasterEditorMenu extends MusicBeatState
 			changeSelection(1);
 		}
 		#if MODS_ALLOWED
-		if (controls.UI_LEFT_P)
+		if(controls.UI_LEFT_P)
 		{
 			changeDirectory(-1);
 		}
-		if (controls.UI_RIGHT_P)
+		if(controls.UI_RIGHT_P)
 		{
 			changeDirectory(1);
 		}
@@ -114,8 +112,7 @@ class MasterEditorMenu extends MusicBeatState
 
 		if (controls.ACCEPT)
 		{
-			switch(options[curSelected]) 
-			{
+			switch(options[curSelected]) {
 				case 'Character Editor':
 					LoadingState.loadAndSwitchState(new CharacterEditorState(Character.DEFAULT_CHARACTER, false));
 				case 'Week Editor':
@@ -128,8 +125,6 @@ class MasterEditorMenu extends MusicBeatState
 					LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
 				case 'Chart Editor'://felt it would be cool maybe
 					LoadingState.loadAndSwitchState(new ChartingState(), false);
-				case 'Stage Editor':
-					LoadingState.loadAndSwitchState(new StageEditorState());
 			}
 			FlxG.sound.music.volume = 0;
 			#if PRELOAD_ALL
@@ -174,13 +169,13 @@ class MasterEditorMenu extends MusicBeatState
 
 		curDirectory += change;
 
-		if (curDirectory < 0)
+		if(curDirectory < 0)
 			curDirectory = directories.length - 1;
-		if (curDirectory >= directories.length)
+		if(curDirectory >= directories.length)
 			curDirectory = 0;
 	
 		WeekData.setDirectoryFromWeek();
-		if (directories[curDirectory] == null || directories[curDirectory].length < 1)
+		if(directories[curDirectory] == null || directories[curDirectory].length < 1)
 			directoryTxt.text = '< No Mod Directory Loaded >';
 		else
 		{

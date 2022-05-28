@@ -1308,8 +1308,7 @@ class CharacterEditorState extends MusicBeatState
 		}
 	}
 
-	//shared with stageeditorstate
-	public static function ClipboardAdd(prefix:String = ''):String {
+	function ClipboardAdd(prefix:String = ''):String {
 		if(prefix.toLowerCase().endsWith('v')) //probably copy paste attempt
 		{
 			prefix = prefix.substring(0, prefix.length-1);

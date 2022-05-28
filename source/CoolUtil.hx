@@ -21,7 +21,6 @@ class CoolUtil
 		'Hell', //1
 		//lol, no more normal and easy mode B)
 		//'Crazy' (this was meant for remixed versions, but ig this is unused)
-		//'Mania' (this will be added when multikeys are added)
 	];
 	public static var defaultDifficulty:String = 'Hard'; //The chart that has no suffix and starting difficulty on Freeplay/Story Mode
 

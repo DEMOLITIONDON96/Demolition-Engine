@@ -97,7 +97,6 @@ class CreditsState extends MusicBeatState
 			//['Phoneguytech75', 'missing-icon', 'Note Skins :D',			'https://github.com/Phoneguytech75',	'FFFFFF'],
 			['HiroMizuki',	'hiro',		'Pixel Splashes & \nScreen Resolution Code',	'https://github.com/HiroMizuki',	'3DED02'],
 			['8bitjake',	'missing-icon',	'Hold Pieces Fix for Sidescroll Modcharts',	'https://github.com/ShadowMario/FNF-PsychEngine/pull/8676',		'FFFFFF'],
-			['magnumsrtisswag',		'mag',	'Stage Editor',		'https://github.com/magnumsrtisswag',			'0B03FC'],
 			['AlexDrar',		'missing-icon',	'Hard Code Song Shit',		'https://github.com/mayo78/PSYCHDISCUSSIONS/discussions/85',			'FFFFFF'],
 			['Snow White Muffins',		'missing-icon',	'Moving Main Menu Code',		'https://www.youtube.com/watch?v=QZQJ701tAqQ',			'FFFFFF'],
 			['TimothyFnf',		'missing-icon',	'Some Credit For Code',		'https://gamebanana.com/mods/370936',			'FFFFFF'],
