@@ -223,6 +223,9 @@ class PlayState extends MusicBeatState
 	public var camOther:FlxCamera;
 	public var camCustom:FlxCamera;
 	public var cameraSpeed:Float = 1;
+	
+        // Smooth healthbar
+	var fakeHealth:Float = 1;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
@@ -1177,11 +1180,12 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
+			'fakeHealth', 0, 2);
 		healthBar.scrollFactor.set();
 		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
+	        healthBar.numDivisions = healthBar.barWidth;
 		add(healthBar);
 		healthBarBG.sprTracker = healthBar;
 
@@ -3033,6 +3037,8 @@ class PlayState extends MusicBeatState
 		}
 
 		super.update(elapsed);
+		
+		fakeHealth = FlxMath.lerp(fakeHealth, health, CoolUtil.boundTo(elapsed * 20, 0, 1));
 
 		if(ClientPrefs.simplifiedScore) {
 		
@@ -5168,26 +5174,30 @@ class PlayState extends MusicBeatState
 								animToPlay = 'singLEFT';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.x -= 20;
+											camFollow.x -= 40;
 										}
+								health -= 0.01;
 							case 1:
 								animToPlay = 'singDOWN';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.y += 20;
+											camFollow.y += 40;
 										}
+								health -= 0.01;
 							case 2:
 								animToPlay = 'singUP';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.y -= 20;
+											camFollow.y -= 40;
 										}
+								health -= 0.01;
 							case 3:
 								animToPlay = 'singRIGHT';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.x += 20;
+											camFollow.x += 40;
 										}
+								health -= 0.01;
 						}
 			if(note.gfNote) {
 				char = gf;
