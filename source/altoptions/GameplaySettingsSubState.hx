@@ -117,12 +117,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		addOption(option);
 
-		var option:Option = new Option('Debug Mode',
-		'If checked, you can do cool stuff on a song',
-		'debugMode',
-		false);
-		addOption(option);
-
 		var option:Option = new Option('Marvelouses Rating',
 		'If checked, marvelouses rating will appear on the\nJudgment counter and will show\n when hit',
 		'marvelouses',

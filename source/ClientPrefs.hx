@@ -13,11 +13,12 @@ class ClientPrefs {
 	public static var center:Bool = true;
 	public static var keAccuracy:Bool = false;
 	public static var ratingSystem:String = "Bedrock";
+	public static var funkyLights:Bool = true;
 	public static var laneunderlay:Bool = false;
 	public static var laneTransparency:Float = 0.5;
-	public static var debugMode:Bool = false;
 	public static var iconBounce:String = 'Default';
-	public static var camMove:Bool = true;
+	public static var camMove:String = '40';
+	public static var healthDrain:String = '0.1';
 	public static var marvelouses:Bool = true;
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
@@ -121,10 +122,10 @@ class ClientPrefs {
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.laneunderlay = laneunderlay;
 		FlxG.save.data.laneTransparency = laneTransparency;
-		FlxG.save.data.debugMode = debugMode;
 		FlxG.save.data.marvelouses = marvelouses;
 		FlxG.save.data.middleScroll = middleScroll;
 		FlxG.save.data.camMove = camMove;
+		FlxG.save.data.healthDrain = healthDrain;
 		FlxG.save.data.showFPS = showFPS;
 		FlxG.save.data.flashing = flashing;
 		FlxG.save.data.winningIcon = winningIcon;
@@ -136,6 +137,7 @@ class ClientPrefs {
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
 		FlxG.save.data.antiMash = antiMash;
+		FlxG.save.data.funkyLights = funkyLights;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
 		FlxG.save.data.keAccuracy = keAccuracy;
@@ -182,9 +184,6 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
-		if(FlxG.save.data.debugMode != null) {
-			debugMode = FlxG.save.data.debugMode;
-		}
 		if (FlxG.save.data.center != null) {
 			center = FlxG.save.data.center;
 		}
@@ -212,6 +211,9 @@ class ClientPrefs {
 		if(FlxG.save.data.camMove != null) {
 			camMove = FlxG.save.data.camMove;
 		}
+		if(FlxG.save.data.healthDrain != null) {
+			healthDrain = FlxG.save.data.healthDrain;
+		}
 		if(FlxG.save.data.laneunderlay != null) {
 			laneunderlay = FlxG.save.data.laneunderlay;
 		}
@@ -227,6 +229,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.simplifiedScore != null) {
 			simplifiedScore = FlxG.save.data.simplifiedScore;
+		}
+		if(FlxG.save.data.funkyLights != null) {
+			funkyLights = FlxG.save.data.funkyLights;
 		}
 		if(FlxG.save.data.showFPS != null) {
 			showFPS = FlxG.save.data.showFPS;

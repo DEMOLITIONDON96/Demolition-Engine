@@ -48,6 +48,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('Enable Funky',
+			'If checked, Funky Lights Will Play Each Hit',
+			'funkyLights',
+			'bool',
+			true);
+		addOption(option);
+
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
 			'hideHud',
@@ -87,10 +94,19 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Camera Movement',
-			"If checked, camera moves to the corresponding arrow!",
+			'How much the camera should be to the corresponding arrow?',
 			'camMove',
-			'bool',
-			true);
+			'string',
+		    '40',
+			['0', '10', '20', '30', '40', '50']);
+		addOption(option);
+
+		var option:Option = new Option('Health Drain',
+			'How much the player should loose with health?',
+			'healthDrain',
+			'string',
+		    '0.1',
+			['0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9', '1']);
 		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',
