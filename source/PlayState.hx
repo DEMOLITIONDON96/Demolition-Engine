@@ -3011,31 +3011,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if(ClientPrefs.debugMode){
-			if(!endingSong && !startingSong){
-				if (FlxG.keys.justPressed.ONE) {
-					KillNotes();
-					FlxG.sound.music.onComplete();
-				}
-			}
-			if (FlxG.keys.justPressed.TWO) {
-				FlxG.sound.music.pause();
-				vocals.pause();
-				Conductor.songPosition = 10000;
-				notes.forEachAlive(function(daNote:Note)
-				{
-					if(daNote.strumTime + 800 < Conductor.songPosition) {
-						daNote.active = false;
-						daNote.visible = false;
-
-						daNote.kill();
-						notes.remove(daNote, true);
-						daNote.destroy();
-					}
-				});
-			}
-		}
-
 		super.update(elapsed);
 		
 		fakeHealth = FlxMath.lerp(fakeHealth, health, CoolUtil.boundTo(elapsed * 20, 0, 1));
@@ -3597,6 +3572,49 @@ class PlayState extends MusicBeatState
 				var value:Int = Std.parseInt(value1);
 				if(Math.isNaN(value) || value < 1) value = 1;
 				gfSpeed = value;
+
+							case 'Blammed Lights Special':
+				stopLights = true;
+				var color:Int = 0xffffffff;
+				var lightId:Int = FlxG.random.int(1, 5, [curLightEvent]);
+				switch(lightId) {
+					case 1: //Blue
+						color = 0xff31a2fd;
+					case 2: //Green
+						color = 0xff31fd8c;
+					case 3: //Pink
+						color = 0xfff794f7;
+					case 4: //Red
+						color = 0xfff96d63;
+					case 5: //Orange
+						color = 0xfffba633;
+				}
+
+				for (spr in members)
+				{
+					if(spr != null /*&& spr.cameras.contains(camGame)*/ && Std.isOfType(spr, FlxSprite))
+					{
+						// ridiculous
+						Reflect.setProperty(spr, 'color', color);
+					}
+				}
+
+				for (note in notes)
+				{
+					if(note != null)
+						note.color = color;
+				}
+				for (note in unspawnNotes)
+				{
+					if(note != null)
+						note.color = color;
+				}
+				for (note in strumLineNotes)
+				{
+					if(note != null)
+						note.color = color;
+				}
+				curLightEvent = lightId;
 
 			case 'Philly Glow':
 				var lightId:Int = Std.parseInt(value1);
@@ -5367,6 +5385,10 @@ class PlayState extends MusicBeatState
 			note.kill();
 			notes.remove(note, true);
 			note.destroy();
+			if (ClientPrefs.funkyLights)
+			{
+			triggerEventNote('Blammed Lights Special', '', '');
+			}
 		}
 	}
 
@@ -5606,6 +5628,10 @@ class PlayState extends MusicBeatState
 				note.kill();
 				notes.remove(note, true);
 				note.destroy();
+			if (ClientPrefs.funkyLights)
+			{
+			triggerEventNote('Blammed Lights Special', '', '');
+			}
 			}
 		}
 	}
@@ -6228,6 +6254,7 @@ class PlayState extends MusicBeatState
 	}
 	#end
 
+var stopLights:Bool = false;
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;
 }
