@@ -18,7 +18,7 @@ class ClientPrefs {
 	public static var laneTransparency:Float = 0.5;
 	public static var iconBounce:String = 'Default';
 	public static var camMove:String = '40';
-	public static var healthDrain:String = '0.1';
+	public static var healthDrain:String = '10%';
 	public static var marvelouses:Bool = true;
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;

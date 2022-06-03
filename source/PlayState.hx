@@ -1,4 +1,4 @@
-package;
+package; //hi
 
 import flixel.graphics.FlxGraphic;
 #if desktop
@@ -3043,16 +3043,16 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.simplifiedScore) {
 		
 		if(ratingName == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' ~ Misses: ' + songMisses;
+			scoreTxt.text = 'Score: ' + songScore + ' - Combo Breaks: ' + songMisses;
 		} else {
-                        scoreTxt.text = 'Score: ' + songScore + ' ~ Misses: ' + songMisses + ' (' + ratingFC + ')';
+                        scoreTxt.text = 'Score: ' + songScore + ' - Combo Breaks: ' + songMisses + ' (' + ratingFC + ')';
 		}
 	        } else {
 
 		if(ratingName == '?') {
-			scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' ~ Score: ' + songScore + ' ~ Misses: ' + songMisses + ' ~ Rating: ' + ratingName;
+			scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' - Score: ' + songScore + ' - Combo Breaks: ' + songMisses + ' - Accuracy: ' + ratingName;
 		} else {
-			scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' ~ Score: ' + songScore + ' ~ Misses: ' + songMisses + ' ~ Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
+			scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' - Score: ' + songScore + ' - Combo Breaks: ' + songMisses + ' - Accuracy: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
 	        }
 
@@ -5172,32 +5172,172 @@ class PlayState extends MusicBeatState
 						{
 							case 0:
 								animToPlay = 'singLEFT';
-									if(ClientPrefs.camMove)
+									switch (ClientPrefs.camMove)
 										{
+											case '0':
+											camFollow.x -= 0;
+
+											case '10':
+											camFollow.x -= 10;
+
+											case '20':
 											camFollow.x -= 20;
+
+											case '30':
+											camFollow.x -= 30;
+
+											case '40':
+											camFollow.x -= 40;
+
+											case '50':
+											camFollow.x -= 50;
 										}
-								health -= 0.01;
+								switch (ClientPrefs.healthDrain)
+										{
+											case '0%':
+											health -= 0;
+
+											case '10%':
+											health -= 0.01;
+
+											case '20%':
+											health -= 0.02;
+
+											case '30%':
+											health -= 0.03;
+
+											case '40%':
+											health -= 0.04;
+
+											case '50%':
+											health -= 0.05;
+										}
 							case 1:
 								animToPlay = 'singDOWN';
-									if(ClientPrefs.camMove)
+									switch (ClientPrefs.camMove)
 										{
+											case '0':
+											camFollow.y += 0;
+
+											case '10':
+											camFollow.y += 10;
+
+											case '20':
 											camFollow.y += 20;
+
+											case '30':
+											camFollow.y += 30;
+
+											case '40':
+											camFollow.y += 40;
+
+											case '50':
+											camFollow.y += 50;
 										}
-								health -= 0.01;
+														switch (ClientPrefs.healthDrain)
+										{
+											case '0%':
+											health -= 0;
+
+											case '10%':
+											health -= 0.01;
+
+											case '20%':
+											health -= 0.02;
+
+											case '30%':
+											health -= 0.03;
+
+											case '40%':
+											health -= 0.04;
+
+											case '50%':
+											health -= 0.05;
+										}
 							case 2:
 								animToPlay = 'singUP';
-									if(ClientPrefs.camMove)
+									switch (ClientPrefs.camMove)
 										{
+											case '0':
+											camFollow.y -= 0;
+
+											case '10':
+											camFollow.y -= 10;
+
+											case '20':
 											camFollow.y -= 20;
+
+											case '30':
+											camFollow.y -= 30;
+
+											case '40':
+											camFollow.y -= 40;
+
+											case '50':
+											camFollow.y -= 50;
 										}
-								health -= 0.01;
+														switch (ClientPrefs.healthDrain)
+										{
+											case '0%':
+											health -= 0;
+
+											case '10%':
+											health -= 0.01;
+
+											case '20%':
+											health -= 0.02;
+
+											case '30%':
+											health -= 0.03;
+
+											case '40%':
+											health -= 0.04;
+
+											case '50%':
+											health -= 0.05;
+										}
 							case 3:
 								animToPlay = 'singRIGHT';
-									if(ClientPrefs.camMove)
+									switch (ClientPrefs.camMove)
 										{
+											case '0':
+											camFollow.x += 0;
+
+											case '10':
+											camFollow.x += 10;
+
+											case '20':
 											camFollow.x += 20;
+
+											case '30':
+											camFollow.x += 30;
+
+											case '40':
+											camFollow.x += 40;
+
+											case '50':
+											camFollow.x += 50;
 										}
-								health -= 0.01;
+														switch (ClientPrefs.healthDrain)
+										{
+											case '0%':
+											health -= 0;
+
+											case '10%':
+											health -= 0.01;
+
+											case '20%':
+											health -= 0.02;
+
+											case '30%':
+											health -= 0.03;
+
+											case '40%':
+											health -= 0.04;
+
+											case '50%':
+											health -= 0.05;
+										}
 						}
 			if(note.gfNote) {
 				char = gf;
@@ -5319,30 +5459,94 @@ class PlayState extends MusicBeatState
 				var animToPlay:String = '';
 				switch (Std.int(Math.abs(note.noteData)))
 				{
-					case 0:
-						animToPlay = 'singLEFT';
-						if(ClientPrefs.camMove)
-					{
-						camFollow.x -= 20;
-					}
-					case 1:
-						animToPlay = 'singDOWN';
-						if(ClientPrefs.camMove)
-							{
-								camFollow.y += 20;
-							}
-					case 2:
-						animToPlay = 'singUP';
-						if(ClientPrefs.camMove)
-							{
-								camFollow.y -= 20;
-							}
-					case 3:
-						animToPlay = 'singRIGHT';
-						if(ClientPrefs.camMove)
-							{
-								camFollow.x += 20;
-							}
+												case 0:
+								animToPlay = 'singLEFT';
+									switch (ClientPrefs.camMove)
+										{
+											case '0':
+											camFollow.x -= 0;
+
+											case '10':
+											camFollow.x -= 10;
+
+											case '20':
+											camFollow.x -= 20;
+
+											case '30':
+											camFollow.x -= 30;
+
+											case '40':
+											camFollow.x -= 40;
+
+											case '50':
+											camFollow.x -= 50;
+										}
+							case 1:
+								animToPlay = 'singDOWN';
+									switch (ClientPrefs.camMove)
+										{
+											case '0':
+											camFollow.y += 0;
+
+											case '10':
+											camFollow.y += 10;
+
+											case '20':
+											camFollow.y += 20;
+
+											case '30':
+											camFollow.y += 30;
+
+											case '40':
+											camFollow.y += 40;
+
+											case '50':
+											camFollow.y += 50;
+										}
+							case 2:
+								animToPlay = 'singUP';
+									switch (ClientPrefs.camMove)
+										{
+											case '0':
+											camFollow.y -= 0;
+
+											case '10':
+											camFollow.y -= 10;
+
+											case '20':
+											camFollow.y -= 20;
+
+											case '30':
+											camFollow.y -= 30;
+
+											case '40':
+											camFollow.y -= 40;
+
+											case '50':
+											camFollow.y -= 50;
+										}
+							case 3:
+								animToPlay = 'singRIGHT';
+									switch (ClientPrefs.camMove)
+										{
+											case '0':
+											camFollow.x += 0;
+
+											case '10':
+											camFollow.x += 10;
+
+											case '20':
+											camFollow.x += 20;
+
+											case '30':
+											camFollow.x += 30;
+
+											case '40':
+											camFollow.x += 40;
+
+											case '50':
+											camFollow.x += 50;
+										}
 				}
 
 				if(note.gfNote) 
