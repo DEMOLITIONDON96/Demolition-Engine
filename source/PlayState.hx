@@ -5174,28 +5174,28 @@ class PlayState extends MusicBeatState
 								animToPlay = 'singLEFT';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.x -= 40;
+											camFollow.x -= 20;
 										}
 								health -= 0.01;
 							case 1:
 								animToPlay = 'singDOWN';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.y += 40;
+											camFollow.y += 20;
 										}
 								health -= 0.01;
 							case 2:
 								animToPlay = 'singUP';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.y -= 40;
+											camFollow.y -= 20;
 										}
 								health -= 0.01;
 							case 3:
 								animToPlay = 'singRIGHT';
 									if(ClientPrefs.camMove)
 										{
-											camFollow.x += 40;
+											camFollow.x += 20;
 										}
 								health -= 0.01;
 						}
