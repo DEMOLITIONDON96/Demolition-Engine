@@ -1222,7 +1222,7 @@ class PlayState extends MusicBeatState
 		peWatermark.scrollFactor.set();
 		peWatermark.text = "Demolition Engine v" + MainMenuState.DemoEngineVersion + " | " + curSong + " " + storyDifficultyText;
 		peWatermark.visible = ClientPrefs.showWatermarks;
-		peWatermark.cameras = [camCustom];
+		peWatermark.cameras = [camHUD]; // This sould be part of the hud, else the thing won't be included in shaders if they are used
 		add(peWatermark);
 
 		botplayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (ClientPrefs.downScroll ? 100 : -100), "", 32);
