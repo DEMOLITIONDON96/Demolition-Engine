@@ -18,7 +18,7 @@ class CoolUtil
 {
 	public static var defaultDifficulties:Array<String> = [
 		'Hard', //0
-		'Hell', //1
+		//'Hell', //1
 		//lol, no more normal and easy mode B)
 		//'Crazy' (this was meant for remixed versions, but ig this is unused)
 	];

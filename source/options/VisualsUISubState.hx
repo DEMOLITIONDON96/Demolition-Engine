@@ -109,6 +109,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			['0%', '10%', '20%', '30%', '40%', '50%']);
 		addOption(option);
 
+		var option:Option = new Option('FreePlay Type',
+			'What Should The FreePlay Be',
+			'itemType',
+			'string',
+		    'Classic',
+			['Classic', 'Vertical', 'C-Shape', 'D-Shape']);
+		addOption(option);
+
 		var option:Option = new Option('Flashing Lights',
 			"Uncheck this if you're sensitive to flashing lights!",
 			'flashing',

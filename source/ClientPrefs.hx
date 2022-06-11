@@ -19,6 +19,8 @@ class ClientPrefs {
 	public static var iconBounce:String = 'Default';
 	public static var camMove:String = '40';
 	public static var healthDrain:String = '10%';
+	public static var itemType:String = "Classic";
+	public static var hitSound:String = "Default";
 	public static var marvelouses:Bool = true;
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
@@ -130,6 +132,7 @@ class ClientPrefs {
 		FlxG.save.data.flashing = flashing;
 		FlxG.save.data.winningIcon = winningIcon;
 		FlxG.save.data.iconBounce = iconBounce;
+		FlxG.save.data.itemType = itemType;
 		FlxG.save.data.simplifiedScore = simplifiedScore;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
@@ -226,6 +229,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.longBar != null) {
 			longBar = FlxG.save.data.longBar;
+		}
+		if(FlxG.save.data.itemType != null) {
+			itemType = FlxG.save.data.itemType;
 		}
 		if(FlxG.save.data.simplifiedScore != null) {
 			simplifiedScore = FlxG.save.data.simplifiedScore;

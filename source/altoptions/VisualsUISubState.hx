@@ -48,7 +48,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Enable Funky Lights',
+		var option:Option = new Option('Enable Funky',
 			'If checked, Funky Lights Will Play Each Hit',
 			'funkyLights',
 			'bool',
@@ -108,6 +108,16 @@ class VisualsUISubState extends BaseOptionsMenu
 		    '10%',
 			['0%', '10%', '20%', '30%', '40%', '50%']);
 		addOption(option);
+
+        /*
+		var option:Option = new Option('FreePlay Type',
+			'What Should The FreePlay Be',
+			'itemType',
+			'string',
+		    'Classic',
+			['Classic', 'Vertical', 'C-Shape', 'D-Shape']);
+		addOption(option);
+		*/
 
 		var option:Option = new Option('Flashing Lights',
 			"Uncheck this if you're sensitive to flashing lights!",
@@ -195,7 +205,13 @@ class VisualsUISubState extends BaseOptionsMenu
 
 		changedMusic = true;
 	}
-	
+
+	override function destroy()
+	{
+		if(changedMusic) FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		super.destroy();
+	}
+
 	#if !mobile
 	function onChangeFPSCounter()
 	{
