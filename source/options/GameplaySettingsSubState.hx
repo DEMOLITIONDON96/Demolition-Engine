@@ -55,29 +55,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool',
 			false);
 		addOption(option);
-		
-		//bedrock can kiss my ass XD
-		var option:Option = new Option('Rating System:',
-		    "What should your Rating System be?", 
-			'ratingSystem', 
-			'string', 
-			'Bedrock',
-			['Bedrock', 'Psych', 'Forever', 'Andromeda', "Etterna", 'Mania', "None"]);
-		addOption(option);
-		
-			var option:Option = new Option('Kade Engine Input System',
-			'If checked, KE input system will be on, this will not effect the rating system',
-			'keAccuracy',
-			'bool',
-			false);
-		addOption(option);
-		
-		var option:Option = new Option('Hide Judgement Counter',
-			'If checked, hides Judgement Counter on the screen',
-			'hideJudgement',
-			'bool',
-			false);
-		addOption(option);
 
 		var option:Option = new Option('Ghost Tapping',
 			"If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
@@ -86,42 +63,11 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Enable Anti Mash',
-		"If Checked, Anti Mash Is Enabled IDK WHAT THIS DOES\nITS BEEN 10 FUCKING YEARS PLZ\nDEMO LET ME OUT :(",
-		'antiMash',
-		'bool',
-		true);
-		addOption(option);
-
 		var option:Option = new Option('Disable Reset Button',
 			"If checked, pressing Reset won't do anything.",
 			'noReset',
 			'bool',
 			false);
-		addOption(option);
-
-		var option:Option = new Option('Enable Lane Underlay', //Stolen from DAB
-		'Check for a underlay behind the notes',
-		'laneunderlay',
-		'bool',
-		true);
-		addOption(option);
-		
-		var option:Option = new Option('Lane Underlay',
-		'Set lane underlay (Lane underlay must be enabled)',
-		'laneTransparency',
-		'float',
-		0);
-		option.minValue = 0;
-		option.maxValue = 1;
-		option.changeValue = 0.1;
-		addOption(option);
-
-		var option:Option = new Option('Marvelouses Rating',
-		'If checked, marvelouses rating will appear on the\nJudgment counter and will show\n when hit',
-		'marvelouses',
-		'bool',
-		true); //Default value
 		addOption(option);
 
 		var option:Option = new Option('Hitsound Volume',

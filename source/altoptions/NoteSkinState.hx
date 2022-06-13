@@ -115,6 +115,6 @@ class NoteSkinState extends MusicBeatState {
         var skinName = skinList[curSelected];
         FlxG.save.data.arrowSkin = 'noteSkins\x2f'+skinName;
         trace(FlxG.save.data.arrowSkin);
-        MusicBeatState.switchState(new altoptions.PauseOptionsState());
+        MusicBeatState.switchState(new options.OptionsState());
     }
 } 

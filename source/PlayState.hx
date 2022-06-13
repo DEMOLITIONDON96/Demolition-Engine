@@ -224,7 +224,7 @@ class PlayState extends MusicBeatState
 	public var camCustom:FlxCamera;
 	public var cameraSpeed:Float = 1;
 	
-        // Smooth healthbar
+    // Smooth healthbar
 	var fakeHealth:Float = 1;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
@@ -277,6 +277,8 @@ class PlayState extends MusicBeatState
 	var peWatermark:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
+
+	var iconOffset:Int = 26;
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
@@ -1172,13 +1174,23 @@ class PlayState extends MusicBeatState
 		add(healthBarBG);
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
+		if (ClientPrefs.smooth)
+		{
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'fakeHealth', 0, 2);
+		'fakeHealth', 0, 2);	
+		}
+		else
+		{
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
+		'health', 0, 2);	
+		}
 		healthBar.scrollFactor.set();
 		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
+		if (ClientPrefs.smooth){
 	        healthBar.numDivisions = healthBar.barWidth;
+		}
 		add(healthBar);
 		healthBarBG.sprTracker = healthBar;
 
@@ -1439,7 +1451,7 @@ class PlayState extends MusicBeatState
 
 	function set_songSpeed(value:Float):Float
 	{
-		if(generatedMusic)
+	if(generatedMusic)
 		{
 			var ratio:Float = value / songSpeed; //funny word huh
 			for (note in notes)
@@ -3006,7 +3018,9 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 		
-		fakeHealth = FlxMath.lerp(fakeHealth, health, CoolUtil.boundTo(elapsed * 20, 0, 1));
+		if (ClientPrefs.smooth) {
+             fakeHealth = FlxMath.lerp(fakeHealth, health, CoolUtil.boundTo(elapsed * 20, 0, 1));
+		}
 
 		if(ClientPrefs.simplifiedScore) {
 		
@@ -3102,11 +3116,15 @@ class PlayState extends MusicBeatState
 
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;*/
+
+	    if(ClientPrefs.smooth){
+	    var percent:Float = 1 - (fakeHealth / 2);
+		iconP1.x = healthBar.x + (healthBar.width * percent) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+		iconP2.x = healthBar.x + (healthBar.width * percent) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+	    }
 				
 		if(ClientPrefs.iconBounce == "None")
-		{
-			var iconOffset:Int = 26;
-			
+		{	
 			iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 			iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 		} else {
@@ -3566,7 +3584,7 @@ class PlayState extends MusicBeatState
 				if(Math.isNaN(value) || value < 1) value = 1;
 				gfSpeed = value;
 
-							case 'Blammed Lights Special':
+			case 'Blammed Lights Special':
 				stopLights = true;
 				var color:Int = 0xffffffff;
 				var lightId:Int = FlxG.random.int(1, 5, [curLightEvent]);
@@ -3773,6 +3791,8 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'Screen Shake':
+			if (ClientPrefs.screenShake)
+			{
 				var valuesArray:Array<String> = [value1, value2];
 				var targetsArray:Array<FlxCamera> = [camGame, camHUD];
 				for (i in 0...targetsArray.length) {
@@ -3788,6 +3808,7 @@ class PlayState extends MusicBeatState
 						targetsArray[i].shake(intensity, duration);
 					}
 				}
+			}
 
 
 			case 'Change Character':
@@ -3888,6 +3909,7 @@ class PlayState extends MusicBeatState
 					add(lyrics);
 				}
 			case 'Flash Screen':
+			if (ClientPrefs.flashing) {
 				var colorFlash:Int = Std.parseInt(value1);
 				if(Math.isNaN(colorFlash)) colorFlash = 0;
 		
@@ -3913,6 +3935,7 @@ class PlayState extends MusicBeatState
 					case 9:
 						FlxG.camera.flash(FlxColor.LIME, 3);
 				}
+			}
 
 				switch(value2) {
 					case 'false' | 'False':
@@ -5935,8 +5958,13 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.iconBounce == "None")
 		{
 			//Don't know why Haxe won't let me code it the other way, but apparently, it wants it to look messier, so ig
-		} else {
-                        iconP1.scale.set(1.2, 1.2);
+		} else 
+		if(ClientPrefs.smooth){
+			iconP1.scale.set(1, 1);
+			iconP2.scale.set(1, 1);
+		}
+		else {
+            iconP1.scale.set(1.2, 1.2);
 			iconP2.scale.set(1.2, 1.2);
 
 			iconP1.updateHitbox();
