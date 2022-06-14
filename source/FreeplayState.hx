@@ -21,6 +21,9 @@ import lime.app.Application;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
 import WeekData;
+#if MODS_ALLOWED
+import sys.FileSystem;
+#end
 
 using StringTools;
 
