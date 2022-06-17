@@ -40,20 +40,6 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
-		
-		var option:Option = new Option('Winning Icons',
-			'If checked, enables extra icon frames',
-			'winningIcon',
-			'bool',
-			true);
-		addOption(option);
-
-		var option:Option = new Option('Enable Funky Lights',
-			'If checked, Funky Lights Will Play Each Hit',
-			'funkyLights',
-			'bool',
-			true);
-		addOption(option);
 
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
@@ -69,57 +55,11 @@ class VisualsUISubState extends BaseOptionsMenu
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
-		
-		var option:Option = new Option('Icon Bounce:',
-			'How should your icons bounce?',
-			'iconBounce',
-			'string',
-			'Default',
-			['Default', 'Golden Apple', 'None']);
-		addOption(option);
-
-		var option:Option = new Option('Judgement Skin:', 
-		"What should your judgements look like?", 
-		'uiSkin', 
-		'string', 
-		'Demolition',
-			['Demolition', 'Classic', 'BEAT!', 'BEAT! Gradient', 'Bedrock', 'Matt :)']);
-		addOption(option);
-		
-		var option:Option = new Option('Simplify Score Text',
-			"If checked, Score Text under the Health Bar \ndisplays less text",
-			'simplifiedScore',
-			'bool',
-		        false);
-		addOption(option);
-
-		var option:Option = new Option('Camera Movement',
-			'How much the camera should be to the corresponding arrow?',
-			'camMove',
-			'string',
-		    '40',
-			['0', '10', '20', '30', '40', '50']);
-		addOption(option);
-
-		var option:Option = new Option('Health Drain',
-			'How much the player should loose with health?',
-			'healthDrain',
-			'string',
-		    '10%',
-			['0%', '10%', '20%', '30%', '40%', '50%']);
-		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',
 			"Uncheck this if you're sensitive to flashing lights!",
 			'flashing',
 			'bool',
-			true);
-		addOption(option);
-
-		var option:Option = new Option('Show Watermarks',
-			"If unchecked, hides engine watermarks from the bottom left corner.", 
-			'showWatermarks', 
-			'bool', 
 			true);
 		addOption(option);
 
@@ -140,13 +80,6 @@ class VisualsUISubState extends BaseOptionsMenu
 		var option:Option = new Option('Score Text Zoom on Hit',
 			"If unchecked, disables the Score text zooming\neverytime you hit a note.",
 			'scoreZoom',
-			'bool',
-			true);
-		addOption(option);
-		
-		var option:Option = new Option('Long Health Bar',
-			"If unchecked, the health bar will be short.",
-			'longBar',
 			'bool',
 			true);
 		addOption(option);
@@ -195,7 +128,13 @@ class VisualsUISubState extends BaseOptionsMenu
 
 		changedMusic = true;
 	}
-	
+
+	override function destroy()
+	{
+		if(changedMusic) FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		super.destroy();
+	}
+
 	#if !mobile
 	function onChangeFPSCounter()
 	{

@@ -121,20 +121,6 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			updateTextFrom(optionsArray[i]);
 		}
 
-		/*var shadow:FlxSprite = new FlxSprite().loadGraphic(Paths.image('SpookyMenu_Assets/Options_Assets/SettingsShadowOverlay'));
-		shadow.updateHitbox();
-		shadow.screenCenter();
-		shadow.antialiasing = ClientPrefs.globalAntialiasing;
-		add(shadow);
-
-		var pulse:FlxSprite = new FlxSprite().loadGraphic(Paths.image('SpookyMenu_Assets/Options_Assets/SettingsVignettePulse'));
-		pulse.updateHitbox();
-		pulse.screenCenter();
-		FlxTween.tween(pulse, {alpha: pulse.alpha = 0}, 1.2, {ease: FlxEase.quadInOut, type: LOOPING});
-		pulse.alpha = 1;
-		pulse.antialiasing = ClientPrefs.globalAntialiasing;
-		add(pulse);*/
-
 		changeSelection();
 		reloadCheckboxes();
 	}

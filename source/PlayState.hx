@@ -224,7 +224,7 @@ class PlayState extends MusicBeatState
 	public var camCustom:FlxCamera;
 	public var cameraSpeed:Float = 1;
 	
-        // Smooth healthbar
+    // Smooth healthbar
 	var fakeHealth:Float = 1;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
@@ -277,6 +277,8 @@ class PlayState extends MusicBeatState
 	var peWatermark:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
+
+	var iconOffset:Int = 26;
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
@@ -390,14 +392,7 @@ class PlayState extends MusicBeatState
 		storyDifficultyText = CoolUtil.difficulties[storyDifficulty];
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
-		if (isStoryMode)
-		{
-			detailsText = "Story Mode: " + WeekData.getCurrentWeek().weekName;
-		}
-		else
-		{
 			detailsText = "Freeplay";
-		}
 
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
@@ -1179,13 +1174,23 @@ class PlayState extends MusicBeatState
 		add(healthBarBG);
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
+		if (ClientPrefs.smooth)
+		{
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'fakeHealth', 0, 2);
+		'fakeHealth', 0, 2);	
+		}
+		else
+		{
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
+		'health', 0, 2);	
+		}
 		healthBar.scrollFactor.set();
 		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
+		if (ClientPrefs.smooth){
 	        healthBar.numDivisions = healthBar.barWidth;
+		}
 		add(healthBar);
 		healthBarBG.sprTracker = healthBar;
 
@@ -1222,7 +1227,7 @@ class PlayState extends MusicBeatState
 		peWatermark.scrollFactor.set();
 		peWatermark.text = "Demolition Engine v" + MainMenuState.DemoEngineVersion + " | " + curSong + " " + storyDifficultyText;
 		peWatermark.visible = ClientPrefs.showWatermarks;
-		peWatermark.cameras = [camHUD]; // This sould be part of the hud, else the thing won't be included in shaders if they are used
+		peWatermark.cameras = [camOther]; // This sould be part of the hud, else the thing won't be included in shaders if they are used - theo; yeah, that's the whole point, dude, i know what i'm doing - don
 		add(peWatermark);
 
 		botplayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (ClientPrefs.downScroll ? 100 : -100), "", 32);
@@ -1323,7 +1328,7 @@ class PlayState extends MusicBeatState
 		#end
 		
 		var daSong:String = Paths.formatToSongPath(curSong);
-		if (isStoryMode && !seenCutscene)
+		if (!seenCutscene)
 		{
 			switch (daSong)
 			{
@@ -1446,7 +1451,7 @@ class PlayState extends MusicBeatState
 
 	function set_songSpeed(value:Float):Float
 	{
-		if(generatedMusic)
+	if(generatedMusic)
 		{
 			var ratio:Float = value / songSpeed; //funny word huh
 			for (note in notes)
@@ -2693,7 +2698,7 @@ class PlayState extends MusicBeatState
 
 			var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, strumLine.y, i, player, char);
 			babyArrow.downScroll = ClientPrefs.downScroll;
-			if (!isStoryMode && !skipArrowStartTween)
+			if (!skipArrowStartTween)
 			{
 				//babyArrow.y -= 10;
 				babyArrow.alpha = 0;
@@ -3013,7 +3018,9 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 		
-		fakeHealth = FlxMath.lerp(fakeHealth, health, CoolUtil.boundTo(elapsed * 20, 0, 1));
+		if (ClientPrefs.smooth) {
+             fakeHealth = FlxMath.lerp(fakeHealth, health, CoolUtil.boundTo(elapsed * 20, 0, 1));
+		}
 
 		if(ClientPrefs.simplifiedScore) {
 		
@@ -3109,11 +3116,15 @@ class PlayState extends MusicBeatState
 
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;*/
+
+	    if(ClientPrefs.smooth){
+	    var percent:Float = 1 - (fakeHealth / 2);
+		iconP1.x = healthBar.x + (healthBar.width * percent) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+		iconP2.x = healthBar.x + (healthBar.width * percent) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+	    }
 				
 		if(ClientPrefs.iconBounce == "None")
-		{
-			var iconOffset:Int = 26;
-			
+		{	
 			iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 			iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 		} else {
@@ -3573,7 +3584,7 @@ class PlayState extends MusicBeatState
 				if(Math.isNaN(value) || value < 1) value = 1;
 				gfSpeed = value;
 
-							case 'Blammed Lights Special':
+			case 'Blammed Lights Special':
 				stopLights = true;
 				var color:Int = 0xffffffff;
 				var lightId:Int = FlxG.random.int(1, 5, [curLightEvent]);
@@ -3780,6 +3791,8 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'Screen Shake':
+			if (ClientPrefs.screenShake)
+			{
 				var valuesArray:Array<String> = [value1, value2];
 				var targetsArray:Array<FlxCamera> = [camGame, camHUD];
 				for (i in 0...targetsArray.length) {
@@ -3795,6 +3808,7 @@ class PlayState extends MusicBeatState
 						targetsArray[i].shake(intensity, duration);
 					}
 				}
+			}
 
 
 			case 'Change Character':
@@ -3895,6 +3909,7 @@ class PlayState extends MusicBeatState
 					add(lyrics);
 				}
 			case 'Flash Screen':
+			if (ClientPrefs.flashing) {
 				var colorFlash:Int = Std.parseInt(value1);
 				if(Math.isNaN(colorFlash)) colorFlash = 0;
 		
@@ -3920,6 +3935,7 @@ class PlayState extends MusicBeatState
 					case 9:
 						FlxG.camera.flash(FlxColor.LIME, 3);
 				}
+			}
 
 				switch(value2) {
 					case 'false' | 'False':
@@ -4437,7 +4453,7 @@ class PlayState extends MusicBeatState
 		deathCounter = 0;
 		seenCutscene = false;
 
-		#if ACHIEVEMENTS_ALLOWED
+		//#if ACHIEVEMENTS_ALLOWED
 		if(achievementObj != null) {
 			return;
 		} else {
@@ -4450,7 +4466,7 @@ class PlayState extends MusicBeatState
 				return;
 			}
 		}
-		#end
+		//#end
 		
 		#if LUA_ALLOWED
 		var ret:Dynamic = callOnLuas('onEndSong', []);
@@ -4562,7 +4578,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	#if ACHIEVEMENTS_ALLOWED
+	//#if ACHIEVEMENTS_ALLOWED
 	var achievementObj:AchievementObject = null;
 	function startAchievement(achieve:String) {
 		achievementObj = new AchievementObject(achieve, camOther);
@@ -4577,7 +4593,7 @@ class PlayState extends MusicBeatState
 			endSong();
 		}
 	}
-	#end
+	//#end
 
 	public function KillNotes() {
 		while(notes.length > 0) {
@@ -5040,12 +5056,12 @@ class PlayState extends MusicBeatState
 			});
 
 			if (controlHoldArray.contains(true) && !endingSong) {
-				#if ACHIEVEMENTS_ALLOWED
+				//#if ACHIEVEMENTS_ALLOWED
 				var achieve:String = checkForAchievement(['oversinging']);
 				if (achieve != null) {
 					startAchievement(achieve);
 				}
-				#end
+				//#end
 			}
 			else if (boyfriend.holdTimer > Conductor.stepCrochet * 0.0011 * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
 			{
@@ -5796,7 +5812,7 @@ class PlayState extends MusicBeatState
 				limoCorpseTwo.visible = false;
 				limoKillingState = 1;
 
-				#if ACHIEVEMENTS_ALLOWED
+				//#if ACHIEVEMENTS_ALLOWED
 				Achievements.henchmenDeath++;
 				FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
 				var achieve:String = checkForAchievement(['roadkill_enthusiast']);
@@ -5806,7 +5822,7 @@ class PlayState extends MusicBeatState
 					FlxG.save.flush();
 				}
 				FlxG.log.add('Deaths: ' + Achievements.henchmenDeath);
-				#end
+				//#end
 			}
 		}
 	}
@@ -5942,8 +5958,13 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.iconBounce == "None")
 		{
 			//Don't know why Haxe won't let me code it the other way, but apparently, it wants it to look messier, so ig
-		} else {
-                        iconP1.scale.set(1.2, 1.2);
+		} else 
+		if(ClientPrefs.smooth){
+			iconP1.scale.set(1, 1);
+			iconP2.scale.set(1, 1);
+		}
+		else {
+            iconP1.scale.set(1.2, 1.2);
 			iconP2.scale.set(1.2, 1.2);
 
 			iconP1.updateHitbox();
@@ -6169,7 +6190,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	#if ACHIEVEMENTS_ALLOWED
+	//#if ACHIEVEMENTS_ALLOWED
 	private function checkForAchievement(achievesToCheck:Array<String> = null):String
 	{
 		if(chartingMode) return null;
@@ -6182,7 +6203,7 @@ class PlayState extends MusicBeatState
 				switch(achievementName)
 				{
 					case 'week1_nomiss' | 'week2_nomiss' | 'week3_nomiss' | 'week4_nomiss' | 'week5_nomiss' | 'week6_nomiss' | 'week7_nomiss':
-						if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
+						if(campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
 						{
 							var weekName:String = WeekData.getWeekFileName();
 							switch(weekName) //I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
@@ -6252,7 +6273,7 @@ class PlayState extends MusicBeatState
 		}
 		return null;
 	}
-	#end
+	//#end
 
 var stopLights:Bool = false;
 	var curLight:Int = -1;

@@ -8,6 +8,7 @@ import Controls;
 
 class ClientPrefs {
 	public static var downScroll:Bool = false;
+	public static var smooth:Bool = false;
 	public static var middleScroll:Bool = false;
 	public static var antiMash:Bool = true;
 	public static var center:Bool = true;
@@ -19,9 +20,12 @@ class ClientPrefs {
 	public static var iconBounce:String = 'Default';
 	public static var camMove:String = '40';
 	public static var healthDrain:String = '10%';
+	public static var itemType:String = "Classic";
+	public static var hitSound:String = "Default";
 	public static var marvelouses:Bool = true;
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
+	public static var screenShake:Bool = true;
 	public static var hideJudgement:Bool = false;
 	public static var longBar:Bool = true;
 	public static var globalAntialiasing:Bool = true;
@@ -119,6 +123,7 @@ class ClientPrefs {
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.smooth = smooth;
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.laneunderlay = laneunderlay;
 		FlxG.save.data.laneTransparency = laneTransparency;
@@ -128,8 +133,10 @@ class ClientPrefs {
 		FlxG.save.data.healthDrain = healthDrain;
 		FlxG.save.data.showFPS = showFPS;
 		FlxG.save.data.flashing = flashing;
+		FlxG.save.data.screenShake = screenShake;
 		FlxG.save.data.winningIcon = winningIcon;
 		FlxG.save.data.iconBounce = iconBounce;
+		FlxG.save.data.itemType = itemType;
 		FlxG.save.data.simplifiedScore = simplifiedScore;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
@@ -205,11 +212,17 @@ class ClientPrefs {
 		if(FlxG.save.data.iconBounce != null) {
 			iconBounce = FlxG.save.data.iconBounce;
 		}
+	    if(FlxG.save.data.screenShake != null) {
+			screenShake = FlxG.save.data.screenShake;
+		}
 		if(FlxG.save.data.middleScroll != null) {
 			middleScroll = FlxG.save.data.middleScroll;
 		}
 		if(FlxG.save.data.camMove != null) {
 			camMove = FlxG.save.data.camMove;
+		}
+		if(FlxG.save.data.smooth != null) {
+			smooth = FlxG.save.data.smooth;
 		}
 		if(FlxG.save.data.healthDrain != null) {
 			healthDrain = FlxG.save.data.healthDrain;
@@ -226,6 +239,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.longBar != null) {
 			longBar = FlxG.save.data.longBar;
+		}
+		if(FlxG.save.data.itemType != null) {
+			itemType = FlxG.save.data.itemType;
 		}
 		if(FlxG.save.data.simplifiedScore != null) {
 			simplifiedScore = FlxG.save.data.simplifiedScore;
