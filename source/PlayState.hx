@@ -2384,18 +2384,6 @@ class PlayState extends MusicBeatState
  		windowH = window.height;
 		startingSong = false;
 
-				switch (ClientPrefs.songOptions)
-				{
-					case hifi:
-						FlxG.sound.playMusic(Paths.instHIFI(PlayState.SONG.song), false);
-					case lofi:
-						FlxG.sound.playMusic(Paths.instLOFI(PlayState.SONG.song), false);
-					case defalt:
-						FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), false);
-					default:
-						FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), false);
-				}
-
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
 
@@ -2455,33 +2443,8 @@ class PlayState extends MusicBeatState
 		}
 
 		var songData = SONG;
-
-		Conductor.changeBPM(songData.bpm);
-
-			switch (ClientPrefs.songOptions)
-			{
-				case hifi:
-					Conductor.changeBPM(songData.bpm * 1.2);
-				case lofi:
-					Conductor.changeBPM(songData.bpm * 0.8);
-			}
 		
 		curSong = songData.song;
-
-		if (SONG.needsVoices)
-			{
-				switch (ClientPrefs.songOptions)
-				{
-					case hifi:
-						vocals = new FlxSound().loadEmbedded(Paths.voicesHIFI(PlayState.SONG.song));
-					case lofi:
-						vocals = new FlxSound().loadEmbedded(Paths.voicesLOFI(PlayState.SONG.song));
-					case defalt:
-						vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
-					default:
-						vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
-				}
-			}
 		
 			if (SONG.needsVoices)
 				vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));

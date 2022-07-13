@@ -177,14 +177,6 @@ class DemoSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Song Options',
-		      'What Should The Funky Vibe Be For A Song?',
-			'songOptions',
-			'string',
-			'default',
-			['defalt','lofi', 'hifi']);
-		addOption(option);
-
 		super();
 	}
 }

@@ -7,7 +7,6 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 
 class ClientPrefs {
-	public  static var songOptions:String = "defalt";
 	public static var downScroll:Bool = false;
 	public static var smooth:Bool = false;
 	public static var middleScroll:Bool = false;
@@ -124,7 +123,6 @@ class ClientPrefs {
 	}
 
 	public static function saveSettings() {
-		FlxG.save.data.songOptions = songOptions;
 		FlxG.save.data.smooth = smooth;
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.laneunderlay = laneunderlay;
@@ -193,9 +191,6 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
-		if (FlxG.save.data.songOptions != null) {
-			songOptions = FlxG.save.data.songOptions;
-		}
 		if (FlxG.save.data.center != null) {
 			center = FlxG.save.data.center;
 		}
