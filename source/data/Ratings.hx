@@ -40,10 +40,11 @@ class Ratings
 		["S-", 0.9], // 89%
 		["S", 0.93], // 92%
 		["S+", 0.95], // 94%
-		["☆", 0.97], // 96%
-		["☆☆", 0.99], // 98%
-		["☆☆☆", 1], // 99.99%
-		["☆☆☆☆", 1] // 100%
+		["Star!", 0.97], // 96%
+		["Double Star!!", 0.99], // 98%
+		["Super Star!!!", 1], // 99.99%
+		["Special Star!!!!", 1] // 100%
+		// wow FNAF wow..
 	];
 
 	public static var psychRatings:Array<Dynamic> = [

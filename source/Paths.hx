@@ -231,6 +231,34 @@ class Paths
 		return inst;
 	}
 
+	inline static public function voicesHIFI(song:String):Any
+	{
+		var songKey:String = '${formatToSongPath(song)}/Voices_HIFI';
+		var voices = returnSound('songs', songKey);
+		return voices;
+	}
+		
+	inline static public function instLOFI(song:String):Any
+	{
+		var songKey:String = '${formatToSongPath(song)}/Inst_LOFI';
+		var inst = returnSound('songs', songKey);
+		return inst;
+	}
+
+	inline static public function voicesLOFI(song:String):Any
+	{
+		var songKey:String = '${formatToSongPath(song)}/Voices_LOFI';
+		var voices = returnSound('songs', songKey);
+		return voices;
+	}
+			
+			inline static public function instHIFI(song:String):Any
+			{
+				var songKey:String = '${formatToSongPath(song)}/Inst_HIFI';
+				var inst = returnSound('songs', songKey);
+				return inst;
+			}
+
 	inline static public function image(key:String, ?library:String):FlxGraphic
 	{
 		// streamlined the assets process more
