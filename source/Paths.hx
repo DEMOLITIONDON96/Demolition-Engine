@@ -344,17 +344,19 @@ class Paths
 		#end
 
 		var path = getPath('images/$key.png', IMAGE, library);
+		var path_ = getPath('images/$key.PNG', IMAGE, library);
+		var thePath = if(OpenFlAssets.exists(path, IMAGE)) path else if(OpenFlAssets.exists(path_, IMAGE)) path_ else null;
 		//trace(path);
-		if (OpenFlAssets.exists(path, IMAGE)) {
-			if(!currentTrackedAssets.exists(path)) {
-				var newGraphic:FlxGraphic = FlxG.bitmap.add(path, false, path);
+		if (thePath != null) {
+			if(!currentTrackedAssets.exists(thePath)) {
+				var newGraphic:FlxGraphic = FlxG.bitmap.add(thePath, false, thePath);
 				newGraphic.persist = true;
-				currentTrackedAssets.set(path, newGraphic);
+				currentTrackedAssets.set(thePath, newGraphic);
 			}
-			localTrackedAssets.push(path);
-			return currentTrackedAssets.get(path);
+			localTrackedAssets.push(thePath);
+			return currentTrackedAssets.get(thePath);
 		}
-		trace('oh no its returning null NOOOO');
+		trace('oh no $key is returning null NOOOO');
 		return null;
 	}
 
