@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-95,
+				260
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Trevor idle dance",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-20,
+				250
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Trevor sing note LEFT"
+		},
+		{
+			"offsets": [
+				-110,
+				259
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Trevor Sing Note DOWN"
+		},
+		{
+			"offsets": [
+				-98,
+				263
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Trevor Sing Note right"
+		},
+		{
+			"offsets": [
+				-66,
+				257
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Trevor Sing note UP"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Trev_assets",
+	"position": [
+		0,
+		350
+	],
+	"healthicon": "trevor",
+	"flip_x": false,
+	"healthbar_colors": [
+		0,
+		153,
+		255
+	],
+	"camera_position": [
+		60,
+		-300
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

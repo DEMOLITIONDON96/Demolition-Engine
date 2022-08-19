@@ -1,0 +1,11 @@
+{
+	"idle_anim": "Trevor Idle Dance",
+	"image": "Menu_Trevor",
+	"position": [
+		110,
+		130
+	],
+	"flipX": false,
+	"scale": 0.55,
+	"confirm_anim": "M Dad Idle"
+}
