@@ -7,6 +7,5 @@ Shit People Probably Want Most:
 - Stage Editor (overrated request, but, eh, we're doing it ig)
 - Playback Rate
 - Porting Lots Of Code From Time Engine To Demolition Engine
-- Making The Health + Time Bar Skin Work
 - Fixing Some Shit
 - Remaking The Camera Movement
