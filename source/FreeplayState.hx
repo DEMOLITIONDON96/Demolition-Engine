@@ -4,6 +4,7 @@ package;
 import Discord.DiscordClient;
 #end
 import editors.ChartingState;
+import PlayState;
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -13,8 +14,10 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
+import lime.app.Application;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
 import WeekData;
@@ -49,11 +52,12 @@ class FreeplayState extends MusicBeatState
 	var bg:FlxSprite;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
+	public var camZooming:Bool = false;
 
 	override function create()
 	{
-		//Paths.clearStoredMemory();
-		//Paths.clearUnusedMemory();
+		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
@@ -61,8 +65,10 @@ class FreeplayState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("In Freeplay", null);
 		#end
+			
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine";
 
 		for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
@@ -101,7 +107,7 @@ class FreeplayState extends MusicBeatState
 			}
 		}*/
 
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg = new FlxSprite().loadGraphic(Paths.image('menuFreeplay'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 		bg.screenCenter();
@@ -112,7 +118,7 @@ class FreeplayState extends MusicBeatState
 		for (i in 0...songs.length)
 		{
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
-			songText.isMenuItem = true;
+			songText.isMenuItemCenter = true;
 			songText.targetY = i;
 			grpSongs.add(songText);
 
@@ -203,6 +209,7 @@ class FreeplayState extends MusicBeatState
 		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
 		text.scrollFactor.set();
 		add(text);
+
 		super.create();
 	}
 
@@ -239,7 +246,7 @@ class FreeplayState extends MusicBeatState
 	}*/
 
 	var instPlaying:Int = -1;
-	public static var vocals:FlxSound = null;
+	private static var vocals:FlxSound = null;
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
@@ -302,13 +309,6 @@ class FreeplayState extends MusicBeatState
 					changeDiff();
 				}
 			}
-
-			if(FlxG.mouse.wheel != 0)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'), 0.2);
-				changeSelection(-shiftMult * FlxG.mouse.wheel, false);
-				changeDiff();
-			}
 		}
 
 		if (controls.UI_LEFT_P)
@@ -354,6 +354,17 @@ class FreeplayState extends MusicBeatState
 				vocals.looped = true;
 				vocals.volume = 0.7;
 				instPlaying = curSelected;
+				switch(PlayState.SONG.song)
+				{
+					case 'Atrocity':
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Saster";
+					case 'Tutorial' | 'Bopeebo' | 'Fresh' | 'Dad Battle' | 'Spookeez' | 'South' | 'Pico' | 'Philly Nice' | 'Blammed' | 'Satin Panties' | 'High' | 'Milf' | 'Cocoa' | 'Eggnog' | 'Senpai' | 'Roses' | 'Thorns' | 'Ugh' | 'Guns' | 'Stress':
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Kawai Sprite";
+					case 'Monster' | 'Winter Horrorland':
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Kawai Sprite & Bassetfilms";
+					default:
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song;
+				}
 				#end
 			}
 		}
@@ -387,6 +398,7 @@ class FreeplayState extends MusicBeatState
 				LoadingState.loadAndSwitchState(new ChartingState());
 			}else{
 				LoadingState.loadAndSwitchState(new PlayState());
+				FlxG.mouse.visible = false;
 			}
 
 			FlxG.sound.music.volume = 0;
@@ -401,6 +413,14 @@ class FreeplayState extends MusicBeatState
 		}
 		super.update(elapsed);
 	}
+	
+	override function beatHit()
+		{
+			super.beatHit();
+
+				if (FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms && curBeat % 4 == 0)
+					FlxG.camera.zoom += 0.015;
+		}
 
 	public static function destroyFreeplayVocals() {
 		if(vocals != null) {

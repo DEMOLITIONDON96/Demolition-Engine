@@ -53,13 +53,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeAntiAliasing; //Changing onChange is only needed if you want to make a special interaction after it changes the value
 		addOption(option);
 
-		var option:Option = new Option('Shaders', //Name
-			'If unchecked, disables shaders.\nIt\'s used for some visual effects, and also CPU intensive for weaker PCs.', //Description
-			'shaders', //Save data variable name
-			'bool', //Variable type
-			true); //Default value
-		addOption(option);
-
 		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
 		var option:Option = new Option('Framerate',
 			"Pretty self explanatory, isn't it?",
@@ -74,6 +67,35 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeFramerate;
 		#end
 
+		#if desktop //no need for this at other platforms cuz only desktop has fullscreen as false by default (MAYBE I'LL TRY TO MAKE IT FOR FULLSCREEN MODE TOO)
+		var option:Option = new Option('Screen Resolution',
+			'Choose your preferred screen resolution.',
+			'screenRes',
+			'string',
+			'1280x720',
+			['640x360', '852x480', '960x540', '1280x720', '1920x1080', '3840x2160']);
+		addOption(option);
+		option.onChange = onChangeScreenRes;
+
+		var option:Option = new Option('Fullscreen',
+			'Should the game be maximized?',
+			'fullscreen',
+			'bool',
+			false);
+		addOption(option);
+		option.onChange = onChangeFullscreen;
+		#end
+
+		/*
+		var option:Option = new Option('Persistent Cached Data',
+			'If checked, images loaded will stay in memory\nuntil the game is closed, this increases memory usage,\nbut basically makes reloading times instant.',
+			'imagesPersist',
+			'bool',
+			false);
+		option.onChange = onChangePersistentData; //Persistent Cached Data changes FlxGraphic.defaultPersist
+		addOption(option);
+		*/
+
 		super();
 	}
 
@@ -87,6 +109,22 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 				sprite.antialiasing = ClientPrefs.globalAntialiasing;
 			}
 		}
+	}
+
+	function onChangeScreenRes()
+	{
+		var res = ClientPrefs.screenRes.split('x');
+		FlxG.resizeWindow(Std.parseInt(res[0]), Std.parseInt(res[1]));
+
+		FlxG.fullscreen = false;
+
+		if(!FlxG.fullscreen)
+			onChangeFullscreen();
+	}
+
+	function onChangeFullscreen()
+	{
+		FlxG.fullscreen = ClientPrefs.fullscreen;
 	}
 
 	function onChangeFramerate()

@@ -5,6 +5,7 @@ import Discord.DiscordClient;
 import sys.thread.Thread;
 #end
 import flixel.FlxG;
+import flixel.util.FlxGradient;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.input.keyboard.FlxKey;
@@ -15,6 +16,7 @@ import flixel.addons.transition.TransitionData;
 import haxe.Json;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
+import flash.system.System;
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
@@ -22,10 +24,8 @@ import sys.io.File;
 import options.GraphicsSettingsSubState;
 //import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
 import flixel.input.gamepad.FlxGamepad;
-import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
 import flixel.system.FlxSound;
@@ -41,7 +41,7 @@ import openfl.Assets;
 using StringTools;
 typedef TitleData =
 {
-
+	
 	titlex:Float,
 	titley:Float,
 	startx:Float,
@@ -58,17 +58,21 @@ class TitleState extends MusicBeatState
 	public static var volumeUpKeys:Array<FlxKey> = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
 
 	public static var initialized:Bool = false;
+	public var camZooming:Bool = false;
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
+	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 1, 0xFFAA00AA);
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
-	
-	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
-	var titleTextAlphas:Array<Float> = [1, .64];
+	var psychEngine:FlxSprite;
+	var creditsGrid:FlxSprite;
+	var randomWindowText:Int = FlxG.random.int(0, 20);
 
 	var curWacky:Array<String> = [];
+
+	var Timer:Float = 0;
 
 	var wackyImage:FlxSprite;
 
@@ -81,9 +85,9 @@ class TitleState extends MusicBeatState
 	#end
 
 	var mustUpdate:Bool = false;
-
+	
 	var titleJSON:TitleData;
-
+	
 	public static var updateVersion:String = '';
 
 	override public function create():Void
@@ -91,12 +95,9 @@ class TitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		#if LUA_ALLOWED
-		Paths.pushGlobalMods();
-		#end
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
 		WeekData.loadTheFirstEnabledMod();
-
+		
 		//trace(path, FileSystem.exists(path));
 
 		/*#if (polymod && !html5)
@@ -113,6 +114,30 @@ class TitleState extends MusicBeatState
 			}
 		}
 		#end*/
+		
+		#if CHECK_FOR_UPDATES
+		if(!closedState) {
+			trace('checking for update');
+			var http = new haxe.Http("https://raw.githubusercontent.com/DEMOLITIONDON96/Demolition-Engine/main/gitVersion.txt");
+			
+			http.onData = function (data:String)
+			{
+				updateVersion = data.split('\n')[0].trim();
+				var curVersion:String = MainMenuState.psychEngineVersion.trim();
+				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
+				if(updateVersion != curVersion) {
+					trace('versions arent matching!');
+					mustUpdate = true;
+				}
+			}
+			
+			http.onError = function (error) {
+				trace('error: $error');
+			}
+			
+			http.request();
+		}
+		#end
 
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.sound.muteKeys = muteKeys;
@@ -130,38 +155,14 @@ class TitleState extends MusicBeatState
 		super.create();
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
-
+		
 		ClientPrefs.loadPrefs();
-
-		#if CHECK_FOR_UPDATES
-		if(ClientPrefs.checkForUpdates && !closedState) {
-			trace('checking for update');
-			var http = new haxe.Http("https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/main/gitVersion.txt");
-
-			http.onData = function (data:String)
-			{
-				updateVersion = data.split('\n')[0].trim();
-				var curVersion:String = MainMenuState.psychEngineVersion.trim();
-				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
-				if(updateVersion != curVersion) {
-					trace('versions arent matching!');
-					mustUpdate = true;
-				}
-			}
-
-			http.onError = function (error) {
-				trace('error: $error');
-			}
-
-			http.request();
-		}
-		#end
-
+		
 		Highscore.load();
 
 		// IGNORE THIS!!!
 		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
-
+		
 		#if TITLE_SCREEN_EASTER_EGG
 		if (FlxG.save.data.psychDevsEasterEgg == null) FlxG.save.data.psychDevsEasterEgg = ''; //Crash prevention
 		switch(FlxG.save.data.psychDevsEasterEgg.toUpperCase())
@@ -181,15 +182,10 @@ class TitleState extends MusicBeatState
 		}
 		#end
 
-		if(!initialized)
+		if(!initialized && FlxG.save.data != null && FlxG.save.data.fullscreen)
 		{
-			if(FlxG.save.data != null && FlxG.save.data.fullscreen)
-			{
-				FlxG.fullscreen = FlxG.save.data.fullscreen;
-				//trace('LOADED FULLSCREEN SETTING!!');
-			}
-			persistentUpdate = true;
-			persistentDraw = true;
+			FlxG.fullscreen = FlxG.save.data.fullscreen;
+			//trace('LOADED FULLSCREEN SETTING!!');
 		}
 
 		if (FlxG.save.data.weekCompleted != null)
@@ -218,15 +214,10 @@ class TitleState extends MusicBeatState
 			}
 			#end
 
-			if (initialized)
-				startIntro();
-			else
+			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					startIntro();
-				});
-			}
+				startIntro();
+			});
 		}
 		#end
 	}
@@ -249,7 +240,7 @@ class TitleState extends MusicBeatState
 				new FlxRect(-300, -300, FlxG.width * 1.8, FlxG.height * 1.8));
 			FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.7, new FlxPoint(0, 1),
 				{asset: diamond, width: 32, height: 32}, new FlxRect(-300, -300, FlxG.width * 1.8, FlxG.height * 1.8));
-
+				
 			transIn = FlxTransitionableState.defaultTransIn;
 			transOut = FlxTransitionableState.defaultTransOut;*/
 
@@ -264,20 +255,22 @@ class TitleState extends MusicBeatState
 
 			if(FlxG.sound.music == null) {
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+
+				FlxG.sound.music.fadeIn(4, 0, 0.7);
 			}
 		}
-
-		Conductor.changeBPM(titleJSON.bpm);
+			
+		Conductor.changeBPM(110);
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite();
-
+		
 		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none"){
 			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
 		}else{
 			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		}
-
+		
 		// bg.antialiasing = ClientPrefs.globalAntialiasing;
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));
 		// bg.updateHitbox();
@@ -285,7 +278,7 @@ class TitleState extends MusicBeatState
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
-
+		
 		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
@@ -297,8 +290,6 @@ class TitleState extends MusicBeatState
 		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
 
 		var easterEgg:String = FlxG.save.data.psychDevsEasterEgg;
-		if(easterEgg == null) easterEgg = ''; //html5 fix
-
 		switch(easterEgg.toUpperCase())
 		{
 			#if TITLE_SCREEN_EASTER_EGG
@@ -329,7 +320,7 @@ class TitleState extends MusicBeatState
 				gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		}
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
-
+		
 		add(gfDance);
 		gfDance.shader = swagShader.shader;
 		add(logoBl);
@@ -349,28 +340,11 @@ class TitleState extends MusicBeatState
 		//trace(path, FileSystem.exists(path));
 		titleText.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path),File.getContent(StringTools.replace(path,".png",".xml")));
 		#else
-
+		
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
 		#end
-		var animFrames:Array<FlxFrame> = [];
-		@:privateAccess {
-			titleText.animation.findByPrefix(animFrames, "ENTER IDLE");
-			titleText.animation.findByPrefix(animFrames, "ENTER FREEZE");
-		}
-		
-		if (animFrames.length > 0) {
-			newTitle = true;
-			
-			titleText.animation.addByPrefix('idle', "ENTER IDLE", 24);
-			titleText.animation.addByPrefix('press', ClientPrefs.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
-		}
-		else {
-			newTitle = false;
-			
-			titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
-			titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
-		}
-		
+		titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
+		titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
 		titleText.antialiasing = ClientPrefs.globalAntialiasing;
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
@@ -392,6 +366,13 @@ class TitleState extends MusicBeatState
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		credGroup.add(blackScreen);
 
+		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x0000BCFF, 0x55007DFF, 0xAA5BF1FF], 1, 90, true);
+		gradientBar.y = 770;
+		gradientBar.scale.y = 0;
+		gradientBar.updateHitbox();
+		add(gradientBar);
+		FlxTween.tween(gradientBar, {'scale.y': 1.3}, 4, {ease: FlxEase.quadInOut});
+
 		credTextShit = new Alphabet(0, 0, "", true);
 		credTextShit.screenCenter();
 
@@ -406,7 +387,21 @@ class TitleState extends MusicBeatState
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		
+		psychEngine = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('psychLogo'));
+		add(psychEngine);
+		psychEngine.visible = false;
+		psychEngine.setGraphicSize(Std.int(ngSpr.width * 0.8));
+		psychEngine.updateHitbox();
+		psychEngine.screenCenter(X);
+		psychEngine.antialiasing = ClientPrefs.globalAntialiasing;
 
+		creditsGrid = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('creditsGrid'));
+		add(creditsGrid);
+		creditsGrid.visible = false;
+		creditsGrid.screenCenter(X);
+		creditsGrid.antialiasing = ClientPrefs.globalAntialiasing;
+		
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		if (initialized)
@@ -434,15 +429,18 @@ class TitleState extends MusicBeatState
 
 	var transitioning:Bool = false;
 	private static var playJingle:Bool = false;
-	
-	var newTitle:Bool = false;
-	var titleTimer:Float = 0;
 
 	override function update(elapsed:Float)
 	{
+		
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
+
+		Timer += 1;
+		gradientBar.scale.y += Math.sin(Timer / 10) * 0.001;
+		gradientBar.updateHitbox();
+		gradientBar.y = FlxG.height - gradientBar.height;
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
 
@@ -468,36 +466,16 @@ class TitleState extends MusicBeatState
 				pressedEnter = true;
 			#end
 		}
-		
-		if (newTitle) {
-			titleTimer += CoolUtil.boundTo(elapsed, 0, 1);
-			if (titleTimer > 2) titleTimer -= 2;
-		}
 
 		// EASTER EGG
 
 		if (initialized && !transitioning && skippedIntro)
 		{
-			if (newTitle && !pressedEnter)
-			{
-				var timer:Float = titleTimer;
-				if (timer >= 1)
-					timer = (-timer) + 2;
-				
-				timer = FlxEase.quadInOut(timer);
-				
-				titleText.color = FlxColor.interpolate(titleTextColors[0], titleTextColors[1], timer);
-				titleText.alpha = FlxMath.lerp(titleTextAlphas[0], titleTextAlphas[1], timer);
-			}
-			
 			if(pressedEnter)
 			{
-				titleText.color = FlxColor.WHITE;
-				titleText.alpha = 1;
-				
 				if(titleText != null) titleText.animation.play('press');
 
-				FlxG.camera.flash(ClientPrefs.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
+				FlxG.camera.flash(FlxColor.WHITE, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 				transitioning = true;
@@ -506,13 +484,18 @@ class TitleState extends MusicBeatState
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					if (mustUpdate) {
+						Application.current.window.title = "Friday Night Funkin': Demolition Engine - OUTDATED VERSION";
 						MusicBeatState.switchState(new OutdatedState());
 					} else {
+						Application.current.window.title = "Friday Night Funkin': Demolition Engine";
 						MusicBeatState.switchState(new MainMenuState());
 					}
 					closedState = true;
 				});
-				// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
+				FlxTween.tween(logoBl, {y: 2000}, 3, {ease: FlxEase.quadIn});
+				FlxTween.tween(titleText, {y: 2000}, 3, {ease: FlxEase.quadIn});
+				FlxTween.tween(gfDance, {y: 2000}, 3, {ease: FlxEase.quadIn});
+				FlxTween.tween(gradientBar, {y: 2000}, 3, {ease: FlxEase.quadIn});
 			}
 			#if TITLE_SCREEN_EASTER_EGG
 			else if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
@@ -550,10 +533,6 @@ class TitleState extends MusicBeatState
 								}
 							});
 							FlxG.sound.music.fadeOut();
-							if(FreeplayState.vocals != null)
-							{
-								FreeplayState.vocals.fadeOut();
-							}
 							closedState = true;
 							transitioning = true;
 							playJingle = true;
@@ -577,6 +556,53 @@ class TitleState extends MusicBeatState
 			if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
 		}
 
+		switch randomWindowText {
+		case 0:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Also try Your Mom Simulator";
+		case 1:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Imagine making yet another modded Psych Engine?";
+		case 2:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Comically Large Spoon";
+		case 3:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - snas uddertail";
+		case 4:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - K i l l .";
+		case 5:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - GYR Demo when?";
+		case 6:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Fun Fact: This fact is literally useless and serves no purpose.";
+		case 7:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - omfg, stop beggin' for new releases, just wait >:(";
+		case 8:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Sample Text";
+		case 9:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - We don't talk about SNS";
+		case 10:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Stfu, I'm playing Minecraft";
+		case 11:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Stfu, I'm playing Fortnite";
+		case 12:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Erect Difficulty is fun, ngl.";
+		case 13:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Why can't BF & GF do shit about the bs the parents are putting them in?";
+		case 14:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Pico funi.";
+		case 15:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - stfu about Dave & Bambi, I don't wanna hear about it.";
+		case 16:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - ur adopted *epic roast 2022*";
+		case 17:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - MOUSE RAP. MOUSE RAP";
+		case 18:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - I'm shutting down your game now, fuck you";
+		new FlxTimer().start(1.5, function(tmr:FlxTimer){
+			System.exit(0);
+		});
+		case 19:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - How's life, buddy?";
+		case 20:
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - mmmm, B E A N S .";
+	}
 		super.update(elapsed);
 	}
 
@@ -619,8 +645,15 @@ class TitleState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+		
+			if(ClientPrefs.camZooms) {
+        FlxG.camera.zoom += 0.025;
+		if(!camZooming) { //Copied from PlayState.hx
+			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5);
+		}
+	}
 
-		if(logoBl != null)
+		if(logoBl != null) 
 			logoBl.animation.play('bump', true);
 
 		if(gfDance != null) {
@@ -636,69 +669,53 @@ class TitleState extends MusicBeatState
 			switch (sickBeats)
 			{
 				case 1:
-					//FlxG.sound.music.stop();
-					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-					FlxG.sound.music.fadeIn(4, 0, 0.7);
-				case 2:
-					#if PSYCH_WATERMARKS
-					createCoolText(['Psych Engine by'], 15);
-					#else
-					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
-					#end
+					createCoolText(['Demolition Engine by'], 15);
 				// credTextShit.visible = true;
-				case 4:
-					#if PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 15);
-					addMoreText('RiverOaken', 15);
-					addMoreText('shubs', 15);
-					#else
-					addMoreText('present');
-					#end
+				case 3:
+					addMoreText('These Guys Lol', 15);
+					creditsGrid.visible = true;
 				// credTextShit.text += '\npresent...';
 				// credTextShit.addText();
-				case 5:
+				case 4:
 					deleteCoolText();
+					creditsGrid.visible = false;
 				// credTextShit.visible = false;
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
-				case 6:
-					#if PSYCH_WATERMARKS
-					createCoolText(['Not associated', 'with'], -40);
-					#else
-					createCoolText(['In association', 'with'], -40);
-					#end
-				case 8:
-					addMoreText('newgrounds', -40);
-					ngSpr.visible = true;
+				case 5:
+					createCoolText(['A Modified version of'], -40);
+				case 7:
+					addMoreText('Psych Engine', -40);
+					psychEngine.visible = true;
 				// credTextShit.text += '\nNewgrounds';
-				case 9:
+				case 8:
 					deleteCoolText();
-					ngSpr.visible = false;
+					psychEngine.visible = false;
 				// credTextShit.visible = false;
 
 				// credTextShit.text = 'Shoutouts Tom Fulp';
 				// credTextShit.screenCenter();
-				case 10:
+				case 9:
 					createCoolText([curWacky[0]]);
 				// credTextShit.visible = true;
-				case 12:
+				case 11:
 					addMoreText(curWacky[1]);
 				// credTextShit.text += '\nlmao';
-				case 13:
+				case 12:
 					deleteCoolText();
 				// credTextShit.visible = false;
 				// credTextShit.text = "Friday";
 				// credTextShit.screenCenter();
-				case 14:
+				case 13:
 					addMoreText('Friday');
 				// credTextShit.visible = true;
-				case 15:
+				case 14:
 					addMoreText('Night');
 				// credTextShit.text += '\nNight';
-				case 16:
+				case 15:
 					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
 
-				case 17:
+				case 16:
 					skipIntro();
 			}
 		}
@@ -727,14 +744,14 @@ class TitleState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('JingleShadow'));
 					case 'BBPANZU':
 						sound = FlxG.sound.play(Paths.sound('JingleBB'));
-
+					
 					default: //Go back to normal ugly ass boring GF
 						remove(ngSpr);
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
 						playJingle = false;
-
+						
 						FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 						FlxG.sound.music.fadeIn(4, 0, 0.7);
 						return;
@@ -777,13 +794,20 @@ class TitleState extends MusicBeatState
 				if(easteregg == 'SHADOW')
 				{
 					FlxG.sound.music.fadeOut();
-					if(FreeplayState.vocals != null)
-					{
-						FreeplayState.vocals.fadeOut();
-					}
 				}
 				#end
-			}
+							}
+			logoBl.angle = -4;
+
+			new FlxTimer().start(0.01, function(tmr:FlxTimer)
+			{
+			   if (logoBl.angle == -4)
+					FlxTween.angle(logoBl, logoBl.angle, 4, 4, {ease: FlxEase.quartInOut});
+			   if (logoBl.angle == 4)
+					FlxTween.angle(logoBl, logoBl.angle, -4, 4, {ease: FlxEase.quartInOut});
+
+	        }, 0);
+			
 			skippedIntro = true;
 		}
 	}

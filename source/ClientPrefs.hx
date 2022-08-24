@@ -8,30 +8,52 @@ import Controls;
 
 class ClientPrefs {
 	public static var downScroll:Bool = false;
+	public static var smooth:Bool = false;
 	public static var middleScroll:Bool = false;
-	public static var opponentStrums:Bool = true;
+	public static var antiMash:Bool = true;
+	public static var center:Bool = true;
+	public static var keAccuracy:Bool = false;
+	public static var ratingSystem:String = "Bedrock";
+	public static var funkyLights:Bool = true;
+	public static var laneunderlay:Bool = false;
+	public static var laneTransparency:Float = 0.5;
+	public static var iconBounce:String = 'Default';
+	public static var camMove:String = '40';
+	public static var healthDrain:String = '10%';
+	public static var itemType:String = "Classic";
+	public static var hitSound:String = "Default";
+	public static var marvelouses:Bool = true;
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
+	public static var screenShake:Bool = true;
+	public static var hideJudgement:Bool = false;
+	public static var longBar:Bool = true;
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
-	public static var shaders:Bool = true;
-	public static var framerate:Int = 60;
+	public static var framerate:Int = 240;
 	public static var cursing:Bool = true;
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
 	public static var hideHud:Bool = false;
+	public static var funiShaders:Bool = true;
 	public static var noteOffset:Int = 0;
+	public static var simplifiedScore:Bool = false;
 	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+	public static var imagesPersist:Bool = false;
 	public static var ghostTapping:Bool = true;
 	public static var timeBarType:String = 'Time Left';
+	public static var uiSkin:String = 'Demolition';
 	public static var scoreZoom:Bool = true;
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;
 	public static var controllerMode:Bool = false;
+	public static var screenRes:String = '1280x720';
+	public static var fullscreen:Bool = false;
+	public static var showWatermarks:Bool = true;
+	public static var winningIcon:Bool = true;
 	public static var hitsoundVolume:Float = 0;
 	public static var pauseMusic:String = 'Tea Time';
-	public static var checkForUpdates:Bool = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -50,11 +72,19 @@ class ClientPrefs {
 		'instakill' => false,
 		'practice' => false,
 		'botplay' => false,
-		'opponentplay' => false
+		//Future Game Modifiers????
+		'opponentplay' => false,
+		'drunknotes' => false,
+		'jacks' => false,
+		'blindness' => false,
+		'mirror' => false,
+		'noholds' => false,
+		'endless' => false //you got to be fucking out of your mind to play this, haha sonic.exe, love that mod
 	];
 
 	public static var comboOffset:Array<Int> = [0, 0, 0, 0];
 	public static var ratingOffset:Int = 0;
+	public static var marvelousWindow:Int = 25;
 	public static var sickWindow:Int = 45;
 	public static var goodWindow:Int = 90;
 	public static var badWindow:Int = 135;
@@ -93,41 +123,63 @@ class ClientPrefs {
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.smooth = smooth;
 		FlxG.save.data.downScroll = downScroll;
+		FlxG.save.data.laneunderlay = laneunderlay;
+		FlxG.save.data.laneTransparency = laneTransparency;
+		FlxG.save.data.marvelouses = marvelouses;
 		FlxG.save.data.middleScroll = middleScroll;
-		FlxG.save.data.opponentStrums = opponentStrums;
+		FlxG.save.data.camMove = camMove;
+		FlxG.save.data.healthDrain = healthDrain;
 		FlxG.save.data.showFPS = showFPS;
 		FlxG.save.data.flashing = flashing;
+		FlxG.save.data.screenShake = screenShake;
+		FlxG.save.data.winningIcon = winningIcon;
+		FlxG.save.data.iconBounce = iconBounce;
+		FlxG.save.data.itemType = itemType;
+		FlxG.save.data.simplifiedScore = simplifiedScore;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
+		FlxG.save.data.longBar = longBar;
 		FlxG.save.data.lowQuality = lowQuality;
-		FlxG.save.data.shaders = shaders;
 		FlxG.save.data.framerate = framerate;
+		FlxG.save.data.antiMash = antiMash;
+		FlxG.save.data.funkyLights = funkyLights;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
+		FlxG.save.data.keAccuracy = keAccuracy;
+		FlxG.save.data.funiShaders = funiShaders;
 		FlxG.save.data.camZooms = camZooms;
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
+		FlxG.save.data.hideJudgement = hideJudgement;
+		FlxG.save.data.ratingSystem = ratingSystem;
 		FlxG.save.data.arrowHSV = arrowHSV;
+		FlxG.save.data.imagesPersist = imagesPersist;
 		FlxG.save.data.ghostTapping = ghostTapping;
 		FlxG.save.data.timeBarType = timeBarType;
+		FlxG.save.data.uiSkin = uiSkin;
 		FlxG.save.data.scoreZoom = scoreZoom;
 		FlxG.save.data.noReset = noReset;
 		FlxG.save.data.healthBarAlpha = healthBarAlpha;
 		FlxG.save.data.comboOffset = comboOffset;
 		FlxG.save.data.achievementsMap = Achievements.achievementsMap;
 		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
+		FlxG.save.data.center = center;
 
 		FlxG.save.data.ratingOffset = ratingOffset;
+		FlxG.save.data.marvelousWindow = marvelousWindow;
 		FlxG.save.data.sickWindow = sickWindow;
 		FlxG.save.data.goodWindow = goodWindow;
 		FlxG.save.data.badWindow = badWindow;
 		FlxG.save.data.safeFrames = safeFrames;
 		FlxG.save.data.gameplaySettings = gameplaySettings;
 		FlxG.save.data.controllerMode = controllerMode;
+		FlxG.save.data.screenRes = screenRes;
+		FlxG.save.data.fullscreen = fullscreen;
+		FlxG.save.data.showWatermarks = showWatermarks;
 		FlxG.save.data.hitsoundVolume = hitsoundVolume;
 		FlxG.save.data.pauseMusic = pauseMusic;
-		FlxG.save.data.checkForUpdates = checkForUpdates;
 	
 		FlxG.save.flush();
 
@@ -139,14 +191,63 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
+		if (FlxG.save.data.center != null) {
+			center = FlxG.save.data.center;
+		}
+		if (FlxG.save.data.funiShaders != null) {
+			funiShaders = FlxG.save.data.funiShaders;
+		}
+		if(FlxG.save.data.winningIcon != null) {
+			winningIcon = FlxG.save.data.winningIcon;
+		}
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
+		}
+		if(FlxG.save.data.marvelouses != null) {
+			marvelouses = FlxG.save.data.marvelouses;
+		}
+		if(FlxG.save.data.antiMash != null) {
+			antiMash = FlxG.save.data.antiMash;
+		}
+		if(FlxG.save.data.iconBounce != null) {
+			iconBounce = FlxG.save.data.iconBounce;
+		}
+	    if(FlxG.save.data.screenShake != null) {
+			screenShake = FlxG.save.data.screenShake;
 		}
 		if(FlxG.save.data.middleScroll != null) {
 			middleScroll = FlxG.save.data.middleScroll;
 		}
-		if(FlxG.save.data.opponentStrums != null) {
-			opponentStrums = FlxG.save.data.opponentStrums;
+		if(FlxG.save.data.camMove != null) {
+			camMove = FlxG.save.data.camMove;
+		}
+		if(FlxG.save.data.smooth != null) {
+			smooth = FlxG.save.data.smooth;
+		}
+		if(FlxG.save.data.healthDrain != null) {
+			healthDrain = FlxG.save.data.healthDrain;
+		}
+		if(FlxG.save.data.laneunderlay != null) {
+			laneunderlay = FlxG.save.data.laneunderlay;
+		}
+		if (FlxG.save.data.keAccuracy != null)
+		{
+			keAccuracy = FlxG.save.data.keAccuracy;
+		}
+		if(FlxG.save.data.laneTransparency != null) {
+			laneTransparency = FlxG.save.data.laneTransparency;
+		}
+		if(FlxG.save.data.longBar != null) {
+			longBar = FlxG.save.data.longBar;
+		}
+		if(FlxG.save.data.itemType != null) {
+			itemType = FlxG.save.data.itemType;
+		}
+		if(FlxG.save.data.simplifiedScore != null) {
+			simplifiedScore = FlxG.save.data.simplifiedScore;
+		}
+		if(FlxG.save.data.funkyLights != null) {
+			funkyLights = FlxG.save.data.funkyLights;
 		}
 		if(FlxG.save.data.showFPS != null) {
 			showFPS = FlxG.save.data.showFPS;
@@ -163,11 +264,15 @@ class ClientPrefs {
 		if(FlxG.save.data.noteSplashes != null) {
 			noteSplashes = FlxG.save.data.noteSplashes;
 		}
+		if(FlxG.save.data.hideJudgement != null) {
+			hideJudgement = FlxG.save.data.hideJudgement;
+		}
+		if (FlxG.save.data.ratingSystem != null)
+		{
+			ratingSystem = FlxG.save.data.ratingSystem;
+		}
 		if(FlxG.save.data.lowQuality != null) {
 			lowQuality = FlxG.save.data.lowQuality;
-		}
-		if(FlxG.save.data.shaders != null) {
-			shaders = FlxG.save.data.shaders;
 		}
 		if(FlxG.save.data.framerate != null) {
 			framerate = FlxG.save.data.framerate;
@@ -203,6 +308,9 @@ class ClientPrefs {
 		if(FlxG.save.data.timeBarType != null) {
 			timeBarType = FlxG.save.data.timeBarType;
 		}
+		if (FlxG.save.data.uiSkin != null) {
+			uiSkin = FlxG.save.data.uiSkin;
+		}
 		if(FlxG.save.data.scoreZoom != null) {
 			scoreZoom = FlxG.save.data.scoreZoom;
 		}
@@ -219,6 +327,9 @@ class ClientPrefs {
 		if(FlxG.save.data.ratingOffset != null) {
 			ratingOffset = FlxG.save.data.ratingOffset;
 		}
+		if(FlxG.save.data.marvelousWindow != null) {
+			marvelousWindow = FlxG.save.data.marvelousWindow;
+		}
 		if(FlxG.save.data.sickWindow != null) {
 			sickWindow = FlxG.save.data.sickWindow;
 		}
@@ -233,6 +344,16 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.controllerMode != null) {
 			controllerMode = FlxG.save.data.controllerMode;
+		}
+		if(FlxG.save.data.screenRes != null) {
+			screenRes = FlxG.save.data.screenRes;
+		}
+		if(FlxG.save.data.fullscreen != null) {
+			fullscreen = FlxG.save.data.fullscreen;
+		}
+		if (FlxG.save.data.showWatermarks != null)
+		{
+			showWatermarks = FlxG.save.data.showWatermarks;
 		}
 		if(FlxG.save.data.hitsoundVolume != null) {
 			hitsoundVolume = FlxG.save.data.hitsoundVolume;
@@ -257,10 +378,6 @@ class ClientPrefs {
 		if (FlxG.save.data.mute != null)
 		{
 			FlxG.sound.muted = FlxG.save.data.mute;
-		}
-		if (FlxG.save.data.checkForUpdates != null)
-		{
-			checkForUpdates = FlxG.save.data.checkForUpdates;
 		}
 
 		var save:FlxSave = new FlxSave();

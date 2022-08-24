@@ -56,13 +56,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		var option:Option = new Option('Opponent Notes',
-			'If unchecked, opponent notes get hidden.',
-			'opponentStrums',
-			'bool',
-			true);
-		addOption(option);
-
 		var option:Option = new Option('Ghost Tapping',
 			"If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
 			'ghostTapping',
@@ -88,7 +81,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 1;
 		option.changeValue = 0.1;
 		option.decimals = 1;
-		option.onChange = onChangeHitsoundVolume;
 
 		var option:Option = new Option('Rating Offset',
 			'Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.',
@@ -99,6 +91,17 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.scrollSpeed = 20;
 		option.minValue = -30;
 		option.maxValue = 30;
+		addOption(option);
+
+		var option:Option = new Option('Marvelous Hit Window',
+			'Changes the amount of time you have\nfor hitting a "Marvelous" in milliseconds.\n(Must have "Marvelouses Rating" on for this to work)',
+			'marvelousWindow',
+			'int',
+			25);
+		option.displayFormat = '%vms';
+		option.scrollSpeed = 15;
+		option.minValue = 15;
+		option.maxValue = 25;
 		addOption(option);
 
 		var option:Option = new Option('Sick! Hit Window',
@@ -146,10 +149,5 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		super();
-	}
-
-	function onChangeHitsoundVolume()
-	{
-		FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
 	}
 }

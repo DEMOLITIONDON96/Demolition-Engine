@@ -11,6 +11,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import lime.app.Application;
 import flixel.system.FlxSound;
 import openfl.utils.Assets;
 import flixel.addons.ui.FlxInputText;
@@ -86,6 +87,8 @@ class WeekEditorState extends MusicBeatState
 		missingFileText.borderSize = 2;
 		missingFileText.visible = false;
 		add(missingFileText); 
+		
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Week Editor - Editing: " + weekFileName;
 		
 		var charArray:Array<String> = weekFile.weekCharacters;
 		for (char in 0...3)

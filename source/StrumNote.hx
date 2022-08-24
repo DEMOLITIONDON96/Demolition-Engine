@@ -1,5 +1,6 @@
 package;
 
+import flixel.addons.ui.U;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -14,6 +15,8 @@ class StrumNote extends FlxSprite
 	public var direction:Float = 90;//plan on doing scroll directions soon -bb
 	public var downScroll:Bool = false;//plan on doing scroll directions soon -bb
 	public var sustainReduce:Bool = true;
+	//Note Skin
+	public var doAntialiasing:Bool = ClientPrefs.globalAntialiasing;
 	
 	private var player:Int;
 	
@@ -26,7 +29,7 @@ class StrumNote extends FlxSprite
 		return value;
 	}
 
-	public function new(x:Float, y:Float, leData:Int, player:Int) {
+	public function new(x:Float, y:Float, leData:Int, player:Int, char:String = 'bf') {
 		colorSwap = new ColorSwap();
 		shader = colorSwap.shader;
 		noteData = leData;
@@ -34,9 +37,54 @@ class StrumNote extends FlxSprite
 		this.noteData = leData;
 		super(x, y);
 
-		var skin:String = 'NOTE_assets';
+		var skin:String;
+		skin = 'NOTE_assets';
+		
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
+		switch(char)
+		{
+			case 'dad':
+				skin = 'Skins/DADNOTE_assets';
+				doAntialiasing = true; //same as before
+			case 'gf' | 'gf-opponent' | 'gf-car' | 'gf-christmas':
+				skin = 'Skins/gfNOTE_assets';
+				doAntialiasing = true;
+			case 'mom' | 'mom-car':
+				skin = 'Skins/MOMNOTE_assets';
+				doAntialiasing = true;
+			case 'parents-christmas':
+				skin = 'Skins/ParentsNOTE_assets';
+				doAntialiasing = true;
+			case 'pico' | 'pico-player':
+				skin = 'Skins/picoNOTE_assets';
+				doAntialiasing = true;
+			case 'monster' | 'monster-christmas':
+				skin = 'Skins/LemonboiNOTE_assets';
+				doAntialiasing = true;
+			case 'spooky':
+				skin = 'Skins/SpookyNOTE_assets';
+				doAntialiasing = true;
+			case 'bf-pixel-opponent' /*| 'bf-pixel'*/:
+				/*if(PlayState.isPixelStage) {
+					skin = 'pixelUI/pixelBF-notes';
+					doAntialiasing = false;
+				}else{*/
+					skin = 'Skins/pixelBF-notes';
+					doAntialiasing = false;
+				//}
+			/*case 'spirit':
+				if(PlayState.isPixelStage) {
+					skin = 'pixelUI/SpiritNotes';
+					doAntialiasing = false;
+				}else{	
+					skin = 'Skins/SpiritNotes';
+					doAntialiasing = false;
+				}*/
+			default:
+				if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
+		}
 		texture = skin; //Load texture and anims
+
 
 		scrollFactor.set();
 	}
@@ -60,7 +108,7 @@ class StrumNote extends FlxSprite
 			animation.add('red', [7]);
 			animation.add('blue', [5]);
 			animation.add('purple', [4]);
-			switch (Math.abs(noteData) % 4)
+			switch (Math.abs(noteData))
 			{
 				case 0:
 					animation.add('static', [0]);
@@ -91,7 +139,7 @@ class StrumNote extends FlxSprite
 			antialiasing = ClientPrefs.globalAntialiasing;
 			setGraphicSize(Std.int(width * 0.7));
 
-			switch (Math.abs(noteData) % 4)
+			switch (Math.abs(noteData))
 			{
 				case 0:
 					animation.addByPrefix('static', 'arrowLEFT');
@@ -153,12 +201,9 @@ class StrumNote extends FlxSprite
 			colorSwap.saturation = 0;
 			colorSwap.brightness = 0;
 		} else {
-			if (noteData > -1 && noteData < ClientPrefs.arrowHSV.length)
-			{
-				colorSwap.hue = ClientPrefs.arrowHSV[noteData][0] / 360;
-				colorSwap.saturation = ClientPrefs.arrowHSV[noteData][1] / 100;
-				colorSwap.brightness = ClientPrefs.arrowHSV[noteData][2] / 100;
-			}
+			colorSwap.hue = ClientPrefs.arrowHSV[noteData % 4][0] / 360;
+			colorSwap.saturation = ClientPrefs.arrowHSV[noteData % 4][1] / 100;
+			colorSwap.brightness = ClientPrefs.arrowHSV[noteData % 4][2] / 100;
 
 			if(animation.curAnim.name == 'confirm' && !PlayState.isPixelStage) {
 				centerOrigin();

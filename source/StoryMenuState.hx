@@ -9,10 +9,12 @@ import flixel.FlxSubState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import lime.app.Application;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
@@ -46,6 +48,7 @@ class StoryMenuState extends MusicBeatState
 	var sprDifficulty:FlxSprite;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
+	var transitionThing:FlxSprite;
 
 	var loadedWeeks:Array<WeekData> = [];
 
@@ -90,8 +93,10 @@ class StoryMenuState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("In Story Mode", null);
 		#end
+			
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine";
 
 		var num:Int = 0;
 		for (i in 0...WeekData.weeksList.length)
@@ -185,6 +190,11 @@ class StoryMenuState extends MusicBeatState
 		changeWeek();
 		changeDifficulty();
 
+		transitionThing = new FlxSprite(-1700, 0).loadGraphic(Paths.image('storyMenuTransition'));
+		add(transitionThing);
+
+		FlxTween.tween(transitionThing, {x: 1600}, 2.1, {ease: FlxEase.quadInOut});
+
 		super.create();
 	}
 
@@ -218,13 +228,6 @@ class StoryMenuState extends MusicBeatState
 			{
 				changeWeek(1);
 				FlxG.sound.play(Paths.sound('scrollMenu'));
-			}
-
-			if(FlxG.mouse.wheel != 0)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-				changeWeek(-FlxG.mouse.wheel);
-				changeDifficulty();
 			}
 
 			if (controls.UI_RIGHT)

@@ -33,15 +33,17 @@ class CreditsState extends MusicBeatState
 	var descText:FlxText;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
+	var noLink:Bool;
 	var descBox:AttachedSprite;
 
 	var offsetThing:Float = -75;
+	public var camZooming:Bool = false;
 
 	override function create()
 	{
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("Viewing Credits", null);
 		#end
 
 		persistentUpdate = true;
@@ -81,28 +83,52 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+			['Demolition Engine Team'],
+			['DEMOLITIONDON96',		'demolitiondon96',	'Creator of the Engine',			'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
+			['Tony Time!',				'matt',				'Epic Coder \n(Did Lots of Cool Shit)',											'https://github.com/TonyTimee',			'444444'],
+			['Cherif107',	'missing-icon',	'Cool Coder\nNice Guy',		'https://github.com/Cherif107',		'FFFFFF'],
+			['PrismLight', 'prism', 'Minor Code',	'https://github.com/PrismLight', 	'3B3B3B',],
+			['Theoyeah',	'theoyeah credit',		'Help with some code',	'https://github.com/Theoyeah',		'FFFFFF'],
+			[''],
+			['Extra Code'],
+			['mayo78',   'missing-icon',     'Epic CPU Skin Code',        'https://github.com/mayo78',                'FFFFFF'],
+			['Wither362',  'wither362',	'.mp3 & .wav file support\n(and for allowing me to add in some cool shit they made)',   'https://www.youtube.com/channel/UCsVr-qBLxT0uSWH037BmlHw',   '009BF4'],
+			['lemz1',     'lemz1',            'Modchart Code for Game Window',        'https://github.com/lemz1',         '383838'],
+			//['Phoneguytech75', 'missing-icon', 'Note Skins :D',			'https://github.com/Phoneguytech75',	'FFFFFF'],
+			['HiroMizuki',	'hiro',		'Pixel Splashes & \nScreen Resolution Code',	'https://github.com/HiroMizuki',	'3DED02'],
+			['8bitjake',	'missing-icon',	'Hold Pieces Fix for Sidescroll Modcharts',	'https://github.com/ShadowMario/FNF-PsychEngine/pull/8676',		'FFFFFF'],
+			['AlexDrar',		'missing-icon',	'Hard Code Song Shit',		'https://github.com/mayo78/PSYCHDISCUSSIONS/discussions/85',			'FFFFFF'],
+			['Snow White Muffins',		'missing-icon',	'Moving Main Menu Code',		'https://www.youtube.com/watch?v=QZQJ701tAqQ',			'FFFFFF'],
+			['TimothyFnf',		'missing-icon',	'Some Credit For Code',		'https://gamebanana.com/mods/370936',			'FFFFFF'],
+			['KutikiPlayz',	'missing-icon',		'Scroll Type Event',		'https://github.com/KutikiPlayz',		'FFFFFF'],
+			['Ash237',	'missing-icon',		'Funni Code',		'https://github.com/alexlolxp/baldi-source/commit/8bc86a45de3fba962539cab1258ebd48daf324a0',		'FFFFFF'],
+			['Chimmie-mpeg',	'missing-icon',		'Chromatics for omni lol',		'https://github.com/Chimmie-mpeg/FNF-FANMADE-CHROMATIC-SCALES/tree/main/Chromatics%202.0',		'FFFFFF'],
+			['NoahWantsDie',	'missing-icon',		'MIDI for omni (same i wanna die /j)',		'https://www.youtube.com/watch?v=2s5mDJrkFoc',		'FFFFFF'],
+			['SaadTheDrip',	'missing-icon',		'open browser shit',		'https://github.com/mayo78/PSYCHDISCUSSIONS/discussions/611',		'FFFFFF'],
+			[''],
 			['Psych Engine Team'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['RiverOaken',			'river',			'Main Artist/Animator of Psych Engine',							'https://twitter.com/RiverOaken',		'B42F71'],
-			['shubs',				'shubs',			'Additional Programmer of Psych Engine',						'https://twitter.com/yoshubs',			'5E99DF'],
+			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',							'https://twitter.com/Shadow_Mario_',	'444444'],
+			['RiverOaken',			'riveroaken',		'Main Artist/Animator of Psych Engine',						'https://twitter.com/RiverOaken',		'C30085'],
+			['shubs',				'shubs',			'Additional Programmer of Psych Engine',					'https://twitter.com/yoshubs',			'279ADC'],
 			[''],
 			['Former Engine Members'],
-			['bb-panzu',			'bb',				'Ex-Programmer of Psych Engine',								'https://twitter.com/bbsub3',			'3E813A'],
+			['bb-panzu',			'bb-panzu',			'Ex-Programmer of Psych Engine',							'https://twitter.com/bbsub3',			'389A58'],
 			[''],
 			['Engine Contributors'],
-			['iFlicky',				'flicky',			'Composer of Psync and Tea Time\nMade the Dialogue Sounds',		'https://twitter.com/flicky_i',			'9E29CF'],
-			['SqirraRNG',			'sqirra',			'Crash Handler and Base code for\nChart Editor\'s Waveform',	'https://twitter.com/gedehari',			'E1843A'],
-			['PolybiusProxy',		'proxy',			'.MP4 Video Loader Library (hxCodec)',							'https://twitter.com/polybiusproxy',	'DCD294'],
-			['KadeDev',				'kade',				'Fixed some cool stuff on Chart Editor\nand other PRs',			'https://twitter.com/kade0912',			'64A250'],
-			['Keoiki',				'keoiki',			'Note Splash Animations',										'https://twitter.com/Keoiki_',			'D2D2D2'],
-			['Nebula the Zorua',	'nebula',			'LUA JIT Fork and some Lua reworks',							'https://twitter.com/Nebula_Zorua',		'7D40B2'],
-			['Smokey',				'smokey',			'Sprite Atlas Support',											'https://twitter.com/Smokey_5_',		'483D92'],
+			['iFlicky',				'iflicky',			'Composer of Psync and Tea Time\nMade the Dialogue Sounds',	'https://twitter.com/flicky_i',			'AA32FE'],
+			['SqirraRNG',			'gedehari',			'Chart Editor\'s Sound Waveform base',						'https://twitter.com/gedehari',			'FF9300'],
+			['PolybiusProxy',		'polybiusproxy',	'.MP4 Video Loader Extension',								'https://twitter.com/polybiusproxy',	'FFEAA6'],
+			['Keoiki',				'keoiki',			'Note Splash Animations',									'https://twitter.com/Keoiki_',			'FFFFFF'],
+			['Smokey',				'smokey',			'Spritemap Texture Support',								'https://twitter.com/Smokey_5_',		'4D5DBD'],
 			[''],
 			["Funkin' Crew"],
-			['ninjamuffin99',		'ninjamuffin99',	"Programmer of Friday Night Funkin'",							'https://twitter.com/ninja_muffin99',	'CF2D2D'],
-			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",								'https://twitter.com/PhantomArcade3K',	'FADC45'],
-			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",								'https://twitter.com/evilsk8r',			'5ABD4B'],
-			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",								'https://twitter.com/kawaisprite',		'378FC7']
+			['ninjamuffin99',		'ninjamuffin99',	"Programmer of Friday Night Funkin'",						'https://twitter.com/ninja_muffin99',	'F73838'],
+			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",							'https://twitter.com/PhantomArcade3K',	'FFBB1B'],
+			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",							'https://twitter.com/evilsk8r',			'53E52C'],
+			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",							'https://twitter.com/kawaisprite',		'6475F3']
+			//[''],
+			//["Slutty Crew"],
+			//['Ben UWU',		'ben',	"Got Drip And Is So Slutty",						"https://www.youtube.com/watch?v=v5F5WyhzW9M",		'FFFFFF']
 		];
 		
 		for(i in pisspoop){
@@ -207,9 +233,23 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
-				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+				if(creditsStuff[curSelected][3] == 'nolink') {
+
+  					noLink = true;
+  				}else{
+  					noLink = false;
+  				}
+  				if(noLink) {
+  				if(controls.ACCEPT) {
+  					FlxG.sound.play(Paths.sound('cancelMenu'));
+  				} 
+  				}else {
+  					if(controls.ACCEPT) {
+  					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+  				}
+
 			}
+
 			if (controls.BACK)
 			{
 				if(colorTween != null) {
@@ -242,7 +282,18 @@ class CreditsState extends MusicBeatState
 		}
 		super.update(elapsed);
 	}
-
+	
+		override function beatHit()
+	{
+		super.beatHit();
+			if(ClientPrefs.camZooms) {
+        FlxG.camera.zoom += 0.015;
+		if(!camZooming) { //Copied from PlayState.hx
+			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5);
+		}
+	}
+	}
+	
 	var moveTween:FlxTween = null;
 	function changeSelection(change:Int = 0)
 	{

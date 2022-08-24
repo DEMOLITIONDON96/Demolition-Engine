@@ -2,13 +2,13 @@
 
 name: Build
 
-# Controls when the action will run.
+# Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ main ]
+    branches: [ Disabled ]
   pull_request:
-    branches: [ main ]
+    branches: [ Disabled ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -27,12 +27,10 @@ jobs:
 
       - uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.2.5
+          haxe-version: 4.2.0
       # Runs a set of commands using the runners shell
       - name: Install Haxelib
         run: |
-          sudo apt-get install libvlc-dev
-          sudo apt-get install libvlccore-dev
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null
           haxelib install lime
@@ -45,8 +43,7 @@ jobs:
           haxelib install flixel-addons
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib install hxCodec
-          haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
+          haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit
           haxelib install hscript
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
@@ -61,16 +58,17 @@ jobs:
         with:
           name: linuxBuild
           path: 'export/release/linux/bin'
+          retention-days: 3
   buildWindows:
     runs-on: windows-latest
-
+    
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2.3.0
 
       - uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.2.5
+          haxe-version: 4.2.0
       # Runs a set of commands using the runners shell
       - name: Install Haxelib
         run: |
@@ -86,9 +84,8 @@ jobs:
           haxelib install flixel-addons
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib install hxCodec
-          haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
-          haxelib install hscript
+          haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit
+          haxelib install hscript 
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib install hxcpp-debug-server
@@ -103,6 +100,7 @@ jobs:
         with:
           name: windowsBuild
           path: export/release/windows/bin
+          retention-days: 3
   buildMac:
     runs-on: macos-latest
 
@@ -112,7 +110,7 @@ jobs:
 
       - uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.2.5
+          haxe-version: 4.2.0
       # Runs a set of commands using the runners shell
       - name: Install Haxelib
         run: |
@@ -128,8 +126,7 @@ jobs:
           haxelib install flixel-addons
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib install hxCodec
-          haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
+          haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit
           haxelib install hscript
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
@@ -144,3 +141,4 @@ jobs:
         with:
           name: macBuild
           path: export/release/macos/bin
+          retention-days: 3
