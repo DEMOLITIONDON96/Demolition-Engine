@@ -24,8 +24,8 @@ class PauseSubState extends MusicBeatSubstate
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Options', 'Change Difficulty', 'Exit to menu'];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
-	var composer:String = '';
-	var charter:String = '';
+	//var composer:String = '';
+	//var charter:String = '';
 
 	var pauseMusic:FlxSound;
 	var practiceText:FlxText;
@@ -80,7 +80,7 @@ class PauseSubState extends MusicBeatSubstate
 		bg.scrollFactor.set();
 		add(bg);
 
-		switch(PlayState.SONG.song)
+		/*switch(PlayState.SONG.song)
 				{
 					case 'Atrocity':
 					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Saster (Paused)";
@@ -90,7 +90,8 @@ class PauseSubState extends MusicBeatSubstate
 					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Kawai Sprite & Bassetfilms (Paused)";
 					default:
 					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] (Paused)";
-				}
+				}*/
+		Application.current.window.title = "Friday Night Funkin: Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: " + PlayState.SONG.composer + " (Paused)";
 
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
 		levelInfo.text += PlayState.SONG.song;
@@ -100,7 +101,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(levelInfo);
 
 		var composerCredit:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
-		switch(PlayState.SONG.song)
+		/*switch(PlayState.SONG.song)
 		{
 			case 'Atrocity':
 			composer = 'By Saster';
@@ -108,22 +109,22 @@ class PauseSubState extends MusicBeatSubstate
 			composer = 'By Kawai Sprite';
 			case 'Monster' | 'Winter Horrorland':
 			composer = 'By Kawai Sprite & Bassetfilms';
-		}
-		composerCredit.text += composer;
+		}*/
+		composerCredit.text = 'Chart by:' + PlayState.SONG.charter;
 		composerCredit.scrollFactor.set();
 		composerCredit.setFormat(Paths.font('vcr.ttf'), 32);
 		composerCredit.updateHitbox();
 		add(composerCredit);
 
 		var charterCredit:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
-		switch(PlayState.SONG.song)
+		/*switch(PlayState.SONG.song)
 		{
 			case 'Atrocity':
 			charter = 'Chart by DEMOLITIONDON96';
 			case 'Tutorial' | 'Bopeebo' | 'Fresh' | 'Dad Battle' | 'Spookeez' | 'South' | 'Monster' | 'Pico' | 'Philly Nice' | 'Blammed' | 'Satin Panties' | 'High' | 'Milf' | 'Cocoa' | 'Eggnog' | 'Winter Horrorland' | 'Senpai' | 'Roses' | 'Thorns' | 'Ugh' | 'Guns' | 'Stress':
 			charter = 'Chart by ninjamuffin99';
-		}
-		charterCredit.text += charter;
+		}*/
+		charterCredit.text += PlayState.SONG.composer;
 		charterCredit.scrollFactor.set();
 		charterCredit.setFormat(Paths.font('vcr.ttf'), 32);
 		charterCredit.updateHitbox();
@@ -280,7 +281,7 @@ class PauseSubState extends MusicBeatSubstate
 			switch (daSelected)
 			{
 				case "Resume":
-					switch(PlayState.SONG.song)
+					/*switch(PlayState.SONG.song)
 				{
 					case 'Atrocity':
 					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Saster";
@@ -290,7 +291,8 @@ class PauseSubState extends MusicBeatSubstate
 					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Kawai Sprite & Bassetfilms";
 					default:
 					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "]";
-				}
+				}*/
+					Application.current.window.title = "Friday Night Funkin: Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: " + PlayState.SONG.composer;
 					close();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
