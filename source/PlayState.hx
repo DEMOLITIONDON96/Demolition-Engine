@@ -1149,7 +1149,7 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		moveCameraSection(0);
 
-		switch(PlayState.SONG.song)
+		/*switch(PlayState.SONG.song)
 				{
 					case 'Atrocity':
 					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Saster";
@@ -1159,7 +1159,8 @@ class PlayState extends MusicBeatState
 					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Kawai Sprite & Bassetfilms";
 					default:
 					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "]";
-				}
+				}*/
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: " + PlayState.SONG.composer;
 
 		if(ClientPrefs.longBar)
 		{
