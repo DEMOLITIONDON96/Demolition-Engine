@@ -218,6 +218,8 @@ class ChartingState extends MusicBeatState
 		{
 			_song = {
 				song: 'Test',
+				charter: 'Unknown',
+				composer: 'Unknown',
 				notes: [],
 				events: [],
 				bpm: 150.0,
