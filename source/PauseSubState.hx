@@ -110,7 +110,7 @@ class PauseSubState extends MusicBeatSubstate
 			case 'Monster' | 'Winter Horrorland':
 			composer = 'By Kawai Sprite & Bassetfilms';
 		}*/
-		composerCredit.text = 'Chart by:' + PlayState.SONG.charter;
+		composerCredit.text = 'By: ' + PlayState.SONG.composer;
 		composerCredit.scrollFactor.set();
 		composerCredit.setFormat(Paths.font('vcr.ttf'), 32);
 		composerCredit.updateHitbox();
@@ -124,7 +124,7 @@ class PauseSubState extends MusicBeatSubstate
 			case 'Tutorial' | 'Bopeebo' | 'Fresh' | 'Dad Battle' | 'Spookeez' | 'South' | 'Monster' | 'Pico' | 'Philly Nice' | 'Blammed' | 'Satin Panties' | 'High' | 'Milf' | 'Cocoa' | 'Eggnog' | 'Winter Horrorland' | 'Senpai' | 'Roses' | 'Thorns' | 'Ugh' | 'Guns' | 'Stress':
 			charter = 'Chart by ninjamuffin99';
 		}*/
-		charterCredit.text += PlayState.SONG.composer;
+		charterCredit.text = 'Chart by: ' + PlayState.SONG.charter;
 		charterCredit.scrollFactor.set();
 		charterCredit.setFormat(Paths.font('vcr.ttf'), 32);
 		charterCredit.updateHitbox();
