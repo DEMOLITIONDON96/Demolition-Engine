@@ -6,7 +6,7 @@ import Discord.DiscordClient;
 import Conductor.BPMChangeEvent;
 import Section.SwagSection;
 import Song.SwagSong;
-import PlayState;
+import PlayState; //omg playstate import real
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxObject;
@@ -97,7 +97,7 @@ class ChartingState extends MusicBeatState
 		['Fade Character', "0 = -0.05 Dad Alpha Value\n1 = -0.05 BF Alpha Value\n2 = +0.05 Dad Alpha Value\n3 = +0.05 BF Alpha Value\n(i'm so sorry for the spam shit)"],
 		['Screen Fade', "Funi Screen Fade\n0 = Invisible\n1 = add 0.05 to Visibility\n2 = remove 0.05 to Visibility\n3 = Visible\n(i'm sorry you have to spam 1 & 2)"],
 		['Lyrics',"Value 1: Lyrics\nValue 2: Color (white is default)"],
-		//['Hide HUD', "Value 1: 1 = Hide HUD, 2 = Show HUD\n Value 2: No Use"],
+		['Hide HUD', "Value 1: 1 = Hide HUD, 2 = Show HUD\n Value 2: No Use"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Scroll Type', "Changes Scroll Type, Mid-Song\n \nValue 1 = BF Notes\nValue 2 = Dad Notes\n \nDefault = Normal Scroll Type\nFlip = Flips Current Scroll Type\nDown = Locks Downscroll\nUp = Locks Upscroll\nLeft = Sidescroll from Left\nRight = Sidescroll from Right\nUndyne = Centerscroll"],
 		['Flash Screen', "Flashes da hud, yup, thats it\nValue 1 = Color you should Flash\nValue 2 = Option to Hide HUD\n \n Colors: 0 = White\n1 = Red\n2 = Blue\n3 = Black\n4 = Cyan\n5 = Magenta\n6 = Pink\n7 = Orange\n8 = Purple\n9 = Lime\n \nTrue: HUD is hidden\n False: HUD is visible"],
@@ -216,23 +216,24 @@ class ChartingState extends MusicBeatState
 			_song = PlayState.SONG;
 		else
 		{
+			//this is when you go to the chart editor in the master editor menu
 			_song = {
 				song: 'Test',
 				charter: 'Unknown',
 				composer: 'Unknown',
 				notes: [],
 				events: [],
-				bpm: 150.0,
-				needsVoices: true,
-				arrowSkin: '',
+				bpm: 150.0, //BPM
+				needsVoices: true, //Voices shit
+				arrowSkin: '', //Arrow skin
 				splashSkin: 'noteSplashes',//idk it would crash if i didn't
-				player1: 'bf',
-				player2: 'dad',
-				player3: null,
-				gfVersion: 'gf',
-				speed: 1,
-				stage: 'stage',
-				validScore: false
+				player1: 'bf', //bf
+				player2: 'dad', //bitch bad ass
+				player3: null, //removed
+				gfVersion: 'gf', //*insert bobs joke
+				speed: 2, //speed
+				stage: 'stage', //stage
+				validScore: false //basically don't save the score
 			};
 			addSection();
 			PlayState.SONG = _song;
@@ -245,7 +246,7 @@ class ChartingState extends MusicBeatState
 		DiscordClient.changePresence("Chart Editor", StringTools.replace(_song.song, '-', ' '));
 		#end
 			
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Chart Editor - Editing: " + StringTools.replace(_song.song, '-', ' ');
+		Application.current.window.title = "Funkin.Avi Chart Editor - Editing: " + StringTools.replace(_song.song, '-', ' ');
 
 		vortex = FlxG.save.data.chart_vortex;
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
@@ -360,7 +361,8 @@ class ChartingState extends MusicBeatState
 		\nEsc - Test your chart inside Chart Editor
 		\nEnter - Play your chart
 		\nQ/E - Decrease/Increase Note Sustain Length
-		\nSpace - Stop/Resume song";
+		\nSpace - Stop/Resume song;
+		\nBackspace - Go To Menu Editor";
 
 		var tipTextArray:Array<String> = text.split('\n');
 		for (i in 0...tipTextArray.length) {
@@ -407,8 +409,8 @@ class ChartingState extends MusicBeatState
 	var playSoundBf:FlxUICheckBox = null;
 	var playSoundDad:FlxUICheckBox = null;
 	var UI_songTitle:FlxUIInputText;
-	var composerNameInput:FlxUIInputText;
-	var charterNameInput:FlxUIInputText;
+	var composerInputUI:FlxUIInputText;
+	var charterInputUI:FlxUIInputText;
 	var noteSkinInputText:FlxUIInputText;
 	var noteSplashesInputText:FlxUIInputText;
 	var stageDropDown:FlxUIDropDownMenuCustom;
@@ -599,6 +601,17 @@ class ChartingState extends MusicBeatState
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
 
+		composerInputUI = new FlxUIInputText(stageDropDown.x, stageDropDown.y + 42, 120, _song.composer, 8);
+		blockPressWhileTypingOn.push(composerInputUI);
+
+		charterInputUI = new FlxUIInputText(composerInputUI.x, composerInputUI.y + 40, 120, _song.charter, 8);
+		blockPressWhileTypingOn.push(charterInputUI);
+
+		var creditsUpdateButton:FlxButton = new FlxButton(charterInputUI.x + 170, charterInputUI.y - 2, 'Update Credits', function(){
+			_song.composer = composerInputUI.text;
+			_song.charter = charterInputUI.text;
+		});
+
 		var skin = PlayState.SONG.arrowSkin;
 		if(skin == null) skin = '';
 		noteSkinInputText = new FlxUIInputText(player2DropDown.x, player2DropDown.y + 50, 150, skin, 8);
@@ -628,6 +641,9 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(stepperBPM);
 		tab_group_song.add(stepperSpeed);
 		tab_group_song.add(reloadNotesButton);
+		tab_group_song.add(creditsUpdateButton);
+		tab_group_song.add(composerInputUI);
+		tab_group_song.add(charterInputUI);
 		tab_group_song.add(noteSkinInputText);
 		tab_group_song.add(noteSplashesInputText);
 		tab_group_song.add(new FlxText(stepperBPM.x, stepperBPM.y - 15, 0, 'Song BPM:'));
@@ -636,6 +652,8 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(new FlxText(player3DropDown.x, player3DropDown.y - 15, 0, 'Girlfriend:'));
 		tab_group_song.add(new FlxText(player1DropDown.x, player1DropDown.y - 15, 0, 'Boyfriend:'));
 		tab_group_song.add(new FlxText(stageDropDown.x, stageDropDown.y - 15, 0, 'Stage:'));
+		tab_group_song.add(new FlxText(composerInputUI.x, composerInputUI.y - 15, 0, 'Composer:'));
+		tab_group_song.add(new FlxText(charterInputUI.x, charterInputUI.y - 15, 0, 'Charter:'));
 		tab_group_song.add(new FlxText(noteSkinInputText.x, noteSkinInputText.y - 15, 0, 'Note Texture:'));
 		tab_group_song.add(new FlxText(noteSplashesInputText.x, noteSplashesInputText.y - 15, 0, 'Note Splashes Texture:'));
 		tab_group_song.add(player2DropDown);
@@ -1642,7 +1660,7 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.justPressed.BACKSPACE) {
 				//if(onMasterEditor) {
 					MusicBeatState.switchState(new editors.MasterEditorMenu());
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'));
 				//}
 				FlxG.mouse.visible = false;
 				return;
@@ -1977,60 +1995,63 @@ class ChartingState extends MusicBeatState
 			audioBuffers[0].dispose();
 		}
 		audioBuffers[0] = null;
-		#if MODS_ALLOWED
-		if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'))) {
-			audioBuffers[0] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'));
-			//trace('Custom vocals found');
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/Inst.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
 		}
-		#if MP3_ALLOWED
- 		else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'))) {
- 				audioBuffers[0] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'));
- 		}
- 		#end
-		#if WAV_ALLOWED
- 		else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'))) {
- 				audioBuffers[0] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'));
- 		}
- 		#end
-		else { #end
-			var leVocals:String = Paths.getPath(currentSongName + '/Inst.' + Paths.SOUND_EXT, SOUND, 'songs');
-			if (OpenFlAssets.exists(leVocals)) { //Vanilla inst
-				audioBuffers[0] = AudioBuffer.fromFile('./' + leVocals.substr(6));
-				//trace('Inst found');
-			}
-		#if MODS_ALLOWED
-		}
-		#end
 
 		if(audioBuffers[1] != null) {
 			audioBuffers[1].dispose();
 		}
 		audioBuffers[1] = null;
-		#if MODS_ALLOWED
-		if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'))) {
-			audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'));
-			//trace('Custom vocals found');
-		
-		} 
- 		#if MP3_ALLOWED 
- 		else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'))) {
- 			audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'));
- 		}
-		#end
- 		#if WAV_ALLOWED
- 		else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'))) {
- 			audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'));
- 		}
- 		#end
- 			else { #end
-			var leVocals:String = Paths.getPath(currentSongName + '/Voices.' + Paths.SOUND_EXT, SOUND, 'songs');
-			if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
-				audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
-				//trace('Voices found, LETS FUCKING GOOOO');
-			}
-		#if MODS_ALLOWED
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/Voices.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
 		}
-		#end
 	}
 	function reloadGridLayer() {
 		gridLayer.clear();
@@ -2741,8 +2762,13 @@ class ChartingState extends MusicBeatState
 	function loadJson(song:String):Void
 	{
 		//make it look sexier if possible
+		//null fix shit, i hate it
 		if (CoolUtil.difficulties[PlayState.storyDifficulty] != "Normal"){
-		PlayState.SONG = Song.loadFromJson(song.toLowerCase()+"-"+CoolUtil.difficulties[PlayState.storyDifficulty], song.toLowerCase());
+			if(CoolUtil.difficulties[PlayState.storyDifficulty] == null){
+				PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
+			}else{
+				PlayState.SONG = Song.loadFromJson(song.toLowerCase()+"-"+CoolUtil.difficulties[PlayState.storyDifficulty], song.toLowerCase());
+			}
 			
 		}else{
 		PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
@@ -2769,8 +2795,13 @@ class ChartingState extends MusicBeatState
 	private function saveLevel()
 	{
 		_song.events.sort(sortByTime);
+		/*var songShit:Dynamic = {
+			
+		}*/
 		var json = {
-			"song": _song
+			"song": _song,
+			/*"composer": composerInputUI.text,
+			"charter": charterInputUI.text*/
 		};
 
 		var data:String = Json.stringify(json, "\t");
@@ -2793,22 +2824,8 @@ class ChartingState extends MusicBeatState
 	private function saveEvents()
 	{
 		_song.events.sort(sortByTime);
-		var eventsSong:SwagSong = {
-			song: _song.song,
-			notes: [],
-			events: _song.events,
-			bpm: _song.bpm,
-			needsVoices: _song.needsVoices,
-			speed: _song.speed,
-			arrowSkin: _song.arrowSkin,
-			splashSkin: _song.splashSkin,
-
-			player1: _song.player1,
-			player2: _song.player2,
-			player3: null,
-			gfVersion: _song.gfVersion,
-			stage: _song.stage,
-			validScore: false
+		var eventsSong:Dynamic = {
+			events: _song.events
 		};
 		var json = {
 			"song": eventsSong
