@@ -131,7 +131,7 @@ class CreditsState extends MusicBeatState
 			//['Ben UWU',		'ben',	"Got Drip And Is So Slutty",						"https://www.youtube.com/watch?v=v5F5WyhzW9M",		'FFFFFF']
 		];
 		
-		for(i in pisspoop){
+		for(i in pisspoop) {
 			creditsStuff.push(i);
 		}
 	
@@ -233,21 +233,12 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-				if(creditsStuff[curSelected][3] == 'nolink') {
-
-  					noLink = true;
-  				}else{
-  					noLink = false;
-  				}
-  				if(noLink) {
-  				if(controls.ACCEPT) {
-  					FlxG.sound.play(Paths.sound('cancelMenu'));
-  				} 
-  				}else {
-  					if(controls.ACCEPT) {
-  					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
-  				}
-
+			if(controls.ACCEPT) {
+				if(creditsStuff[curSelected][3] == 'noLink') {
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				} else {
+					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+				}
 			}
 
 			if (controls.BACK)
@@ -283,15 +274,15 @@ class CreditsState extends MusicBeatState
 		super.update(elapsed);
 	}
 	
-		override function beatHit()
+	override function beatHit()
 	{
 		super.beatHit();
-			if(ClientPrefs.camZooms) {
-        FlxG.camera.zoom += 0.015;
-		if(!camZooming) { //Copied from PlayState.hx
-			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5);
+		if(ClientPrefs.camZooms) {
+			FlxG.camera.zoom += 0.015;
+			if(!camZooming) { //Copied from PlayState.hx
+				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5);
+			}
 		}
-	}
 	}
 	
 	var moveTween:FlxTween = null;
