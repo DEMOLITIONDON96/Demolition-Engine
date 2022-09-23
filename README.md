@@ -17,9 +17,14 @@ hi, welcome to yet, another modified version of Psych Engine, where we add lots 
 
 ## Origins of Engine:
 
-This was originally used for a mod titled "Friday Night Funkin: Graveyard Rush", you can go download and play it on GameJolt Here:
+This was originally used for a mod titled "Friday Night Funkin: Graveyard Rush", you can go download and play the scrapped build GameJolt Here:
 
-### funi link soon.
+### https://gamejolt.com/games/Graveyard-Rush/701416
+
+## Funkin.avi is also using this engine, and can be played here:
+
+### https://gamejolt.com/games/funkin-avi/710505
+### https://gamebanana.com/mods/383317
 
 ## Features this Adds:
 
