@@ -93,7 +93,7 @@ class DemoSubState extends BaseOptionsMenu
 			'winningIcon',
 			'bool',
 			true);
-		addOption(option);
+		//addOption(option);
 
 		var option:Option = new Option('Enable Funky Lights',
 			'If checked, Funky Lights Will Play Each Hit',
