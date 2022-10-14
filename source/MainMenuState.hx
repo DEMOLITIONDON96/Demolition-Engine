@@ -29,7 +29,7 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var DemoEngineVersion:String = '0.2.3';
+	public static var DemoEngineVersion:String = '0.3.0spa'; //Source Pre-Release, idk i suck at acronyms
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
