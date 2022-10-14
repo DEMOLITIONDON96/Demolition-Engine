@@ -184,6 +184,7 @@ class PlayState extends MusicBeatState
 
 	public var gfSpeed:Int = 1;
 	public var health:Float = 1;
+	public var maxHealth:Float = 2;
 	public var healthDrain:Float = 0;
 	public var combo:Int = 0;
 
@@ -3167,39 +3168,66 @@ class PlayState extends MusicBeatState
 		health -= 0.001;
 		healthDrain -= 0.0001;
 	}
-		if(ClientPrefs.winningIcon)
+		//This is VERY work in progress lmao
+		if(health > maxHealth)
+		health = maxHealth;
+	
+		if (iconP1.animation.frames == 3)
 		{
-		
-			if (health > 2)	
-				health = 2;
 			if (healthBar.percent < 20)
 				iconP1.animation.curAnim.curFrame = 1;
-			else if (healthBar.percent > 20 && healthBar.percent < 80)	
-				iconP1.animation.curAnim.curFrame = 0;
 			else if (healthBar.percent > 80)
 				iconP1.animation.curAnim.curFrame = 2;
-			
-			switch(SONG.player2)
-			{	
-				default:
-					if (healthBar.percent < 20)
-						iconP2.animation.curAnim.curFrame = 2;
-					else if (healthBar.percent > 20 && healthBar.percent < 80)
-						iconP2.animation.curAnim.curFrame = 0;		
-					else if (healthBar.percent > 80)
-						iconP2.animation.curAnim.curFrame = 1;
-			}
-		} else {
-			if (health > 2)
-				health = 2;
-
+			else
+				iconP1.animation.curAnim.curFrame = 0;
+		}
+		else if(iconP1.animation.frames == 2)
+		{
 			if (healthBar.percent < 20)
 				iconP1.animation.curAnim.curFrame = 1;
-			else		
+			else
 				iconP1.animation.curAnim.curFrame = 0;
-	
+		}
+		else if(iconP1.animation.frames == 5)
+		{
+			if (healthBar.percent < 10)
+				iconP1.animation.curAnim.curFrame = 3;
+			else if (healthBar.percent > 90)
+				iconP1.animation.curAnim.curFrame = 4;
+			else if (healthBar.percent < 20)
+				iconP1.animation.curAnim.curFrame = 1;
+			else if (healthBar.percent > 80)
+				iconP1.animation.curAnim.curFrame = 2;
+			else
+				iconP1.animation.curAnim.curFrame = 0;
+		}
+
+		if (iconP2.animation.frames == 3)
+		{
 			if (healthBar.percent > 80)
 				iconP2.animation.curAnim.curFrame = 1;
+			else if (healthBar.percent < 20)
+				iconP2.animation.curAnim.curFrame = 2;
+			else
+				iconP2.animation.curAnim.curFrame = 0;
+		}
+		else if(iconP2.animation.frames == 2)
+		{
+			if (healthBar.percent > 80)
+				iconP2.animation.curAnim.curFrame = 1;
+			else
+				iconP2.animation.curAnim.curFrame = 0;
+		}
+		else if(iconP2.animation.frames == 5)
+		{
+			if (healthBar.percent > 90)
+				iconP2.animation.curAnim.curFrame = 3;
+			else if (healthBar.percent < 10)
+				iconP2.animation.curAnim.curFrame = 4;
+			else if (healthBar.percent > 80)
+				iconP2.animation.curAnim.curFrame = 1;
+			else if (healthBar.percent < 20)
+				iconP2.animation.curAnim.curFrame = 2;
 			else
 				iconP2.animation.curAnim.curFrame = 0;
 		}
