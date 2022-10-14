@@ -97,10 +97,15 @@ class ChartingState extends MusicBeatState
 		['Fade Character', "0 = -0.05 Dad Alpha Value\n1 = -0.05 BF Alpha Value\n2 = +0.05 Dad Alpha Value\n3 = +0.05 BF Alpha Value\n(i'm so sorry for the spam shit)"],
 		['Screen Fade', "Funi Screen Fade\n0 = Invisible\n1 = add 0.05 to Visibility\n2 = remove 0.05 to Visibility\n3 = Visible\n(i'm sorry you have to spam 1 & 2)"],
 		['Lyrics',"Value 1: Lyrics\nValue 2: Color (white is default)"],
-		['Hide HUD', "Value 1: 1 = Hide HUD, 2 = Show HUD\n Value 2: No Use"],
+		['Flash Background', "Flashes Between Stage and Characters\nValue 1: Time it takes to fade away\nValue 2: Insert a HEX Color ID\n \nIf left empty, Default is:\nFade Time: 0.3, HEX Color ID: #FFFFFF"],
+		['Alter HUD Transparency', "Value 1: Alpha value you want to tween the HUD at.\n Value 2: Time it takes to change."],
+		['Alter Camera Bouncing', "Alters the Intensity and Speed of the camera bounce.\nValue 1: Beats to hit (Default: 4)\nValue 2: Bounce Intensity (Default: 0)\nLeave the values blank if you want to use Default."],
+		['Alter Camera Zoom', "Sets the zoom value\nValue 1: Zoom Value \n(Default: 1)\nValue 2: put in a number to do an instant zoom, otherwise leave blank to do a smooth zoom  \n(Default: 0.5)"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Scroll Type', "Changes Scroll Type, Mid-Song\n \nValue 1 = BF Notes\nValue 2 = Dad Notes\n \nDefault = Normal Scroll Type\nFlip = Flips Current Scroll Type\nDown = Locks Downscroll\nUp = Locks Upscroll\nLeft = Sidescroll from Left\nRight = Sidescroll from Right\nUndyne = Centerscroll"],
 		['Flash Screen', "Flashes da hud, yup, thats it\nValue 1 = Color you should Flash\nValue 2 = Option to Hide HUD\n \n Colors: 0 = White\n1 = Red\n2 = Blue\n3 = Black\n4 = Cyan\n5 = Magenta\n6 = Pink\n7 = Orange\n8 = Purple\n9 = Lime\n \nTrue: HUD is hidden\n False: HUD is visible"],
+		['Set Strum Visibility', "Value 1: Visible Or Not For The Player\nValue 2: Same But With The Opponent\nValue 3: How Time It Takes To Appear/Disappear"],
+		['Do Health Tween', 'Value 1: Set The Health\nValue 2: How Time It Takes'],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"]
 	];
 
@@ -163,6 +168,7 @@ class ChartingState extends MusicBeatState
 
 	var value1InputText:FlxUIInputText;
 	var value2InputText:FlxUIInputText;
+	var value3InputText:FlxUIInputText; //stolen from theoyeah engine lmao
 	var currentSongName:String;
 	
 	var zoomTxt:FlxText;
@@ -1046,6 +1052,11 @@ class ChartingState extends MusicBeatState
 		tab_group_event.add(text);
 		value2InputText = new FlxUIInputText(20, 150, 100, "");
 		blockPressWhileTypingOn.push(value2InputText);
+		
+		var text:FlxText = new FlxText(20, 170, 0, "Value 3:");
+		tab_group_event.add(text);
+		value3InputText = new FlxUIInputText(20, 190, 100, "");
+		blockPressWhileTypingOn.push(value3InputText);
 
 		// New event buttons
 		var removeButton:FlxButton = new FlxButton(eventDropDown.x + eventDropDown.width + 10, eventDropDown.y, '-', function()
@@ -1125,6 +1136,7 @@ class ChartingState extends MusicBeatState
 		tab_group_event.add(descText);
 		tab_group_event.add(value1InputText);
 		tab_group_event.add(value2InputText);
+		tab_group_event.add(value3InputText);
 		tab_group_event.add(eventDropDown);
 
 		UI_box.addGroup(tab_group_event);
