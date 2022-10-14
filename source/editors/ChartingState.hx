@@ -99,7 +99,6 @@ class ChartingState extends MusicBeatState
 		['Lyrics',"Value 1: Lyrics\nValue 2: Color (white is default)"],
 		['Flash Background', "Flashes Between Stage and Characters\nValue 1: Time it takes to fade away\nValue 2: Insert a HEX Color ID\n \nIf left empty, Default is:\nFade Time: 0.3, HEX Color ID: #FFFFFF"],
 		['Alter HUD Transparency', "Value 1: Alpha value you want to tween the HUD at.\n Value 2: Time it takes to change."],
-		['Alter Camera Bouncing', "Alters the Intensity and Speed of the camera bounce.\nValue 1: Beats to hit (Default: 4)\nValue 2: Bounce Intensity (Default: 0)\nLeave the values blank if you want to use Default."],
 		['Alter Camera Zoom', "Sets the zoom value\nValue 1: Zoom Value \n(Default: 1)\nValue 2: put in a number to do an instant zoom, otherwise leave blank to do a smooth zoom  \n(Default: 0.5)"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Scroll Type', "Changes Scroll Type, Mid-Song\n \nValue 1 = BF Notes\nValue 2 = Dad Notes\n \nDefault = Normal Scroll Type\nFlip = Flips Current Scroll Type\nDown = Locks Downscroll\nUp = Locks Upscroll\nLeft = Sidescroll from Left\nRight = Sidescroll from Right\nUndyne = Centerscroll"],
