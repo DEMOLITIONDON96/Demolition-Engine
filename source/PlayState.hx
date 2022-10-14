@@ -229,6 +229,11 @@ class PlayState extends MusicBeatState
 	
     // Smooth healthbar
 	var fakeHealth:Float = 1;
+	
+	var whiteFlashBG:FlxSprite;
+	var whiteFlashBGFade:FlxTween;
+	public var camZoomTween:FlxTween;
+	public var hudTransparentTween:FlxTween;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
@@ -3544,6 +3549,14 @@ class PlayState extends MusicBeatState
 		}
 		return false;
 	}
+		function fadeWhiteFlash(time:Float = 0.3, color:String = '#FFFFFF') {
+			if(ClientPrefs.flashing)
+			{
+					whiteFlashBG.alpha = 0.6;
+					whiteFlashBG.color = FlxColor.fromString(color);
+					whiteFlashBGFade = FlxTween.tween(whiteFlashBG, {alpha: 0}, time, {ease: FlxEase.linear});
+			}
+		}
 
 	public function checkEventNote() {
 		while(eventNotes.length > 0) {
@@ -4296,57 +4309,59 @@ class PlayState extends MusicBeatState
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
 
-			case 'Hide HUD':
-				var HUDid:Int = Std.parseInt(value1);
-				//var HUDtrans:Int = Std.parseInt(value2);
-				if(Math.isNaN(HUDid)) HUDid = 0;
-				//if(Math.isNaN(HUDid)) HUDid = 0;
+				case 'Flash Background':
+					var fadeTime:Float = Std.parseFloat(value1);
+					if(value2.trim()=='')value2='#FFFFFF';
+					if(fadeTime > 0)
+					{
+						fadeWhiteFlash(0.3, value2);
+					}else{	
+						fadeWhiteFlash(fadeTime, value2);
+					}
 
-				//var newHUDValue:Float = camHUD + HUDtrans;
+			case 'Alter HUD Transparency':
+				var alphaValue:Float = Std.parseFloat(value1);
+				var timer:Float = Std.parseFloat(value2);
 
-				switch(HUDid) {
-				case 1:
-					FlxTween.tween(camHUD, {alpha: camHUD.alpha = 0}, 1.5, {ease: FlxEase.linear});
-				case 2:
-					FlxTween.tween(camHUD, {alpha: camHUD.alpha = 1}, 1.5, {ease: FlxEase.linear});
-				}
-
-				/*if(val2 <= 0)
+				if(timer <= 0)
 				{
-					hudTransitionSpeed = newValue;
-				}
-				else
-				{
-					hudTransitionTween = FlxTween.tween(this, {HUDTransitionSpeed: newValue}, val2, {ease: FlxEase.linear, onComplete:
-						function (twn:FlxTween)
-						{
-							hudTransitionTween = null;
-						}
-					}*/
-			
-			case 'Change Scroll Speed':
-				if (songSpeedType == "constant")
-					return;
-				var val1:Float = Std.parseFloat(value1);
-				var val2:Float = Std.parseFloat(value2);
-				if(Math.isNaN(val1)) val1 = 1;
-				if(Math.isNaN(val2)) val2 = 0;
-
-				var newValue:Float = SONG.speed * ClientPrefs.getGameplaySetting('scrollspeed', 1) * val1;
-
-				if(val2 <= 0)
-				{
-					songSpeed = newValue;
-				}
-				else
-				{
-					songSpeedTween = FlxTween.tween(this, {songSpeed: newValue}, val2, {ease: FlxEase.linear, onComplete:
-						function (twn:FlxTween)
-						{
-							songSpeedTween = null;
-						}
+					camHUD.alpha = alphaValue;
+				}else{
+				hudTransparentTween = FlxTween.tween(camHUD, {alpha: alphaValue}, timer, {ease: FlxEase.sineInOut, onComplete:
+					function (twn:FlxTween)
+					{
+						hudTransparentTween = null;
+					}
 					});
+				}	
+
+				case 'Change Scroll Speed':
+				if(ClientPrefs.mechanics)
+				{
+					if (songSpeedType == "constant" && ClientPrefs.events)
+						return;
+					var val1:Float = Std.parseFloat(value1);
+					var val2:Float = Std.parseFloat(value2);
+					if(Math.isNaN(val1)) val1 = 1;
+					if(Math.isNaN(val2)) val2 = 0;
+
+					var newValue:Float = SONG.speed * ClientPrefs.getGameplaySetting('scrollspeed', 1) * val1;
+
+					if(val2 <= 0)
+					{
+						songSpeed = newValue;
+					}
+					else
+					{
+						songSpeedTween = FlxTween.tween(this, {songSpeed: newValue}, val2, {ease: FlxEase.quartInOut, onComplete:
+							function (twn:FlxTween)
+							{
+								songSpeedTween = null;
+							}
+						});
+					}
 				}
+			
 
 			case 'Set Property':
 				var killMe:Array<String> = value1.split('.');
@@ -4355,6 +4370,56 @@ class PlayState extends MusicBeatState
 				} else {
 					Reflect.setProperty(this, value1, value2);
 				}
+			case 'Alter Camera Zoom':
+				var zoomValue:Float = Std.parseFloat(value1);
+				var timeTween:Float = Std.parseFloat(value2);
+
+				if(ClientPrefs.camZooms) {
+				if(Math.isNaN(zoomValue)) zoomValue = 1;
+				if (Math.isNaN(timeTween)) timeTween = 0.5;
+
+				if(timeTween <= 0)
+				{
+					camGame.zoom = zoomValue;
+				}else{
+					camZoomTween = FlxTween.tween(camGame, {zoom: zoomValue}, timeTween, {ease: FlxEase.sineInOut, onComplete: 
+						function (twn:FlxTween)
+							{
+								camZoomTween = null;
+							}
+						});
+				}
+				defaultCamZoom = zoomValue;
+			}
+
+			//need to figure out how to make notes invisible
+			case 'Set Strum Visibility':
+                		var timer = Std.parseFloat(value3);
+
+				for (i in 0...playerStrums.length) {
+				switch(value1) {
+                 		case 'false' | 'False':
+					FlxTween.tween(playerStrums.members[i], {alpha: 0}, timer, {ease: FlxEase.sineInOut});
+				
+				case 'true' | 'True':
+					FlxTween.tween(playerStrums.members[i], {alpha: 1}, timer, {ease: FlxEase.sineInOut});
+				}
+				}
+
+				for (i in 0...opponentStrums.length) {
+					switch(value2) {
+					 case 'false' | 'False':
+						FlxTween.tween(opponentStrums.members[i], {alpha: 0}, timer, {ease: FlxEase.sineInOut});
+					
+					case 'true' | 'True':
+						FlxTween.tween(opponentStrums.members[i], {alpha: 1}, timer, {ease: FlxEase.sineInOut});
+					}
+					}
+
+				case 'Do Health Tween':
+					var val1 = Std.parseFloat(value1);
+					var val2 = Std.parseFloat(value2);
+					FlxTween.tween(this, {health: val1}, val2, {ease: FlxEase.sineInOut});
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
