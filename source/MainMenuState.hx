@@ -135,7 +135,7 @@ class MainMenuState extends MusicBeatState
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 			if (firstStart)
-				FlxTween.tween(menuItem, {y: 100 + (0 * 90)}, 1 + (0 * 0.25), {
+				FlxTween.tween(menuItem, {y: 100}, 1, {
 					ease: FlxEase.elasticInOut,
 					onComplete: function(flxTween:FlxTween)
 					{
@@ -165,7 +165,7 @@ class MainMenuState extends MusicBeatState
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 			if (firstStart)
-				FlxTween.tween(menuItem, {y: 100 + (0 * 90)}, 1 + (0 * 0.25), {
+				FlxTween.tween(menuItem, {y: 100}, 1, {
 					ease: FlxEase.elasticInOut,
 					onComplete: function(flxTween:FlxTween)
 					{
@@ -195,7 +195,7 @@ class MainMenuState extends MusicBeatState
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 			if (firstStart)
-				FlxTween.tween(menuItem, {y: 100 + (0 * 90)}, 1 + (0 * 0.25), {
+				FlxTween.tween(menuItem, {y: 100}, 1, {
 					ease: FlxEase.elasticInOut,
 					onComplete: function(flxTween:FlxTween)
 					{
@@ -204,7 +204,7 @@ class MainMenuState extends MusicBeatState
 					}
 				});
 			else
-				menuItem.y = 108 + (0 * 90);
+				menuItem.y = 108;
 
 			// Credits
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
@@ -225,7 +225,7 @@ class MainMenuState extends MusicBeatState
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 			if (firstStart)
-				FlxTween.tween(menuItem, {y: 100 + (0 * 90)}, 1 + (0 * 0.25), {
+				FlxTween.tween(menuItem, {y: 100}, 1, {
 					ease: FlxEase.elasticInOut,
 					onComplete: function(flxTween:FlxTween)
 					{
@@ -234,7 +234,7 @@ class MainMenuState extends MusicBeatState
 					}
 				});
 			else
-				menuItem.y = 108 + (0 * 90);
+				menuItem.y = 108;
 		
 			// Donate
 			/*var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
@@ -446,7 +446,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-				//spr.screenCenter(X);
+			//spr.screenCenter(X);
 		});
 	}
 
@@ -478,7 +478,7 @@ class MainMenuState extends MusicBeatState
 		});
 	}
 
-override function beatHit()
+	override function beatHit()
 	{
 		super.beatHit();
 		if (curBeat % 4 == 0 && ClientPrefs.camZooms)
