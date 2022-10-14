@@ -33,7 +33,6 @@ hi, welcome to yet, another modified version of Psych Engine, where we add lots 
 - Bonus Content????
 - More Options in Settings
 - More Modchart Options
-- Hell chart (In progress tell us feedback on some charts)
 - Lots of other shit
 
 # HOW TO COMPILE!
