@@ -2491,14 +2491,15 @@ class PlayState extends MusicBeatState
 			for (event in eventsData) //Event Notes
 			{
 				for (i in 0...event[1].length)
-				{
-					var newEventNote:Array<Dynamic> = [event[0], event[1][i][0], event[1][i][1], event[1][i][2]];
-					var subEvent:EventNote = {
-						strumTime: newEventNote[0] + ClientPrefs.noteOffset,
-						event: newEventNote[1],
-						value1: newEventNote[2],
-						value2: newEventNote[3]
-					};
+			{
+				var newEventNote:Array<Dynamic> = [event[0], event[1][i][0], event[1][i][1], event[1][i][2], event[1][i][3]];
+				var subEvent:EventNote = {
+					strumTime: newEventNote[0] + ClientPrefs.noteOffset,
+					event: newEventNote[1],
+					value1: newEventNote[2],
+					value2: newEventNote[3],
+					value3: newEventNote[4]
+				};
 					subEvent.strumTime -= eventNoteEarlyTrigger(subEvent);
 					eventNotes.push(subEvent);
 					eventPushed(subEvent);
@@ -2603,12 +2604,13 @@ class PlayState extends MusicBeatState
 		{
 			for (i in 0...event[1].length)
 			{
-				var newEventNote:Array<Dynamic> = [event[0], event[1][i][0], event[1][i][1], event[1][i][2]];
+				var newEventNote:Array<Dynamic> = [event[0], event[1][i][0], event[1][i][1], event[1][i][2], event[1][i][3]];
 				var subEvent:EventNote = {
 					strumTime: newEventNote[0] + ClientPrefs.noteOffset,
 					event: newEventNote[1],
 					value1: newEventNote[2],
-					value2: newEventNote[3]
+					value2: newEventNote[3],
+					value3: newEventNote[4]
 				};
 				subEvent.strumTime -= eventNoteEarlyTrigger(subEvent);
 				eventNotes.push(subEvent);
@@ -3580,7 +3582,11 @@ class PlayState extends MusicBeatState
 			if(eventNotes[0].value2 != null)
 				value2 = eventNotes[0].value2;
 
-			triggerEventNote(eventNotes[0].event, value1, value2);
+			var value3:String = '';
+			if(eventNotes[0].value3 != null)
+				value3 = eventNotes[0].value3;
+
+			triggerEventNote(eventNotes[0].event, value1, value2, value3);
 			eventNotes.shift();
 		}
 	}
@@ -3593,7 +3599,17 @@ class PlayState extends MusicBeatState
 
 	var lyrics:FlxText;
 	
-	public function triggerEventNote(eventName:String, value1:String, value2:String) {
+	/**
+	 * Function Used For Hardcoded Events So No One Can Remove It!
+	 * @param eventName The Event Name
+	 * @param value1 First Value
+	 * @param value2 Second Value
+	 * @param value3 Third Value Used Just In Case!
+	 */
+	public function triggerEventNote(eventName:String, value1:String, value2:String, ?value3:String = '') {
+		var theValue1:String = value1.toLowerCase().trim();
+		var theValue2:String = value2.toLowerCase().trim();
+		var theValue3:String = value3.toLowerCase().trim();
 		switch(eventName) {
 			case 'Hey!':
 				var value:Int = 2;
