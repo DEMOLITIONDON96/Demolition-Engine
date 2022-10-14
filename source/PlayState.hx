@@ -817,6 +817,13 @@ class PlayState extends MusicBeatState
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
 		}
+				
+		whiteFlashBG = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 1), Std.int(FlxG.height * 1), FlxColor.WHITE);
+		whiteFlashBG.blend = ADD;
+		whiteFlashBG.alpha = 0;
+		whiteFlashBG.scale.set(5, 5);
+		add(whiteFlashBG);
+
 
 		add(gfGroup); //Needed for blammed lights
 
