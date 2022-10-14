@@ -127,7 +127,7 @@ class TitleState extends MusicBeatState
 				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
 				if(updateVersion != curVersion) {
 					trace('versions arent matching!');
-					mustUpdate = true;
+					//mustUpdate = true;
 				}
 			}
 			
