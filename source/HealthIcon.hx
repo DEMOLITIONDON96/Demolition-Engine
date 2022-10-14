@@ -42,29 +42,41 @@ class HealthIcon extends FlxSprite
 			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-face'; //Prevents crash from missing icon
 			var file:Dynamic = Paths.image(name);
 
-			if(ClientPrefs.winningIcon)
+			loadGraphic(file); //Load stupidly first for getting the file size
+			var frames:Array<Int> = [0, 1, 2, 3, 4];
+			var finalWidth = 5;
+			switch (file.width)
 			{
-				loadGraphic(file); //Load stupidly first for getting the file size
-				loadGraphic(file, true, Math.floor(width / 3), Math.floor(height)); //Then load it fr
-				iconOffsets[0] = (width - 150) / 3;
-				iconOffsets[1] = (width - 150) / 3;
-				iconOffsets[2] = (width - 150) / 3;
-				updateHitbox();
-
-				animation.add(char, [0, 1, 2], 0, false, isPlayer);
-				animation.play(char);
-				this.char = char;
-			} else {
-				loadGraphic(file); //Load stupidly first for getting the file size
-				loadGraphic(file, true, Math.floor(width / 3), Math.floor(height)); //Then load it fr
-				iconOffsets[0] = (width - 150) / 3;
-				iconOffsets[1] = (width - 150) / 3;
-				updateHitbox();
-
-				animation.add(char, [0, 1], 0, false, isPlayer);
-				animation.play(char);
-				this.char = char;
+				case 750:
+					finalWidth = 5;
+					frames = [0, 1, 2, 3, 4];
+					iconOffsets[0] = (width - 750) / 5; //Normal
+					iconOffsets[1] = (width - 750) / 5; //Losing
+					iconOffsets[2] = (width - 750) / 5; //Winning
+					iconOffsets[3] = (width - 750) / 5; //U Fucking Suck Lmao
+					iconOffsets[4] = (width - 750) / 5; //Max HP
+				case 450:
+					finalWidth = 3;
+					frames = [0, 1, 2];
+					iconOffsets[0] = (width - 450) / 3; 
+					iconOffsets[1] = (width - 450) / 3;
+					iconOffsets[2] = (width - 450) / 3;
+				case 300:
+					finalWidth = 2;
+					frames = [0, 1];
+					iconOffsets[0] = (width - 300) / 2;
+					iconOffsets[1] = (width - 300) / 2;
+				case 150:
+					finalWidth = 1;
+					frames = [0];
+					iconOffsets[0] = (width - 150) / 1;
 			}
+			loadGraphic(file, true, Math.floor(width / finalWidth), Math.floor(height)); //Then load it fr
+			updateHitbox();
+
+			animation.add(char, frames, 0, false, isPlayer);
+			animation.play(char);
+			this.char = char;
 
 			antialiasing = ClientPrefs.globalAntialiasing;
 			if(char.endsWith('-pixel')) {
