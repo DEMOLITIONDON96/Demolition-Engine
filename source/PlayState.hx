@@ -4359,9 +4359,7 @@ class PlayState extends MusicBeatState
 				}	
 
 				case 'Change Scroll Speed':
-				if(ClientPrefs.mechanics)
-				{
-					if (songSpeedType == "constant" && ClientPrefs.events)
+					if (songSpeedType == "constant")
 						return;
 					var val1:Float = Std.parseFloat(value1);
 					var val2:Float = Std.parseFloat(value2);
@@ -4383,7 +4381,6 @@ class PlayState extends MusicBeatState
 							}
 						});
 					}
-				}
 			
 
 			case 'Set Property':

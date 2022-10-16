@@ -26,11 +26,7 @@ using StringTools;
 
 class Paths
 {
-	inline public static var SOUND_EXT:Array<String> = [
-		#if web #elseif MP3_ALLOWED "mp3" #end,
-		#if WAV_ALLOWED "wav" #end,
-		"ogg"
-		];
+	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var VIDEO_EXT = "mp4";
 
 	#if MODS_ALLOWED
