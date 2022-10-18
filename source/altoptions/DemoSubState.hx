@@ -126,11 +126,10 @@ class DemoSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Camera Movement',
-			'How much the camera should be to the corresponding arrow?',
+			'If checked, camera moves to the corresponding note.',
 			'camMove',
-			'string',
-		    '40',
-			['0', '10', '20', '30', '40', '50']);
+			'bool',
+		   	 true);
 		addOption(option);
 
 		var option:Option = new Option('Health Drain',
