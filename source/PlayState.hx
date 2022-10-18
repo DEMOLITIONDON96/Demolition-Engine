@@ -4335,12 +4335,14 @@ class PlayState extends MusicBeatState
 				case 'Flash Background':
 					var fadeTime:Float = Std.parseFloat(value1);
 					if(value2.trim()=='')value2='#FFFFFF';
-					if(fadeTime > 0)
+					if(value1.trim()=='') fadeTime = 0;
+					if(fadeTime <= 0)
 					{
 						fadeWhiteFlash(0.3, value2);
 					}else{	
 						fadeWhiteFlash(fadeTime, value2);
 					}
+
 
 			case 'Alter HUD Transparency':
 				var alphaValue:Float = Std.parseFloat(value1);
