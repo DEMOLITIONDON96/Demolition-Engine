@@ -2887,6 +2887,10 @@ class PlayState extends MusicBeatState
 		}
 
 		callOnLuas('onUpdate', [elapsed]);
+		
+		if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null && !endingSong && !isCameraOnForcedPos){
+			moveCameraSection(Std.int(curStep / 16), true);
+		}
 
 		switch (curStage)
 		{
@@ -4446,12 +4450,35 @@ class PlayState extends MusicBeatState
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
 
-	function moveCameraSection(?id:Int = 0):Void {
-		if(SONG.notes[id] == null) return;
+	function moveCameraSection(?id:Int = 0, isNote:Bool = false):Void {
 
 		if (gf != null && SONG.notes[id].gfSection)
 		{
-			camFollow.set(gf.getMidpoint().x, gf.getMidpoint().y);
+			var yOffsetB:Int = 0;
+			var xOffsetB:Int = 0;
+			if (ClientPrefs.camMove){
+				if (gf.animation.curAnim.name.startsWith('singUP')){
+					yOffsetB = -40;
+					xOffsetB = 0;
+				}
+				else if (gf.animation.curAnim.name.startsWith('singDOWN')){
+					yOffsetB = 40;
+					xOffsetB = 0;
+				}
+				else if (gf.animation.curAnim.name.startsWith('singLEFT')){
+					yOffsetB = 0;
+					xOffsetB = -40;
+				}
+				else if (gf.animation.curAnim.name.startsWith('singRIGHT')){
+					yOffsetB = 0;
+					xOffsetB = 40;
+				}
+				else if (!gf.animation.curAnim.name.startsWith('sing')){
+					yOffsetB = 0;
+					xOffsetB = 0;
+				}
+			}
+			camFollow.set(gf.getMidpoint().x + xOffsetB, gf.getMidpoint().y + yOffsetB);
 			camFollow.x += gf.cameraPosition[0] + girlfriendCameraOffset[0];
 			camFollow.y += gf.cameraPosition[1] + girlfriendCameraOffset[1];
 			tweenCamIn();
@@ -4461,29 +4488,73 @@ class PlayState extends MusicBeatState
 
 		if (!SONG.notes[id].mustHitSection)
 		{
-			moveCamera(true);
+			moveCamera(true, isNote);
 			callOnLuas('onMoveCamera', ['dad']);
 		}
 		else
 		{
-			moveCamera(false);
+			moveCamera(false, isNote);
 			callOnLuas('onMoveCamera', ['boyfriend']);
 		}
 	}
 
 	var cameraTwn:FlxTween;
-	public function moveCamera(isDad:Bool)
+	public function moveCamera(isDad:Bool, isNote:Bool = false, yOffsetB:Float = 0, xOffsetB:Float = 0, yOffsetD:Float = 0, xOffsetD:Float = 0)
 	{
+		if (isNote && ClientPrefs.camMove){
+			if (boyfriend.animation.curAnim.name.startsWith('singUP')){
+				yOffsetB = -40;
+				xOffsetB = 0;
+			}
+			else if (boyfriend.animation.curAnim.name.startsWith('singDOWN')){
+				yOffsetB = 40;
+				xOffsetB = 0;
+			}
+			else if (boyfriend.animation.curAnim.name.startsWith('singLEFT')){
+				yOffsetB = 0;
+				xOffsetB = -40;
+			}
+			else if (boyfriend.animation.curAnim.name.startsWith('singRIGHT')){
+				yOffsetB = 0;
+				xOffsetB = 40;
+			}
+			else if (!boyfriend.animation.curAnim.name.startsWith('sing') || !PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection){
+				yOffsetB = 0;
+				xOffsetB = 0;
+			}
+
+			if (dad.animation.curAnim.name.startsWith('singUP')){
+				yOffsetD = -40;
+				xOffsetD = 0;
+			}
+			else if (dad.animation.curAnim.name.startsWith('singDOWN')){
+				yOffsetD = 40;
+				xOffsetD = 0;
+			}
+			else if (dad.animation.curAnim.name.startsWith('singLEFT')){
+				yOffsetD = 0;
+				xOffsetD = -40;
+			}
+			else if (dad.animation.curAnim.name.startsWith('singRIGHT')){
+				yOffsetD = 0;
+				xOffsetD = 40;
+			}
+			else if (!dad.animation.curAnim.name.startsWith('sing') || PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection){
+				yOffsetD = 0;
+				xOffsetD = 0;
+			}
+		}
+		
 		if(isDad)
 		{
-			camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+			camFollow.set(dad.getMidpoint().x + 150 + xOffsetD, dad.getMidpoint().y - 100 + yOffsetD);
 			camFollow.x += dad.cameraPosition[0] + opponentCameraOffset[0];
 			camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
 			tweenCamIn();
 		}
 		else
 		{
-			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+			camFollow.set(boyfriend.getMidpoint().x - 100 + xOffsetB, boyfriend.getMidpoint().y - 100 + yOffsetB);
 			camFollow.x -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
 			camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
 
@@ -4509,10 +4580,11 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function snapCamFollowToPos(x:Float, y:Float) {
+	public function snapCamFollowToPos(x:Float, y:Float) {
 		camFollow.set(x, y);
 		camFollowPos.setPosition(x, y);
 	}
+
 
 	//Any way to do this without using a different function? kinda dumb
 	private function onSongComplete()
@@ -5323,26 +5395,6 @@ class PlayState extends MusicBeatState
 						{
 							case 0:
 								animToPlay = 'singLEFT';
-									switch (ClientPrefs.camMove)
-										{
-											case '0':
-											camFollow.x -= 0;
-
-											case '10':
-											camFollow.x -= 10;
-
-											case '20':
-											camFollow.x -= 20;
-
-											case '30':
-											camFollow.x -= 30;
-
-											case '40':
-											camFollow.x -= 40;
-
-											case '50':
-											camFollow.x -= 50;
-										}
 								switch (ClientPrefs.healthDrain)
 										{
 											case '0%':
@@ -5365,26 +5417,6 @@ class PlayState extends MusicBeatState
 										}
 							case 1:
 								animToPlay = 'singDOWN';
-									switch (ClientPrefs.camMove)
-										{
-											case '0':
-											camFollow.y += 0;
-
-											case '10':
-											camFollow.y += 10;
-
-											case '20':
-											camFollow.y += 20;
-
-											case '30':
-											camFollow.y += 30;
-
-											case '40':
-											camFollow.y += 40;
-
-											case '50':
-											camFollow.y += 50;
-										}
 														switch (ClientPrefs.healthDrain)
 										{
 											case '0%':
@@ -5407,26 +5439,6 @@ class PlayState extends MusicBeatState
 										}
 							case 2:
 								animToPlay = 'singUP';
-									switch (ClientPrefs.camMove)
-										{
-											case '0':
-											camFollow.y -= 0;
-
-											case '10':
-											camFollow.y -= 10;
-
-											case '20':
-											camFollow.y -= 20;
-
-											case '30':
-											camFollow.y -= 30;
-
-											case '40':
-											camFollow.y -= 40;
-
-											case '50':
-											camFollow.y -= 50;
-										}
 														switch (ClientPrefs.healthDrain)
 										{
 											case '0%':
@@ -5449,26 +5461,6 @@ class PlayState extends MusicBeatState
 										}
 							case 3:
 								animToPlay = 'singRIGHT';
-									switch (ClientPrefs.camMove)
-										{
-											case '0':
-											camFollow.x += 0;
-
-											case '10':
-											camFollow.x += 10;
-
-											case '20':
-											camFollow.x += 20;
-
-											case '30':
-											camFollow.x += 30;
-
-											case '40':
-											camFollow.x += 40;
-
-											case '50':
-											camFollow.x += 50;
-										}
 														switch (ClientPrefs.healthDrain)
 										{
 											case '0%':
@@ -5548,9 +5540,10 @@ class PlayState extends MusicBeatState
 						var shadow:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('lurkingShadow'));
 						//shadow.screenCenter();
 						shadow.cameras = [camHUD];
-						shadow.alpha = 1;
+						shadow.alpha = 0;
 						add(shadow);
-						//FlxTween.tween(shadow, {alpha: shadow.alpha = 0}, 30, {ease: FlxEase.quadInOut, type: PERSIST});
+						FlxTween.tween(shadow, {alpha: 1}, 1, {ease: FlxEase.sineInOut});
+						FlxTween.tween(shadow, {alpha: 0}, 2, {ease: FlxEase.quadInOut, startDelay: 15});
 						healthDrain = 0.005;
 
 					case 'Instakill Note':
