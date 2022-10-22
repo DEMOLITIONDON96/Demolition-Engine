@@ -5609,92 +5609,15 @@ class PlayState extends MusicBeatState
 				{
 												case 0:
 								animToPlay = 'singLEFT';
-									switch (ClientPrefs.camMove)
-										{
-											case '0':
-											camFollow.x -= 0;
-
-											case '10':
-											camFollow.x -= 10;
-
-											case '20':
-											camFollow.x -= 20;
-
-											case '30':
-											camFollow.x -= 30;
-
-											case '40':
-											camFollow.x -= 40;
-
-											case '50':
-											camFollow.x -= 50;
-										}
+							
 							case 1:
 								animToPlay = 'singDOWN';
-									switch (ClientPrefs.camMove)
-										{
-											case '0':
-											camFollow.y += 0;
-
-											case '10':
-											camFollow.y += 10;
-
-											case '20':
-											camFollow.y += 20;
-
-											case '30':
-											camFollow.y += 30;
-
-											case '40':
-											camFollow.y += 40;
-
-											case '50':
-											camFollow.y += 50;
-										}
+						
 							case 2:
 								animToPlay = 'singUP';
-									switch (ClientPrefs.camMove)
-										{
-											case '0':
-											camFollow.y -= 0;
-
-											case '10':
-											camFollow.y -= 10;
-
-											case '20':
-											camFollow.y -= 20;
-
-											case '30':
-											camFollow.y -= 30;
-
-											case '40':
-											camFollow.y -= 40;
-
-											case '50':
-											camFollow.y -= 50;
-										}
+			
 							case 3:
 								animToPlay = 'singRIGHT';
-									switch (ClientPrefs.camMove)
-										{
-											case '0':
-											camFollow.x += 0;
-
-											case '10':
-											camFollow.x += 10;
-
-											case '20':
-											camFollow.x += 20;
-
-											case '30':
-											camFollow.x += 30;
-
-											case '40':
-											camFollow.x += 40;
-
-											case '50':
-											camFollow.x += 50;
-										}
 				}
 
 				if(note.gfNote) 
