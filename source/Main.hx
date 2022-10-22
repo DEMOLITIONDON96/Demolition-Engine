@@ -10,6 +10,19 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
+//crash handler stuff
+import lime.app.Application;
+import openfl.events.UncaughtErrorEvent;
+import haxe.CallStack;
+import haxe.io.Path;
+import Discord.DiscordClient;
+import sys.FileSystem;
+import sys.io.File;
+import sys.io.Process;
+import flixel.input.mouse.FlxMouse;
 
 class Main extends Sprite
 {
@@ -21,6 +34,8 @@ class Main extends Sprite
 	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 	public static var fpsVar:FPS;
+	
+	public static var focusMusicTween:FlxTween;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -91,4 +106,75 @@ class Main extends Sprite
 		FlxG.autoPause = false;
 		FlxG.mouse.visible = false;
 	}
+	
+	var game:FlxGame;
+	var oldVol:Float = 1.0;
+	var newVol:Float = 0.3;
+
+	public static var focused:Bool = true;
+
+	// funi Indie Cross volume code
+	function onWindowFocusOut()
+		{
+			focused = false;
+	
+			// Lower global volume when unfocused
+			if (Type.getClass(FlxG.state) != PlayState)
+			{
+				oldVol = FlxG.sound.volume;
+				if (oldVol > 0.3)
+				{
+					newVol = 0.3;
+				}
+				else
+				{
+					if (oldVol > 0.1)
+					{
+						newVol = 0.1;
+					}
+					else
+					{
+						newVol = 0;
+					}
+				}
+	
+				trace("Game unfocused");
+	
+				if (focusMusicTween != null)
+					focusMusicTween.cancel();
+				focusMusicTween = FlxTween.tween(FlxG.sound, {volume: newVol}, 0.5);
+	
+				// Conserve power by lowering draw framerate when unfocuced
+				FlxG.drawFramerate = 60;
+				FlxG.updateFramerate = 60;
+			}
+		}
+
+		public function onResize(width:Int, height:Int) {
+			FlxG.resizeWindow(width, height);
+		}
+	
+		function onWindowFocusIn()
+		{
+			new FlxTimer().start(0.2, function(tmr:FlxTimer)
+			{
+				focused = true;
+			});
+	
+			// Lower global volume when unfocused
+			if (Type.getClass(FlxG.state) != PlayState)
+			{
+				trace("Game focused");
+	
+				// Normal global volume when focused
+				if (focusMusicTween != null)
+					focusMusicTween.cancel();
+	
+				focusMusicTween = FlxTween.tween(FlxG.sound, {volume: oldVol}, 0.5);
+	
+				// Bring framerate back when focused
+				FlxG.drawFramerate = 60;
+				FlxG.updateFramerate = 60;
+			}
+		}
 }
