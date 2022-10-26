@@ -1,5 +1,7 @@
 # Demolition Engine
 
+![Repo size](https://img.shields.io/github/repo-size/DEMOLITIONDON96/Demolition-Engine)
+
 hi, welcome to yet, another modified version of Psych Engine, where we add lots of shit that the engine devs will not add, probably lmao.
 
 ###### i decided to release this earlier than the mod itself, just to give you all a little sneaky peeky/teaser of what the mod will have in store
