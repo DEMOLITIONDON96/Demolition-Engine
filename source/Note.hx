@@ -53,6 +53,12 @@ class Note extends FlxSprite
 	public static var GREEN_NOTE:Int = 2;
 	public static var BLUE_NOTE:Int = 1;
 	public static var RED_NOTE:Int = 3;
+	public static var notes:Map<Int, String> = [
+		0 => 'purple',
+		1 => 'green',
+		2 => 'blue',
+		3 => 'red'
+	];
 
 	// Lua shit
 	public var noteSplashDisabled:Bool = false;
@@ -108,18 +114,18 @@ class Note extends FlxSprite
 		if(noteData > -1 && noteType != value) {
 			switch(value) {
 				case 'Double Damage': 
-		            		noIgnoreNote = mustPress;
-		            		reloadNote('DAMAGE');
-		            		noteSplashTexture = 'DAMAGEnoteSplashes';
+					noIgnoreNote = mustPress;
+					reloadNote('DAMAGE');
+					noteSplashTexture = 'DAMAGEnoteSplashes';
 					if(PlayState.isPixelStage) {
 						noteSplashTexture = 'pixelUI/DAMAGEnoteSplashes';
 					}
-		            		colorSwap.hue = 0;
-		            		colorSwap.saturation = 0;
-		            		colorSwap.brightness = 0;
-		            		colorSwap.hue = 0;
-		            		colorSwap.saturation = 0;
-		            		colorSwap.brightness = 0;
+					colorSwap.hue = 0;
+					colorSwap.saturation = 0;
+					colorSwap.brightness = 0;
+					colorSwap.hue = 0;
+					colorSwap.saturation = 0;
+					colorSwap.brightness = 0;
 				case 'Flip Note':
 					ignoreNote = mustPress;
 					hitCausesMiss = true;
@@ -203,7 +209,7 @@ class Note extends FlxSprite
 		return value;
 	}
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false, char:String = 'bf')
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, sustainNote:Bool = false, inEditor:Bool = false, char:String = 'bf')
 	{
 		super();
 
@@ -273,19 +279,7 @@ class Note extends FlxSprite
 
 			x += swagWidth * (noteData % 4);
 			if(!isSustainNote) { //Doing this 'if' check to fix the warnings on Senpai songs
-				var animToPlay:String = '';
-				switch (noteData % 4)
-				{
-					case 0:
-						animToPlay = 'purple';
-					case 1:
-						animToPlay = 'blue';
-					case 2:
-						animToPlay = 'green';
-					case 3:
-						animToPlay = 'red';
-				}
-				animation.play(animToPlay + 'Scroll');
+				animation.play(notes.get(noteData % 4) + 'Scroll');
 			}
 		}
 
@@ -303,17 +297,7 @@ class Note extends FlxSprite
 			offsetX += width / 2;
 			copyAngle = false;
 
-			switch (noteData)
-			{
-				case 0:
-					animation.play('purpleholdend');
-				case 1:
-					animation.play('blueholdend');
-				case 2:
-					animation.play('greenholdend');
-				case 3:
-					animation.play('redholdend');
-			}
+			animation.play(notes.get(noteData % 4) + 'holdend');
 
 			updateHitbox();
 
@@ -324,17 +308,7 @@ class Note extends FlxSprite
 
 			if (prevNote.isSustainNote)
 			{
-				switch (prevNote.noteData)
-				{
-					case 0:
-						prevNote.animation.play('purplehold');
-					case 1:
-						prevNote.animation.play('bluehold');
-					case 2:
-						prevNote.animation.play('greenhold');
-					case 3:
-						prevNote.animation.play('redhold');
-				}
+				prevNote.animation.play(notes.get(prevNote.noteData % 4) + 'hold');
 
 				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.05;
 				if(PlayState.instance != null)
