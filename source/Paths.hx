@@ -290,7 +290,7 @@ class Paths
 		}
 		return false;
 	}
-
+	
 	inline static public function getSparrowAtlas(key:String, ?library:String):FlxAtlasFrames
 	{
 		#if MODS_ALLOWED
@@ -299,13 +299,27 @@ class Paths
 		if(FileSystem.exists(modsXml(key))) {
 			xmlExists = true;
 		}
-
+		
 		return FlxAtlasFrames.fromSparrow((imageLoaded != null ? imageLoaded : image(key, library)), (xmlExists ? File.getContent(modsXml(key)) : file('images/$key.xml', library)));
 		#else
 		return FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));
 		#end
 	}
 
+	inline static public function getXMLAtlas(key:String, ?library:String):FlxAtlasFrames
+	{
+		#if MODS_ALLOWED
+		var imageLoaded:FlxGraphic = returnGraphic(key);
+		var xmlExists:Bool = false;
+		if(FileSystem.exists(modsXml(key))) {
+			xmlExists = true;
+		}
+		
+		return FlxAtlasFrames.fromTexturePackerXml((imageLoaded != null ? imageLoaded : image(key, library)), (xmlExists ? File.getContent(modsXml(key)) : file('images/$key.xml', library)));
+		#else
+		return FlxAtlasFrames.fromTexturePackerXml(image(key, library), file('images/$key.xml', library));
+		#end
+	}
 
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
@@ -319,6 +333,21 @@ class Paths
 		return FlxAtlasFrames.fromSpriteSheetPacker((imageLoaded != null ? imageLoaded : image(key, library)), (txtExists ? File.getContent(modsTxt(key)) : file('images/$key.txt', library)));
 		#else
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
+		#end
+	}
+
+	inline static public function getJSONAtlas(key:String, ?library:String)
+	{
+		#if MODS_ALLOWED
+		var imageLoaded:FlxGraphic = returnGraphic(key);
+		var jsonExists:Bool = false;
+		if(FileSystem.exists(modsJson(key))) {
+			jsonExists = true;
+		}
+
+		return FlxAtlasFrames.fromTexturePackerJson((imageLoaded != null ? imageLoaded : image(key, library)), (jsonExists ? File.getContent(modsJson(key)) : file('images/$key.json', library)));
+		#else
+		return FlxAtlasFrames.fromTexturePackerJson(image(key, library), file('images/$key.json', library));
 		#end
 	}
 
