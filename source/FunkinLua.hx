@@ -447,10 +447,20 @@ class FunkinLua {
 			}
 			luaTrace("Object " + obj + " doesn't exist!");
 		});
-
 		// gay ass tweens
+		Lua_helper.add_callback(lua, "doTweenAdvanced", function(tagNVars:Array<String>, property:String, value:Dynamic, duration:Float, ease:String) {
+ 			var penisExam:Dynamic = tweenShit(tagNVars[0], tagNVars[1]);
+ 			var gayAssAnon = {}
+ 			Reflect.setField(gayAssAnon, property, value);
+ 			if(penisExam != null) {
+ 				PlayState.instance.modchartTweens.set(tagNVars[0], FlxTween.tween(penisExam, gayAssAnon, duration, {ease: getFlxEaseByString(ease),
+ 					onComplete: function(twn:FlxTween) {
+ 						PlayState.instance.callOnLuas('onTweenCompleted', [tagNVars[0]]);
+ 						PlayState.instance.modchartTweens.remove(tagNVars[0]);
+ 					}
+															    
 		Lua_helper.add_callback(lua, "doTweenX", function(tag:String, vars:String, value:Dynamic, duration:Float, ease:String) {
-			var penisExam:Dynamic = tweenShit(tag, vars);
+			var penisExam:Dynamic = tweenShit(tagNVars[0], tagN);
 			if(penisExam != null) {
 				PlayState.instance.modchartTweens.set(tag, FlxTween.tween(penisExam, {x: value}, duration, {ease: getFlxEaseByString(ease),
 					onComplete: function(twn:FlxTween) {
