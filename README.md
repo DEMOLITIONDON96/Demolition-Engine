@@ -23,7 +23,7 @@ hi, welcome to yet, another modified version of Psych Engine, where we add lots 
 
 ### https://gamejolt.com/games/Graveyard-Rush/701416
 
-## Funkin.avi (V1 and V2 (V2 Soon)) is also using this engine, and can be played here:
+## Funkin.avi (1.0.0) is also using this engine, and can be played here:
 
 ### https://gamejolt.com/games/funkin-avi/710505
 ### https://gamebanana.com/mods/383317
