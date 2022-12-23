@@ -75,6 +75,16 @@ class TitleState extends MusicBeatState
 	var Timer:Float = 0;
 
 	var wackyImage:FlxSprite;
+	
+	public var theFuni:Array<String> = [
+         "Also try Your Mom Simulator",
+         "Imagine making yet another modded Psych Engine?",
+         "Mario be like wahoo!",
+         "stfu about Dave & Bambi, I don't wanna hear about it.", //bob expanded devs going mad with your reaction
+         "MOUSE RAP. MOUSE RAP", // totally a funkin.avi reference
+         "K i l l",
+         "Why can't BF & GF do shit about the bs the parents are putting them in?" 
+     ];
 
 	#if TITLE_SCREEN_EASTER_EGG
 	var easterEggKeys:Array<String> = [
@@ -555,8 +565,10 @@ class TitleState extends MusicBeatState
 			if(controls.UI_LEFT) swagShader.hue -= elapsed * 0.1;
 			if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
 		}
+		
+		openfl.Lib.application.window.title = "Friday Night Funkin': Demolition Engine - " + theFuni[FlxG.random.int(0, theFuni.length - 1)];
 
-		switch randomWindowText {
+		/*switch randomWindowText {
 		case 0:
 		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Also try Your Mom Simulator";
 		case 1:
@@ -602,7 +614,7 @@ class TitleState extends MusicBeatState
 		Application.current.window.title = "Friday Night Funkin': Demolition Engine - How's life, buddy?";
 		case 20:
 		Application.current.window.title = "Friday Night Funkin': Demolition Engine - mmmm, B E A N S .";
-	}
+	}*/
 		super.update(elapsed);
 	}
 
