@@ -1,21 +1,8 @@
-# Demolition Engine
+# Demolition Engine [SCRAPPED]
 
 ![Repo size](https://img.shields.io/github/repo-size/DEMOLITIONDON96/Demolition-Engine)
 
-hi, welcome to yet, another modified version of Psych Engine, where we add lots of shit that the engine devs will not add, probably lmao.
-
-###### i decided to release this earlier than the mod itself, just to give you all a little sneaky peeky/teaser of what the mod will have in store
-
-## Rules for Discussions:
-
-- Don’t hate on others, be respectful of others.
-- Do not make spam posts, I will just remove them.
-- Showcase your stuff, code, art, anything that relates to FNF, and maybe give us ideas of what to add.
-- Dave & Bambi stuff is okay, but please, don’t flood the discussions with them. :(
-- Ask for help, but don’t beg for it, it gets annoying.
-- Joke posts are okay, but please don’t do what I just said not to do under the 2nd bullet…
-
-## If you wish to make a PR to this repo, you are more than welcome to do so, we're willing to accept all ideas if they work and aren't stupid (looking at you, Dave & Bambi porters)
+This engine is scrapped, not gonna bother continuing on this pile of garbage, however, you all can, and I honestly don't care anymore, making a rewrite of this engine anyways in the near future.
 
 ## Origins of Engine:
 
