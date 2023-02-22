@@ -1,8 +1,8 @@
-# Demolition Engine [SCRAPPED]
+# Demolition Engine
 
 ![Repo size](https://img.shields.io/github/repo-size/DEMOLITIONDON96/Demolition-Engine)
 
-This engine is scrapped, not gonna bother continuing on this pile of garbage, however, you all can, and I honestly don't care anymore, making a rewrite of this engine anyways in the near future.
+A modified version of Psych Engine intended to add features that have been long requested
 
 ## Origins of Engine:
 
