@@ -216,7 +216,45 @@ class Paths
 		var file:Sound = returnSound('music', key, library);
 		return file;
 	}
-
+	
+	/*
+	* Cover Makers are gonna looove this shit
+	*
+	* - don
+	*
+	* "diff" var in the functions allows you to have different remixes of the same song in one folder
+	* "singer" var allows you to shange character voice based on character file name
+	*
+	* example use of these functions: "joke-song-henry-erect" will allow you to play a remix on Erect Difficulty & play Henry's voice only, 
+	* changing henry to "bf" will allow you to play BF's voice instead
+	*
+	* having opponent and player voices separate fixes this one issue I've had with duel sections during gameplay
+	* where the opponent voice would get muted as well if you missed a note
+	*/
+	inline static public function voicesPlayer(song:String, diff:String = 'hard', singer:String = 'bf')
+	{
+		var songKey:String = '${formatToSongPath(song)}/Voices-${singer}-${diff}';
+		var voices = returnSound('songs', songKey);
+		return voices;
+	}
+	
+	inline static public function voicesOpponent(song:String, diff:String = 'hard', singer:String = 'dad')
+	{
+		var songKey:String = '${formatToSongPath(song)}/VoicesOpp-${singer}-${diff}';
+		var voices = returnSound('songs', songKey);
+		return voices;
+	}
+	
+	inline static public function instNew(song:String, diff:String = 'hard')
+	{
+		var songKey:String = '${formatToSongPath(song)}/Inst-${diff}';
+		var inst = returnSound('songs', songKey);
+		return inst;
+	}
+	
+	/*
+	* LEGACY PURPOSES
+	*/
 	inline static public function voices(song:String):Any
 	{
 		var songKey:String = '${formatToSongPath(song)}/Voices';
