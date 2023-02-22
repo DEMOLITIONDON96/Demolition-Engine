@@ -150,7 +150,12 @@ class PlayState extends MusicBeatState
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
 
+	public var inst:FlxSound;
 	public var vocals:FlxSound;
+
+	public var inst_new:FlxSound;
+	public var bf_vocals:FlxSound;
+	public var dad_vocals:FlxSound;
 
 	public var dad:Character = null;
 	public var gf:Character = null;
@@ -2365,14 +2370,26 @@ class PlayState extends MusicBeatState
 	{
 		if(time < 0) time = 0;
 
-		FlxG.sound.music.pause();
+		inst.pause();
+		inst_new.pause();
 		vocals.pause();
+		bf_vocals.pause();
+		dad_vocals.pause();
 
-		FlxG.sound.music.time = time;
-		FlxG.sound.music.play();
+		inst.time = time;
+		inst.play();
 
-		vocals.time = time;
+		inst_new.time = time;
+		inst_new.play();
+
+		vocals.time = inst.time;
 		vocals.play();
+
+		bf_vocals.time = inst_new.time;
+		dad_vocals.time = inst_new.time;
+		bf_vocals.play();
+		dad_vocals.play();
+
 		Conductor.songPosition = time;
 	}
 
@@ -2401,9 +2418,14 @@ class PlayState extends MusicBeatState
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
 
-		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
-		FlxG.sound.music.onComplete = onSongComplete;
+		inst.play();
+		inst_new.play();
 		vocals.play();
+		bf_vocals.play();
+		dad_vocals.play();
+
+		inst.onComplete = onSongComplete;
+		inst_new.onComplete = onSongComplete;
 
 		if(startOnTime > 0)
 		{
@@ -2418,7 +2440,11 @@ class PlayState extends MusicBeatState
 		}
 
 		// Song duration in a float, useful for the time left feature
-		songLength = FlxG.sound.music.length;
+		if (inst != null)
+			songLength = inst.length;
+		else
+			songLength = inst_new.length;
+
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
@@ -2459,6 +2485,9 @@ class PlayState extends MusicBeatState
 		var songData = SONG;
 		
 		curSong = songData.song;
+
+		inst = new FlxSound().loadEmbedded(Paths.inst(SONG.song), false, true);
+		inst_new = new FlxSound().loadEmbedded(Paths.instNew(SONG.song, CoolUtil.getDifficultyFilePath), false, true);
 		
 			if (SONG.needsVoices)
 				vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
